@@ -1,0 +1,418 @@
+What means period as the first character of string in manifest attribute value, ex android:name=".MyService"?
+It's a class name, which will be appended to the application's package name (as specified in <manifest>)
+
+What means '@' at the beginning of some manifest attribute value, ex @drawable/myPicture?
+It's a value from resources.
+
+What means '?' at the beginning of some manifest attribute value?
+It's a value from themes.
+
+What are obligatory elements and attributes of <manifest>?
+- <application> element
+- xmlns:android attribute
+- package attribute
+
+What means <manifest> xmlns:android attribute?
+- Defines the Android namespace. 
+- Should always be set to "http://schemas.android.com/apk/res/android".
+
+What means <manifest> package attribute?
+- A full Java-language-style package name for the application.
+- It cannot be changed after app is published.
+- It serves as:
+1 unique identifier for the application
+2 default name for the application process
+3 default task affinity of an activity
+
+What means <manifest> android:sharedUserId attribute?
+- The name of a Linux user ID that will be shared with other applications. 
+- By default, Android assigns each application its own unique user ID.
+- Application with the same user ID can access each other's data and run in the same process.
+
+What means <manifest> android:versionCode attribute?
+An internal (not presented to users) version number.
+
+What means <manifest> android:versionName attribute?
+The version number shown to users. 
+
+What's difference between <manifest> android:versionCode and android:versionName attributes?
+- versionCode is internal
+- versionName is shown to users
+
+What means <manifest> android:installLocation attribute? What are possible values?
+The default install location for the application.
+Possible values:
+- 'internalOnly' (default)
+- 'auto' 
+- 'preferExternal'
+
+What means "internalOnly" value of <manifest> android:installLocation attribute?
+- The application must be installed on the internal device storage only.
+- If the internal storage is full, then the system will not install the application
+- This is default value.
+
+What means "auto" value of <manifest> android:installLocation attribute?
+- System will install the application on the internal storage by default. 
+- If the internal storage is full, then the system will try to install it on the external storage. 
+
+What means "preferExternal" value of <manifest> android:installLocation attribute?
+- The application prefers to be installed on the external storage (SD card). 
+- The application might be installed on internal storage if the external media is unavailable or full.
+
+What are possible attributes of <uses-sdk> element?
+1 android:minSdkVersion
+2 android:targetSdkVersion
+3 android:maxSdkVersion
+
+What means <uses-sdk> android:minSdkVersion attribute?
+- An integer designating the minimum API Level required for the application to run.
+- Application won't be installed, if the system's API Level is lower than the value specified in this attribute. 
+- It always should be specified.
+
+What means <uses-sdk> android:targetSdkVersion attribute?
+- An integer designating the API Level that the application targets. 
+- It informs the system that you have tested against the target version and the system should not enable any compatibility behaviours to maintain app's forward-compatibility with the target version. 
+- If not set, the default value equals that given to minSdkVersion.
+
+What means <uses-sdk> android:maxSdkVersion attribute?
+- An integer designating the maximum API Level on which the application is designed to run.
+- Used by Google Play as a filter when presenting users with applications available for download.
+- Since Android 2.0.1 this attribute is not checked during installation or re-validation.
+- Not recommended to declare.
+
+Why is <uses-sdk> android:maxSdkVersion attribute not recommended to declare?
+1 Until Android 2.0.1 could cause app removal on system update.
+2 By design, new versions of the platform are fully backward-compatible.
+3 Google Play filter may remove it from applications available for download.
+
+What elements can be contained by <application>?
+1 <activity> and <activity-alias>
+2 <service>
+3 <receiver>
+4 <provider>
+5 <meta-data>
+6 <uses-library>
+
+What means <application> android:allowBackup attribute?
+Whether to allow the application to participate in the backup (application data to be saved via adb) and restore infrastructure.
+
+What means <application> android:backupAgent attribute?
+The name of the class that implement's the application's backup agent, a subclass of BackupAgent.
+
+What means <application> android:debuggable attribute?
+Whether or not the application can be debugged, even when running on a device in user mode. The default is false.
+
+What means <application> android:description attribute?
+User-readable text about the application, longer and more descriptive than the application label.
+
+Whate means <application> android:isGame attribute?
+Whether or not the application is a game. The system may group together applications classified as games or display them separately from other applications.
+
+What means <application> android:largeHeap attribute?
+- Whether application's processes should be created with a large Dalvik heap. 
+- Most apps should not need this and should instead focus on reducing their overall memory usage for improved performance.
+
+What means <application> android:manageSpaceActivity attribute?
+The name of an Activity subclass that the system can launch to let users manage the memory occupied by the application on the device.
+
+What means <application> android:name attribute?
+- Name of an Application subclass implemented for the application. When the application process is started, this class is instantiated before any of the application's components.
+- The subclass is optional; most applications won't need one. In the absence of a subclass, Android uses an instance of the base Application class.
+
+What means <application> android:persistent attribute?
+- Whether or not the application should remain running at all times.
+- The default value is "false". 
+- Applications should not normally set this flag; persistence mode is intended only for certain system applications.
+
+What is default process name in which application runs?
+It matches the package name set by the <manifest> element.
+
+How can be name of the process in which an application runs modified?
+- For whole application: android:process in <application> element
+- For chosen activity: android:process in <activity> element
+
+What means <application> android:supportsRtl attribute?
+- Declares whether your application is willing to support right-to-left (RTL) layouts.
+- Works only for targetSdkVersion set to 17 or higher
+
+What means <application> android:testOnly attribute?
+- Indicates whether this application is only for testing purposes.
+- This kind of application can be installed only through adb.
+
+What means task affinity?
+- Activities with the same affinity belong to the same task.
+- By default, all activities in an application have the same affinity (taskAffinity attribute equal to package name). 
+
+What means <application> and <activity> android:allowTaskReparenting attribute?
+Whether or not the activity can move from the task that started it to the task it has an affinity for when that task is next brought to the front.
+
+What means <activity> android:alwaysRetainTaskState attribute?
+When this attribute is "true", users will always return to the task in its last state, regardless of how they get there. System won't clear it by default.
+
+What means <application> and <activity> android:banner attribute?
+- Graphical banner to represent an app in the Android TV home screen.
+- It should only be specified by applications with an activity that handles the CATEGORY_LEANBACK_LAUNCHER intent.
+
+What means <activity> android:clearTaskOnLaunch attribute?
+- When the value is "true", every time users start the task again, they are brought to its root activity regardless of what they were last doing in the task. 
+False by default.
+- It's the opposite of alwaysRetainTaskState. 
+
+What means <activity> android:finishTaskOnLaunch attribute?
+When it's set to "true", the activity remains part of the task only for the current session. If the user leaves and then returns to the task, it is no longer present.
+
+What means <activity> android:configChanges attribute?
+Lists configuration changes that won't be shut down and restarted, but the activity will handle them in onConfigurationChanged() method.
+
+What means <activity> android:documentLaunchMode attribute?
+It permits the user to have multiple documents from the same application appear in the overview screen.
+
+What means <activity> android:enabled attribute?
+Whether or not the activity can be instantiated by the system. The default value is "true".
+
+What are the manifest ways of (dis)allowing other application to launch <activity>?
+1 <intent-filter> element
+2 android:exported attribute
+3 android:permission attribute
+
+What means <activity> android:exported attribute?
+- Whether or not the activity can be launched by components of other applications.
+- Default value depends on <intent-filter> existence 
+
+What means <application> and <activity> android:hardwareAccelerated attribute?
+Whether or not hardware-accelerated rendering should be enabled
+
+What means <activity> android:launchMode attribute? What are possible values?
+An instruction on how the activity should be launched. There are four modes:
+1 standard (default) 
+2 singleTop 
+3 singleTask (not appropriate for most applications)
+4 singleInstance (not appropriate for most applications)
+
+What means <activity> android:maxRecents attribute?
+- The maximum number of tasks rooted at this activity in the overview screen. 
+- Valid values are 1 through 50. The default is 16.
+
+What means <activity> android:multiprocess attribute?
+- Whether the activity can run in multiple processes.
+- "Something that is almost never necessary or desirable"
+
+What means <activity> android:name attribute?
+- The name of the class that implements the activity, a subclass of Activity.
+- There is no default. The name must be specified.
+
+What are obligatory attributes of <activity>?
+Only android:name
+
+What means <activity> android:noHistory attribute?
+Whether the activity should be removed from the activity stack and finished when the user navigates away from it and it's no longer visible on screen.
+
+What means <activity> android:parentActivityName attribute?
+- The class name of the logical parent of the activity.
+- Used when the user presses the Up button in the action bar. 
+- Introduced in API 17. Add <meta-data> android.support.PARENT_ACTIVITY entry to support older APIs.
+
+What means <activity> android:permission attribute?
+- The name of a permission that clients must have to launch the activity.
+- If not set, the <application> permission attribute applies to the activity. If neither attribute is set, the activity is not protected by a permission.
+
+What means <activity> android:process attribute?
+- The name of the process in which the activity should run.
+- Normally, all components of an application run in a default process name.
+
+What is default <activity> android:screenOrientation value?
+'unspecified' - system chooses the orientation, the policy it uses may differ from device to device.
+
+What are possible values of <activity> android:screenOrientation attribute?
+1 unspecified (default)
+2 landscape/portrait
+3 reverseLandscape/reversePortrait
+4 sensorLandscape/sensorPortrait
+5 userLandscape/userPortrait
+6 sensor/fullSensor/noSensor
+7 user/fullUser
+8 locked
+
+What means <activity> android:stateNotNeeded attribute?
+- Whether or not the activity can be killed and successfully restarted without having saved its state.
+- If set to "true", onSaveInstanceState() may not be called and onCreate() will be passed null instead of the Bundle .
+
+What means <activity> and <application> android:theme attribute?
+A reference to a style resource defining a theme for the activity/whole application.
+
+What means <activity> and <application> android:uiOptions attribute?
+Extra options for an activity UI.
+Possible values:
+- 'none' - default
+- 'splitActionBarWhenNarrow'
+
+What means 'splitActionBarWhenNarrow' value of <activity> android:uiOptions attribute?
+Add a bar at the bottom of the screen to display action items in the ActionBar, when constrained for horizontal space (such as when in portrait mode on a handset). 
+
+What means <activity> android:windowSoftInputMode attribute?
+- How the activity interacts with on-screen soft keyboard. 
+- The setting for this attribute affects two things:
+1 state of the soft keyboard (hidden/visible)
+2 adjustment made to the activity's window (resized, panned) 
+
+What types of values can <activity> android:windowSoftInputMode attribute have?
+Single value or a combination of one "state..." value plus one "adjust..." value
+
+What "state..." values can <activity> android:windowSoftInputMode attribute have?
+1 stateUnspecified - default, system will choose an appropriate state 
+2 stateUnchanged - kept in whatever state it was last in
+3 stateHidden/stateAlwaysHidden
+4 stateVisible/stateAlwaysVisible
+
+What "adjust..." values can <activity> android:windowSoftInputMode attribute have?
+1 adjustUnspecified - default, system chooses resize/pan based on scrollable layout existence
+2 adjustResize - window is always resized to make room for the soft keyboard
+3 adjustPan - contents of the window are automatically panned, so user always sees what he types
+
+What can <activity-alias> be used for?
+- Creates alias for some existing Activity. It can have different parameters such as icon, label, intent filters and many more.
+- Example usage - two different entries (different icons and labels) in Launcher for the same Activity.
+
+What manifest element can contain <intent-filter>?
+1 <activity> and <activity-alias>
+2 <service>
+3 <receiver>
+
+What is obligatory element of <intent-filter>? What elements are optional?
+- Obligatory: <action>
+- Optional: <category> and <data>
+
+Can <intent-filter> contain more than one <action> element?
+Yes
+
+How (in <action> element) to distinct Android standard actions from these defined by developer?
+- standard actions begin with 'android.intent.action' package
+- developer actions should begin with application package name
+
+What condition must <intent-filter> meet to receive implicit intents?
+It must contain <category android:name="android.intent.category.DEFAULT"> element
+
+What is the purpose of <intent-filter> android:priority attribute?
+- It sets priority of intent-filter.
+- Allowed values: -1000 to 1000
+- When an intent could be handled by multiple activities with different priorities, Android will consider only those with higher priority.
+- It controls the order in which broadcast receivers are executed to receive broadcast messages. 
+
+What is the purpose of <compatible-screens> element?
+- Specifies each screen configuration with which the application is compatible. 
+- Should be used only as a last resort, when the application absolutely does not work with specific screen configurations. 
+
+What is the purpose of <instrumentation> element?
+Declares an Instrumentation class that enables to monitor an application's interaction with the system. The Instrumentation object is instantiated before any of the application's components.
+
+What is the purpose of <meta-data> element?
+- A name-value pair for an item of additional, arbitrary data that can be supplied to the parent component. 
+- The values from all of them are collected in a single Bundle object and made available to the component as the PackageItemInfo.metaData field.
+
+What's difference between <meta-data> android:value and android:resource attributes, when passing them some resource ID?
+- android:value - value stored in the resource will be set
+- android:resource - numeric ID of the resource will be set 
+
+What is the purpose of <uses-feature> element?
+- Declares a single hardware or software feature that is used by the application.
+- Its only information for any external entity (such as Google Play) of the set of hardware and software features on which your application depends. 
+
+What means <uses-feature> android:required attribute?
+- Lets to specify whether application requires and cannot function without the declared feature, or whether it prefers to have the feature but can function without it.
+- True by default
+
+What are hardware features which can be required by the application?
+1 audio
+2 bluetooth
+3 camera (any/autofocus/flash/front/external)
+4 infrared
+5 location (GPS/network)
+6 microphone
+7 NFC
+8 sensors (accelometer/barometer/compass/gyroscope/ligth/proximity/stepcounter/stepdetector)
+9 screen (landscape/portrait)
+10 telephony (CDMA/GSM)
+11 television
+12 touchscreen
+13 USB
+14 Wi-Fi
+
+What are software features which can be required by the application?
+1 App Widgets (devices includes a Home screen or similar location where users can embed App Widgets)
+2 Device Management
+3 Home Screen (devices supports third-party Home screen apps)
+4 Input Method (device supports third-party input methods)
+5 Live Wallpaper (device supports Live Wallpapers)
+6 SIP/VOIP
+
+Name some example permissions implying hardware features requirements.
+1 CAMERA -> camera
+2 ACCESS_FINE_LOCATION -> location and location.gps 
+3 ACCESS_COARSE_LOCATION -> location and location.network
+4 RECORD_AUDIO -> microphone
+5 CALL_PHONE, READ_SMS etc -> telephony 
+6 ACCESS_WIFI_STATE -> wifi
+
+What is the purpose of  <uses-permission> element?
+- Requests a permission that the application must be granted in order for it to operate correctly.
+- Permissions are granted by the user when the application is installed.
+
+What are the types of location access permissions?
+1 ACCESS_COARSE_LOCATION (approximate, based on cell towers and Wi-Fi)
+2 ACCESS_FINE_LOCATION (precise, based on GPS, cell towers, and Wi-Fi)
+3 ACCESS_MOCK_LOCATION (allows mock location providers for testing)
+
+What are network-related permissions?
+1 ACCESS_NETWORK_STATE
+2 ACCESS_WIFI_STATE
+3 INTERNET
+
+Name example permissions allowing to read data from the phone.
+1 READ_CALENDAR
+2 READ_CALL_LOG
+3 READ_CONTACTS
+4 READ_EXTERNAL_STORAGE
+5 READ_PHONE_STATE
+6 READ_PROFILE
+7 READ_SMS 
+ 
+Name example permissions allowing to write data on the phone.
+1 WRITE_CALENDAR
+2 WRITE_CALL_LOG
+3 WRITE_CONTACTS
+4 WRITE_EXTERNAL_STORAGE
+5 WRITE_PROFILE
+6 WRITE_SETTINGS
+7 WRITE_SMS
+
+What is the purpose of <uses-library> element?
+- Specifies a shared library that the application must be linked against. 
+- It also affects the installation of the application on a particular device and the availability of the application on Google Play.
+
+How to specify activity's parent?
+1 Android 4.0.3 and earlier: add <metadata> with:
+- android:name="android.support.PARENT_ACTIVITY"
+- android:value=".MyParentActivity"
+2 Android 4.1 and later: set <activity> android:parentActivityName attribute
+
+What is a placeholder in terms of manifest and what is it used for?
+- It is any manifest's element attribute value in following format: "${applicationId}.foo"
+- Replaced by Manifest Merger with injected value specified in build.gradle ('manifestPlaceholders' attribute).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

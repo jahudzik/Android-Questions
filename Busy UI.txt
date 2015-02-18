@@ -1,0 +1,15 @@
+What attributes are common for all widgets (inherited from View class)?
+1 android:padding*
+2 android:layout_margin*
+3 android:visibility
+4 android:nextFocus*
+5 android:contentDescription
+
+What means android:contentDescription attribute for widgets?
+It is roughly equivalent to the alt attribute on an HTML <img> tag
+
+What's difference between View.getParent() and View.getRootView()?
+- View.getParent() - gets the parent of this view
+- View.getRootView() - gets the root of the tree 
+
+

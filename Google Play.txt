@@ -1,0 +1,27 @@
+What application parts cannot be changed after publication?
+1 Package name (app's unique identifier)
+2 Certificate application is signed with
+3 Manifest elements shouldn't be changed as they serve as a public API (ex for outside intents) and can break compability
+
+What manifest elements are used by Google Play filters?
+1 <supports-screen>
+2 <uses-configuration>
+3 <uses-feature>
+4 <uses-library>
+5 <uses-permission>
+6 <uses-sdk>
+
+How does Google Play retrieve list of features required by the application?
+1 explicitly - from manifest <uses-feature> entries
+2 implicitly - from other manifest elements, especially <uses-permission>
+
+How to verify the application against Google Play filters?
+1 Build and export application as an unsigned .apk
+2 Call: aapt dump badging <path_to_exported_.apk>
+
+What means multiple APK support in terms of Google Play?
+- It is a feature on Google Play that allows to publish different APKs for the application that are each targeted to different device configurations.
+- Sometimes  a single APK is unable to support all device configurations, because alternative resources make the APK file too big (greater than 50MB).
+
+What is the maximum size for an APK published on Google Play?
+50 MB

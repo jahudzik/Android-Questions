@@ -1,0 +1,251 @@
+What is an activity?
+- An application component that provides a screen with which users can interact in order to do something.
+- Each activity is given a window in which to draw its user interface. 
+
+How to set activity's layout?
+A. Define XML layout file and then pass its ID to setContentView() method called from Activity.onCreate().
+B. Programmatically: create Views&ViewGroup hierarchy and pass its root to setContentView()
+
+Which activity's method should be overridden in order to handle user leaving activity?
+onPause()
+
+What methods almost all Activity subclasses should implement?
+- onCreate() - to initialize an activity, define UI with setContentView() and retrieve UI widgets with findViewById()
+- onPause() - to commit any changes made by user (usually to the ContentProvider holding the data)
+
+How to create a new activity accessible to the system?
+1 Subclass Activity class
+2 Define its UI (XML file or programmatically)
+3 Add a new <activity> element to the manifest
+
+Name most common configuration changes.
+1 Locale has changed - user selected a new language
+2 Global font size has changed
+3 Screen orientation changed - user rotated the screen
+4 Screen sized changed - occurs also on screen orientation change
+5 Keyboard type or accessibility has changed
+
+How to disable screen rotation for specified activity?
+- Specify <activity> android:screenOrientation attribute value other than 'unspecified'
+- For example: 'portrait', 'reversePortrait', 'sensorPortrait', 'sensor' etc
+
+Is it possible to turn hardware acceleration for specified activity?
+Yes, by specifying <activity> android:hardwareAccelerated attribute for true
+
+How to define a specific activity as the main application activity available from the launcher?
+In the manifest specify a new <intent-filter> for <activity> with:
+- <action> equal to 'android.intent.action.MAIN'
+- <category> equal to 'android.intent.category.LAUNCHER'
+
+How to start an another specific activity?
+Call startActivity(Intent) with an intent describing the activity to be started:
+- startActivity(new Intent(this, SomeAnother.class));
+
+How to start an another specific activity and receive result it returns?
+- Call startActivityForResult(Intent,int) with intent and request code.
+- Override onActivityResult() callback to receive the result. Request code should be verified there to ensure it was called by expected activity.
+
+How to return result from an activity back to its parent?
+Call setResult(int) passing result code, which can be the standard results RESULT_CANCELED, RESULT_OK, or any custom values starting at RESULT_FIRST_USER.
+
+Is it possible to explicitly finish an activity?
+Yes, although in most cases we should allow Android system to manage life of an activity.
+A By calling finish() method from this activity.
+B By calling finishActivity() from another activity.
+
+In what states can an activity exist?
+1 Resumed (Running) - activity in the foreground and has user focus
+2 Paused - another activity in the foreground and has focus, but this one is still (partially) visible; can be killed by the system in extremely low memory situations
+3 Stopped - activity completely in the background; still alive but can be killed by the system if memory needed elsewhere
+4 Destroyed
+
+What is 'standard' lifecycle of the activity?
+1 onCreate()
+2 onStart()
+3 onResume()
+<activity running>
+4 onPause()
+5 onStop()
+6 onDestroy()
+
+What callbacks are called when an activity is stopped and user navigates to it again?
+1 onRestart()
+2 onStart()
+3 onResume()
+<activity running>
+
+What methods are called in order to preserve and restore activity's state?
+- onSaveInstanceState() is called from an activity before being killed - data can be stored in the bundle here
+- onCreate() and onResotreInstanceState() are called then activity is (re)created - bundle with stored data is received by them
+
+What's difference between restoring Activity's state in onCreate() and onRestoreInstanceState()?
+Any of these may be used.
+In most cases onCreate() should be used. Sometimes it is more convenient to use onRestoreInstanceState() in order allow subclasses to override it.
+
+Is onSaveInstanceState() always called along with onPause() or onStop() methods?
+No.
+When user navigates back, onPause() and onStop() are called, but no need to call onSaveInstanceState().
+
+What callbacks are called on configuration change?
+1 onPause()
+2 onStop()
+3 onDestroy()
+4 onCreate()
+5 onStart()
+6 onResume()
+
+How to ensure that chosen activity will be removed from the activity stack and finished when the user navigates away from it?
+Set <activity> android:noHistory attribute for true.
+
+When is Activity.onStart() callback invoked?
+When activity is about to become visible.
+
+What callback is invoked, when activity is about to become visible?
+onStart()
+
+When is Activity.onResume() callback invoked?
+When activity has become visible - it is now in 'Resumed' (running) state.
+
+What callback is invoked, when activity has become visible?
+onResume()
+
+When is Activity.onPause() callback invoked?
+When another activity is taking focus - this activity is about to be in 'Paused' state.
+
+What callback is invoked, when another activity is taking focus?
+onPause()
+
+When is Activity.onStop() callback invoked?
+When activity is no longer visible - it is now in 'Stopped' state
+
+What callback is invoked, when activity is no longer visible?
+onStop()
+
+What are three activity lifetime cycles?
+1 entire lifetime: onCreate() -> onDestroy()
+2 visible: onStart() -> onStop() 
+3 foreground: onResume() -> onPause()
+
+After which callbacks activity is killable?
+1 onPause()
+2 onStop()
+3 onDestroy()
+
+What condition must be met for widgets to system save their state on configuration change?
+- They must have android:id attribute specified with unique ID 
+- Their android:saveEnabled must be set for (default) true.
+
+What is the order of lifecycle callbacks invoked when activity A starts activity B?
+1 A.onPause() - A is still visible
+2 B.onCreate(), B.onStart(), B.onResume() - now B has foreground
+3 A.onStop() - A no longer visible
+
+What is a task?
+- A collection of activities (even from different applications) that users interact with when performing a certain job. 
+- It has its own back stack of activities.
+
+What is the type (FIFO, LIFO etc) of activities back stack?
+LIFO - last in, first out
+
+Is it possible for one activity to be instantiated more than once?
+Yes. Activities in the back stack are never rearranged, so creating new activity always puts it on top, instead of bringing it back from back stack.
+
+What are the two ways of defining a launch mode - how a new instance of an activity is associated with the current task? Which one has a priority?
+1 intent flags (priority)
+2 attributes in manifest file
+
+What are possible launch modes (<activity> launchMode attribute)? Which one is default?
+1 standard (default)
+2 singleTop
+3 singleTask
+4 singleInstance
+
+What 'standard' launch mode means?
+- The system creates a new instance of an activity in the task from which it was started and routes the intent to it.
+- It is default.
+
+Give example of 'standard' launch mode.
+1 Stack is A-B-C-D; D is on top
+2 An intent arrives for an activity of type D. 
+3 A new instance of the class is launched and the stack becomes A-B-C-D-D. 
+
+What 'singleTop' launch mode means?
+- If an instance of the activity already exists at the top of the current task, the system routes the intent to that instance through a call to its onNewIntent() method, rather than creating a new instance of the activity.
+- Otherwise it creates a new instance of an activity on the top of this task.
+- Equivalent of FLAG_ACTIVITY_SINGLE_TOP flag.
+
+What launch mode is it: 'If an instance of the activity already exists at the top of the current task, the system routes the intent to that instance, rather than creating a new instance of the activity'?
+singleTop
+
+Give example of 'singleTop' launch mode.
+1 Stack is A-B-C-D; D is on top
+2 An intent arrives for an activity of type D - the stack remains A-B-C-D, D receives intent through onNewIntent()
+3 An intent arrives for an activity of type B - the stack becomes A-B-C-D-B
+
+What 'singleTask' launch mode means?
+- If an instance of the activity already exists in a separate task, the system routes the intent to the existing instance through a call to its onNewIntent() method, rather than creating a new instance. 
+- Otherwise, system creates a new task and instantiates the activity in its root. 
+- Only one instance of the activity can exist at a time.
+- Equivalent of FLAG_ACTIVITY_NEW_TASK flag.
+
+Give example of 'singleTask' launch mode.
+1 Application issues an intent to open some activity, ex the Android Browser, 
+2 Either a new task starts for the Browser or, if the Browser already has a task running in the background, that task is brought forward to handle the new intent
+
+What launch mode is it: 'If an instance of the activity already exists in a separate task, the system routes the intent to the existing instance, otherwise, system creates a new task and instantiates the activity in its root'?
+singleTask
+
+What 'singleInstance' launch mode means?
+The activity is always the single and only member of its task; any activities started by this one open in a separate task.
+
+What launch mode is it: 'The activity is always the single and only member of its task; any activities started by this one open in a separate task'?
+singleInstance
+
+What are intent flags used to specify (override) launch mode?
+1 FLAG_ACTIVITY_NEW_TASK
+2 FLAG_ACTIVITY_SINGLE_TOP
+3 FLAG_ACTIVITY_CLEAR_TOP
+
+What FLAG_ACTIVITY_NEW_TASK means?
+- The same behaviour as the "singleTask" launch mode
+- If a task is already running for the activity you are now starting, that task is brought to the foreground with its last state restored and the activity receives the new intent in onNewIntent().
+- Otherwise, start the activity in a new task. 
+
+What FLAG_ACTIVITY_SINGLE_TOP means?
+- The same behaviour as the "singleTop" launch mode
+- If the activity being started is the current activity (at the top of the back stack), then the existing instance receives a call to onNewIntent(), instead of creating a new instance of the activity.
+
+What FLAG_ACTIVITY_CLEAR_TOP means?
+- If the activity being started is already running in the current task, then instead of launching a new instance of that activity, all of the other activities on top of it are destroyed and this intent is delivered to the resumed instance of the activity (now on top), through onNewIntent()).
+
+What affinity means in term of activities and tasks?
+- It indicates which task an activity prefers to belong to. 
+- By default, all the activities from the same application have an affinity for each other, so they prefer to be in the same task. 
+- <activity> taskAffinity attribute can be modified to change affinity
+
+When task affinity is considered?
+A When the intent that launches an activity contains the FLAG_ACTIVITY_NEW_TASK flag - activity is launched in the task pointed by task affinity
+B When an activity has its allowTaskReparenting attribute set to "true" - the activity can move from the task it starts to the task it has an affinity for, when that task comes to the foreground.
+
+How to display activity as a dialog?
+- Set <activity> android:theme attribute to Theme.Holo.Dialog 
+- It will appear as a dialog instead of fullscreen
+
+How to display activity as a dialog only when on large screens?
+- Set <activity> android:theme attribute to Theme.Holo.DialogWhenLarge 
+
+What are other ways of presenting an activity than a fullscreen?
+1 dialog - set <activity> android:theme attribute to Theme.Holo.Dialog
+2 floating window - set theme's windowIsFloating attribute for true
+3 embed inside of another activity - possible with ActivityGroup, but now depreciated in favour of fragments
+
+How to present an activity as a floating window?
+Set its theme windowIsFloating attribute for true
+
+What ActivityGroup can be used for?
+- For embedding activities in each other.
+- Depreciated in API 13 in favour of Fragment and FragmentManager. 
+
+When creating separate layouts for landscape and portrait orientations (ex using fragments) how to distinct from code which layout is currently set?
+A Try to findViewById() and check if it's not null and visible.
+B Specify some resource variable depending on configuration and verify it.

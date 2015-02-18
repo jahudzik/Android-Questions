@@ -1,0 +1,78 @@
+How to enable user to copy text from control (eg from TextView)?
+Set android:textIsSelectable attribute for true
+
+What control should be used to receive any text input from user?
+EditText
+
+How to change type of input keyboard in EditText?
+Specify it in android:inputType parameter.
+
+What are common input keyboards?
+- text - regular text
+- textEmailAddress - normal text with @ character
+- number - basic numbers
+- phone - phone-style
+
+What are different InputType values?
+- classes: text, numbers, phone, datetime
+- datetime variations
+- number variations: decimal, signed, password
+- text variations: capitalization, password, auto-complete etc
+
+How to change keyboard button in place of the carriage return key and the action to be made?
+Specify action by setting the android:imeOptions attribute.
+
+How does keyboard carriage return key change by default?
+- It searches for other focusable fields. 
+- If there are any, it applies actionNext
+- If there are none, it applies actionDone (can be overridden)
+
+How is called fullscreen mode when entering text input in landscape orientation?
+extract mode
+
+How to disable extract mode when collecting text input?
+android:imeOptions="flagNoExtractUi"
+
+How to create auto-complete text input?
+Use AutoCompleteTextView linked with some Adapter.
+
+How to ensure that some RadioButtons are mutually exclusive?
+Put all of them into RadioGroup.
+
+What are the types of CompoundButton?
+1 CheckBox
+2 RadioButton
+3 Switch
+4 ToggleButton
+
+What is toggle button?
+Compound button displaying checked/unchecked states as a button with a "light" indicator and by default accompanied with the text "ON" or "OFF".
+
+What is switch?
+- A two-state toggle switch widget that can select between two options. 
+- The user may drag it back and forth to choose the selected option, or simply tap to toggle.
+
+When was switch introduced?
+Android 4.0
+
+What is spinner?
+Input control with dropdown menu with all available values, from which the user can select a new one.
+
+How to supply spinner with items?
+Use any Adapter implementing SpinnerAdapter
+
+What are the display modes for spinner?
+1 dropdown - an inline dropdown anchored to the spinner widget
+2 dialog - options presented as a dialog window
+
+What the best way to collect time from user?
+Use TimePickerDialog within DialogFragment.
+
+What is View's android:contentDescription attribute used for?
+- Defines text that briefly describes content of the view. 
+- Text in this attribute does not appear on screen, but if the user enables accessibility services that provide audible prompts, then when the user navigates to that control, the text is spoken.
+- Set it for every ImageButton, ImageView and CheckBox.
+
+
+
+

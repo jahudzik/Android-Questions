@@ -1,0 +1,100 @@
+What is a notification?
+Message displayed to the user outside of your application's normal UI.
+
+How to build a notification?
+- Use NotificationCompat.Builder class methods to specify notification parameters
+- NotificationCompat.Builder.build() returns Notification object
+
+How to send a notification?
+1 Build notification with NotificationCompat.Builder
+2 Pass it to NotificationManager.notify() method
+
+What must be contained by each notification?
+1 small icon
+2 title
+3 detailed text
+
+How to make activity start when user click a notification?
+1 Define a PendingIntent starting chosen activity with FLAG_ACTIVITY_NEW_TASK flag set
+2 Pass it to NotificationCompat.Builder.setContentIntent() method
+
+What is the purpose of priorities of notifications?
+- The priority acts as a hint to the device UI about how the notification should be displayed. 
+- Priority set to PRIORITY_MAX or PRIORITY_HIGH may cause it to appear in a small floating window if the notification also has sound or vibration
+
+How to create an expanded view of notification?
+1 Create NotificationCompat.Builder object with normal view options
+2 Call Builder.setStyle() with an expanded layout object as its argument
+
+What are the ways of extending notification view?
+There are three NotificationCompat.Style subclasses:
+1 BigPictureStyle - include a large image attachment
+2 BigTextStyle - include a lot of text
+3 InboxStyle - include a list of (up to 5) strings
+
+How to add a button with some action to extended notification view?
+1 Create NotificationCompat.Builder object with normal view options
+2 Call Builder.addAction() with title and pending intent with action
+
+What means stacking a notification?
+- Updating previous notification instead of creating a new one.
+- Accomplished with calling NotificationManager.notify() with the same notification ID.
+
+When notification can be dismissed?
+1 User dismissed it either individually or using "Clear All"
+2 User clicks notification, which was created with setAutoCancel() method called
+3 cancel() was called for a specific notification ID
+4 cancelAll() was called
+
+How should be navigation handled when starting an activity from notification?
+Regular activity (part of the application's normal workflow):
+- Define activities hierarchy in manifest
+- Create back stack with TaskStackBuilder 
+Special activity
+- Define android:taskAffinity="" and android:excludeFromRecents="true" in manifest
+- Set FLAG_ACTIVITY_NEW_TASK and FLAG_ACTIVITY_CLEAR_TASK flags
+
+How to preserve navigation when starting application's regular activity from notification?
+1 Define parent activity in the manifest - <activity> android:parentActivityName attribute or <metda-data>
+2 Create a stack builder by calling TaskStackBuilder.create()
+3 Add the back stack to the stack builder by calling TaskStackBuilder.addParentStack()
+4 Add the Intent that starts the Activity from the notification, by calling TaskStackBuilder.addNextIntent()
+5 Get a PendingIntent for this back stack by calling TaskStackBuilder.getPendingIntent() 
+
+How to define special activity to be started from notification only (not part of the application's normal workflow)?
+1 Set <activity> android:taskAffinity="" - it won't go to application's default task 
+2 Set <activity> android:excludeFromRecents="true" - user can't navigate back to it
+3 When creating an intent to start it, set FLAG_ACTIVITY_NEW_TASK and FLAG_ACTIVITY_CLEAR_TASK flags
+
+How to show and hide a progress bar in notification?
+- determinate: NotificationCompat.Builder.setProgress(max,currentProgress,false)
+- indeterminate: NotificationCompat.Builder.setProgress(0,0,true)
+- hide: NotificationCompat.Builder.setProgress(0,0,false)
+
+What is heads-up notification?
+- A small floating window with notification appearing when the device is active 
+- May appear if activity is in fullscreen mode or notification has high priority and uses ringtones or vibrations
+- Introduced in API 21
+
+What are possible notification's visibility values?
+1 VISIBILITY_PUBLIC - shows the notification's full content on the lockscreen
+2 VISIBILITY_PRIVATE (default) - only notification's icon and the content title visible
+3 VISIBILITY_SECRET - doesn't show any part of this notification on the lock screen
+(API 21+)
+
+How to define different notification version for the lockscreen when VISIBILITY_PRIVATE is set?
+1 Create the replacement notification using NotificationCompat.Builder. 
+2 When the private notification object is created, attach the replacement notification to it through the setPublicVersion() method.
+
+What are size limits for custom notifications layouts?
+- normal view layouts are limited to 64 dp
+- expanded view layouts are limited to 256 dp
+
+
+
+
+
+
+
+
+

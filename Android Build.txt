@@ -1,0 +1,187 @@
+What are 3 main areas of Android build file?
+1 'buildscript' - repositories and dependiences
+2 'apply plugin'
+3 'android' - all configurations
+
+Can 'android' Gradle plugin be applied along with 'java' plugin?
+No, it will result in a build error.
+
+How should Android SDK location be specified?
+A Set ANDROID_HOME environment variable
+B Set sdk.dir property in local.properties file
+
+What are default source sets for the main source code and the test code?
+- src/main/
+- src/androidTest/
+
+How to replace default source folders?
+android {
+  sourceSets {
+    main {
+      manifest.srcFile 'AndroidManifest.xml'
+      java.srcDirs = ['src']
+      resources.srcDirs = ['src']
+    }
+    androidTest.setRoot('tests')
+  }
+}
+
+What does Gradle 'build' task do by default?
+Nothing. It must be implemented with some plugin (e.x. java or android)
+
+What Gradle 'connectedCheck' task does?
+- Runs checks that requires a connected device or emulator. 
+- They will run on all connected devices in parallel.
+
+What Gradle 'deviceCheck' task does?
+- Runs checks using APIs to connect to remote devices. 
+- This depends on tasks created when other plugins implement test extension points.
+
+How to parametrize application version code in Android build?
+1 Define Gradle's getVersionCode() method
+2 Check if property exists: project.hasProperty('xyz') and return it
+3 In build.gradle override manifest's versionCode value: android { defaultConfig { versionCode getVersionCode() }}
+
+What manifest entries can be modified through the DSL?
+1 minSdkVersion
+2 targetSdkVersion
+3 versionCode
+4 versionName
+5 applicationId
+6 package name for the test app
+7 instrumentation test runner
+
+How to set application identifier different than its package?
+Specify it in build.gradle:
+android {
+  defaultConfig {
+    applicationId ???
+  }
+}
+
+What are differences between release and debug versions of the application?
+1 Signing: debug is automatically signed during build, release needs to be signed later
+2 Debugging: release version is not debuggable
+3 Distribution: debug version cannot be distributed 
+
+What are BuildType configuration options?
+1 debuggable
+2 signingConfig
+3 applicationIdSuffix
+4 versionNameSuffix
+5 minifyEnabled
+6 proguardFile
+
+What is generated for each new BuildType?
+1 source set with default location src/<BuildTypeName>/
+2 assemble<BuildTypeName> task
+
+What is the purpose of signing the application?
+1 identifying the author of an application (only he can publish application updates)
+2 app can expose functionality to another app that is signed with a specified certificate
+3 apps signed by the same certificate can run in the same process
+
+Where is debug keystore located?
+$HOME/.android/debug.keystore (automatically created)
+
+When does debug certificate expire?
+- After 365 days.
+- It should be removed then, as will be automatically recreated on the next build.
+
+What information is required in signing configuration?
+1 A keystore
+2 A keystore password
+3 A key alias name
+4 A key password
+
+How to avoid keeping passwords in Gradle build script?
+A Prompt for user input:  
+- storePassword System.console().readPassword("Enter keystore password:")
+B Get it from environment variable:
+- storePassword System.getenv("KEYSTORE_PASSWORD")
+
+How to sign application in release mode?
+1 Create a keystore
+2 Create a private key
+3 Add the signing configuration to the build file
+4 Invoke the assembleRelease task to sign the apk
+
+How to manually generate a private key?
+Use keytool
+
+What tool can be used to sign the app with private key?
+jarsigner
+
+What Gradle properties should be set to apply ProGuard on Android project?
+For each build type/flavour set:
+- minifyEnabled property for true
+- proguardFile property
+
+What is the role of settings.gradle file?
+- Placed in the root of Gradle multi-project.
+- It defines which subfolders are Gradle projects.
+- Example: include ':app', ':libraries:lib1', ':libraries:lib2'
+
+What is a Library Project? 
+- It is a development module that holds shared Android source code and resources. 
+- Application modules can reference library module and, at build time, include its compiled sources in their .apk files. 
+- Its main output is an .aar package (which stands for Android archive).
+
+What considerations should be taken when developing library modules and dependent applications?
+1 Use prefixes to avoid resource IDs conflicts between modules.
+2 Library modules cannot include raw assets.
+3 Library module should use an API level that is the same as — or lower than — that used by the application.
+4 Each library module creates its own R class.
+
+How library module should be referenced from application module?
+In build.gradle in the same way as any other project is referenced:
+dependencies {
+    compile project(':libraries:lib1')
+}
+
+What is product flavor?
+- It defines a customized version of the application build by the project. 
+- A single project can have different flavors which change the generated application.
+
+What is a Build Variant?
+Each (Build Type, Product Flavor) combination
+
+What is manifests priority order from Manifest Merger point of view?
+1 Product flavors and build types specific manifest files.
+2 Main manifest file for the application.
+3 Library manifest files. 
+
+What means <action android:name="${applicationId}.foo"> in manifest?
+- This is intent filter's action definition with a placeholder.
+- Placeholders are replaced by Manifest Merger with injected values specified in build.gradle ('manifestPlaceholders' attribute).
+
+How to turn on Manifest Merger?
+Add flag manifestmerger.enabled=true in project.properties
+
+How to reference any value from root project build.gradle in module's script?
+1 Specify some value in root project's build.gradle: 
+ext {
+  compileSdkVersion = 19
+}
+2 Refer it in module's script:
+android {
+  compileSdkVersion rootProject.ext.compileSdkVersion
+}
+
+What merging mechanisms are part of Android build process?
+1 manifests
+2 resources 
+3 assets
+
+How to enable resource shrinking?
+In build.gradle specify:
+- minifyEnabled true
+- shrinkResources true
+
+What means 'shrinkResources' in build.gradle?
+This attribute set for true (along with minifyEnabled set for true as well) turns on resource shrinking, which is the automatic removal of resources that are unused, at build time, in the packaged app.
+
+How to save some resources from removing on resources shrinking phase?
+In any XML resource file (typically res/raw/keep.xml) set tools:keep attribute with list of resources to be saved.
+
+

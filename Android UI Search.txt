@@ -1,0 +1,73 @@
+What are two modes of search input?
+1 a search dialog at the top of the screen
+2 a search widget (SearchView) embedded in layout
+
+What is a Searchable Configuration?
+XML resource file (traditionally res/xml/searchable.xml), which configures certain UI aspects and behaviour of search dialog/widget.
+
+What are required components to implement a search interface?
+1 A searchable configuration
+2 A searchable activity
+3 A search interface: dialog or SearchView widget
+
+How Searchable Configuration file should look like?
+- XML resource file (traditionally res/xml/searchable.xml)
+- Root element: <searchable>
+- Required attribute: android:label
+- Recommended attribute: android:hint
+
+How to define text show as a hint in the search field?
+Specify it in android:hint attribute in searchable.xml configuration file.
+
+How to declare searchable activity in the manifest?
+1 Declare the activity to accept the ACTION_SEARCH intent, in an <intent-filter> element.
+2 Specify the searchable configuration to use, in a <meta-data> element.
+3 The <intent-filter> does not need a <category> with the DEFAULT value, because the system delivers the ACTION_SEARCH intent explicitly to searchable activity, using its component name.
+
+What are responsibilities of a searchable activity?
+1 Receive a query
+2 Search data
+3 Present the results
+
+How to receive a query in searchable activity?
+1 Receive an intent: 
+- getIntent()
+2 Check if it is a ACTION_SEARCH intent:
+- if (Intent.ACTION_SEARCH.equals(intent.getAction()))
+3 Get QUERY string extra:
+- String query = intent.getStringExtra(SearchManager.QUERY)
+
+How to place a SearchView in the action bar?
+Define <item> in menu.xml:
+<item android:id="@+id/action_search"
+  android:title="@string/action_search"
+  android:icon="@drawable/ic_action_search"
+  yourapp:showAsAction="ifRoom|collapseActionView"
+  yourapp:actionViewClass="android.widget.SearchView" />
+
+How to implement a voice search?
+1 Implement search dialog or widget
+2 Add voice search functionality by adding the android:voiceSearchMode attribute to searchable configuration:
+android:voiceSearchMode="showVoiceSearchButton|launchRecognizer"
+
+What are two types of search suggestions?
+1 Recent query suggestions - words that the user previously used as search queries
+2 Custom suggestions - provided from the data source
+
+How to implement recent search suggestions?
+1 Implement searchable activity
+2 Create a content provider that extends SearchRecentSuggestionsProvider
+3 Modify the searchable configuration with information about the content provider that provides search suggestions.
+4 Save queries to the content provider each time a search is executed.
+
+How to implement custom search suggestions?
+1 Implement searchable activity
+2 Create DB table to keep suggestions
+3 Create a Content Provider with access to suggestions table
+4 Modify the searchable configuration with information about the content provider that provides search suggestions.
+5 Declare the type of Intent to be sent when the user selects a suggestion (including a custom action and custom data).
+
+
+
+
+

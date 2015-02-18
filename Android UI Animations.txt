@@ -1,0 +1,26 @@
+What's difference between Animation and Animator classes?
+- Animation - introduced in API 1, animate only how the view is drawn on the display
+- Animator - introduced in API 11, change actual properties of the View object, such as alpha and translationX
+
+What animation systems are on Android?
+1 property animation (introduced in Android 3.0)
+2 view animation
+3 drawable animation
+
+What is default animation length?
+300 ms
+
+What is default animation frame refresh delay?
+10 ms
+
+What's difference between view animation and property animation?
+View animation:
+- animates only Views
+- exposes just a few aspects to animate, such as the scaling and rotation
+- it only modifies where the View is drawn, not actual View itself
+Property animation:
+- animates any property of any object
+- requires more code to write
+
+
+

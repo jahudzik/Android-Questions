@@ -1,0 +1,185 @@
+What is intent?
+A messaging object which can be used to request an action from another app component.
+
+What are three fundamental use cases of intents?
+1 start an activity
+2 start a service
+3 deliver a broadcast
+
+How to start an activity with intent?
+A. Context.startActivity(Intent)
+B. Context.startActivityForResult(Intent) and get result in onActivityResult()
+
+How to start a service with intent?
+Call Context.startService(Intent)
+
+How to connect to an application service?
+Context.bindService(Intent, ServiceConnection, int)
+
+How to deliver a broadcast with intent?
+1 Context.sendBroadcast(Intent)
+2 Context.sendOrderedBroadcast(Intent)
+3 Context.sendStickyBroadcast(Intent) - depreciated in API 21
+
+What are two types of intents?
+1 explicit
+2 implicit
+
+What is explicit intent?
+- It specifies the component to start by name
+- Typically used to start a component in your own app
+
+What is implicit intent?
+It declares a general action to perform without any specific component
+
+What type of intents should be used to start services?
+- Explicit. Using an implicit intent to start a service is a security hazard because you cannot be certain what service will respond to the intent.
+- Beginning API 21, the system throws an exception if you call bindService() with an implicit intent.
+
+How to make Intent explicit?
+- By defining the name of component (class) to start. 
+- Otherwise it will be implicit.
+
+What information can be contained in intent?
+1 component name
+2 action
+3 data (URI and MIME type)
+4 category
+5 extras 
+6 flags
+
+What means component name in intent definition?
+- The name of the component to start.
+- If specified, it makes intent explicit. Otherwise it's implicit.
+
+What means action in intent definition?
+- It specifies the generic action intent should perform 
+- Custom action can be used, but usually use action constants defined by the Intent class or other framework classes. 
+
+Name some example intent actions.
+1 ACTION_MAIN
+2 ACTION_EDIT
+3 ACTION_VIEW
+4 ACTION_SEND
+5 ACTION_GET_CONTENT
+6 ACTION_CHOOSER
+
+When should be ACTION_MAIN intent action used?
+When activity should be started as a main entry point and doesn't expect to receive data.
+
+When should be ACITON_VIEW intent action used?
+When starting another activity with some information to be shown to user
+
+When should be ACTION_SEND intent action used?
+When starting another activity with some data to be delivered
+
+When should be ACTION_EDIT intent action used?
+When starting another activity with editable access to the given data.
+
+When should be ACTION_GET_CONTENT intent action used?
+When allowing the user to select a particular kind of data and return it. 
+
+When should be ACTION_CHOOSER intent action used?
+When want to show application chooser each time intent is started. There won't be an option to choose default application.
+
+What means data in intent definition?
+- The URI that references the data to be acted on and/or the MIME type of that data. 
+- The type of data supplied is generally dictated by the intent's action. 
+
+What means category in intent definition?
+- A string containing additional information about the kind of component that should handle the intent.
+
+Name some example intent categories.
+1 CATEGORY_DEFAULT
+2 CATEGORY_LAUNCHER
+3 CATEGORY_BROWSABLE
+4 CATEGORY_ALTERNATIVE
+
+What means CATEGORY_DEFAULT intent category?
+- It should be set on intent filter if activity is expected to be started by implicit intent with no specific category.
+- The methods startActivity() and startActivityForResult() treat all intents as if they declared the CATEGORY_DEFAULT category
+
+What means CATEGORY_LAUNCHER intent category?
+That it should be displayed in the top-level launcher.
+
+What means CATEGORY_BROWSABLE intent category?
+It must be set for activities that can be safely invoked from a browser.
+
+What means CATEGORY_ALTERNATIVE intent category?
+That it should be included in a list of alternative actions the user can perform on a piece of data.
+
+What means extras in intent definition?
+Key-value pairs that carry additional information required to accomplish the requested action. 
+
+What means flags in intent definition?
+- Flags defined in the Intent class that function as metadata for the intent. 
+- The flags may instruct the Android system how to launch an activity and how to treat it after it's launched.
+
+How to ensure there's at least one app to handle implicit intent?
+Call resolveActivity() on Intent to be send.
+
+How to force application chooser dialog to appear each time when responding to the intent?
+Create intent with Intent.createChooser() method. It wraps target intent into ACTION_CHOOSER Intent 
+
+Can explicit intent be filtered by intent filter?
+No, it is always delivered to its target.
+
+What is PendingIntent?
+- A wrapper around Intent object.
+- It grants permission to a foreign application to use the contained Intent as if it were executed from your app's own process.
+
+What are example use cases of pending intents?
+1 action to be executed with notification
+2 action to be executed with app widget
+3 action to be executed at a specified time in the future
+
+What intent filter aspects are considered when matching it to received intent?
+1 action
+2 data (both URI and type)
+3 category
+
+How to create alarm from Android application?
+1 Define new intent with ACTION_SET_ALARM action and extras specifying time and message to be shown
+2 Add SET_ALARM permission to the manifest
+
+How to create timer from Android application?
+1 Define new intent with ACTION_SET_TIMER action and extras specifying time and message to be shown
+2 Add SET_ALARM permission to the manifest
+
+How to add a new event to the user's calendar?
+1 Define new intent with ACTION_INSERT action, data and extras with details of event
+2 Add READ_CALENDAR and WRITE_CALENDAR permissions
+
+How to capture a picture/video from camera?
+1 Define new intent with ACTION_IMAGE_CAPTURE/ACTION_VIDEO_CAPTURE action and EXTRA_OUTPUT extra.
+2 Add CAMERA and WRITE_EXTERNAL_STORAGE permissions
+
+How to select a contact and get access to its information?
+1 Define new intent with ACTION_PICK action and MIME type Contacts.CONTENT_TYPE
+2 Add READ_CONTACTS permission
+
+How to compose an email from Android application?
+Define new intent with ACTION_SENDTO/ACTION_SEND/ACTION_SEND_MULTIPLE (depend on number of attachments) action and extras with details (recipients, subject, message etc)
+
+How to play a music from Android application?
+Define new intent with ACTION_VIEW action and specify data URI location and MIME type
+
+How to make a phone call from Android application?
+1 Define new intent with ACTION_DIAL (requires user's confirmation) or ACTION_CALL (call directly) action and URI data with phone number
+2 Using ACTION_CALL requires CALL_PHONE permission
+
+How to perform a web search from Android application?
+Define new intent with ACTION_WEB_SEARCH action and specify the search string in the SearchManager.QUERY extra
+
+How to compose a SMS/MMS message from Android application?
+1 Define a new intent with ACTION_SENDTO/ACTION_SEND/ACTION_SEND_MULTIPLE action, sms:<phone_number> or mms:<phone_number> data URI and extras with message
+2 Add SEND_SMS permission
+
+How to load a web URL in the browser from Android application?
+Define new intent with ACTION_VIEW action and data with URL
+
+What FLAG_ACTIVITY_NEW_DOCUMENT means?
+This flag is used to open a document into a new task rooted at the activity launched by this Intent. 
+
+How an activity can receive an intent which started it?
+Call getIntent() method

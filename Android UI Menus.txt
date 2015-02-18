@@ -1,0 +1,179 @@
+What are 3 fundamental menus types in Android?
+1 Options menu/action bar
+2 Context menu
+3 Popup menu
+
+When was dedicated Menu button depreciated?
+Android 3.0
+
+Where should be options menu placed?
+- For Android 2.x under dedicated Menu button.
+- Since Android 3.0 in the action bar.
+
+What menu is invoked when user performs a long-click on an element?
+Context menu
+
+What are advantages of defining menu as XML resource over building it in activity's code?
+1 Easier to visualize
+2 Separates menu content from app behavioural code
+3 Allows to create separate menus for different configurations
+
+How to define new menu?
+1 Create XML resource file in res/menu
+2 Build menu using <menu>, <item> and <group> elements
+3 Inflate it (load as Menu object) in activity/fragment
+
+How to create submenu?
+In menu XML file, add <menu> element as the child of an <item>.
+
+How to make chosen menu option appear in the action bar to enable quick access?
+- Set android:showAsAction attribute of <item> element.
+- Possible values: always, never, ifRoom, withText, collapseActionView
+
+What happens if both activity and fragment declare their menus?
+- Both menus are combined in the UI.
+- The activity's items appear first, followed by those of each fragment in the order in which each fragment is added to the activity.
+
+How to inflate menu XML resource to the activity/fragment?
+- Override onCreateOptionsMenu() method.
+- Call getMenuInflater().inflate(R.menu.xxx)
+
+How to handle user choosing an item from options menu?
+A. Override onOptionsItemSelected() method
+B. Supply method name in android:onClick attribute of <item>
+
+How to modify menu items at runtime?
+- Override onPrepareOptionsMenu(Menu) method and modify Menu object.
+- This method is called always before menu is shown.
+- Since Android 3.0 menu is considered to always be shown, so invalidateOptionsMenu() must be called.
+
+What are two ways of providing contextual actions? Which one is preferred?
+1 Contextual action mode (preferred)
+2 Floating context menu
+
+How to implement floating context menu for chosen view?
+1 Define context menu layout in XML file
+2 Call registerForContextMenu(View) passing chosen view
+3 Implement onCreateContextMenu() in activity/fragment and inflate it there
+4 Implement onContextItemSelected() method
+
+How does contextual action mode work?
+- When user selects enabled item, contextual action bar appears at the top (over regular action bar).
+- It presents actions user can perform on selected item(s).
+- Contextual action bar disappears when user deselects all items, presses BACK or Done action on the left side of the bar.
+
+How to implement contextual action mode for chosen view?
+1 Implement ActionMode.Callback to handle lifecycle events for the action mode
+2 Call startActionMode() when you want to show the bar (ex long-click on chosen view)
+
+How to implement contextual action mode for ListView or GridView?
+1 Implement AbsListView.MultiChoiceModeListener to handle lifecycle events for the action mode
+2 Pass it to ListView.setMultiChoiceModeListener()
+3 Call ListView.setChoiceMode(CHOICE_MODE_MULTIPLE_MODAL)
+
+What's difference between popup menu and context menu?
+- Popup menu holds actions that relate to chosen content
+- Context menu holds actions that affect selected content
+
+How to implement PopupMenu for chosen view?
+1 Instantiate a PopupMenu passing View to which the menu should be anchored
+2 Implement method inflating the menu and showing it
+3 Specify this method in android:onClick attribute for chosen view
+
+When was ActionBar API introduced?
+In API 11, but support library enables it for API 7 and above.
+
+How to enable action bar?
+- Below API 11: activity should extend ActionBarActivity from support library
+- For API 11+: action bar is included in all activities using default Theme.Holo theme (or one of its descendants)
+
+How to disable action bar for chosen activity?
+A. Set activity theme to Theme.Holo.NoActionBar (API 11+)
+B. Remove it on runtime by calling ActionBar.hide()
+
+How to make action bar overlay activity instead of causing it to relayout each time it (dis)appears?
+Create custom theme for the activity and set windowActionBarOverlay to true.
+
+How is called ActionBar's button on the right side holding rarely used actions?
+overflow button
+
+How to make chosen option of options menu appear on action bar?
+Set its showAsAction attribute to always/ifRoom/withText/collapseActionView
+
+Why action bar item should have title defined even if we don't intend to present it (just icon is shown)?
+1 If there's no enough space, item with title may appear in overflow
+2 Screen readers for sight-impaired users read the menu item's title.
+3 Long-press on the item reveals a tool-tip with action title
+
+How to split action bar into top and bottom parts? What will be placed in each part?
+- In manifest set <activity> uiOptions attribute to splitActionBarWhenNarrow.
+- Top bar will contain navigation items.
+- Bottom bar will contain actions.
+
+How to implement action bar with navigation tabs on top and actions on the bottom of the screen?
+- In manifest set <activity> uiOptions attribute to splitActionBarWhenNarrow.
+- Disable action bar icon and title.
+
+How to implement Up button on the action bar to return to 'parent' screen (for example from selected item details to items list)?
+1 Call ActionBar.setDisplayHomeAsUpEnabled(true)
+2 Define parent activity:
+2a in manifest file (if it's always the same)
+2b by overriding getSupportParentActivityIntent() method (if it changes)
+3 In case of fragments onSupportNavigateUp() should be overridden instead
+
+How to place action view instead of action button on action bar?
+In menu XML resource file for chosen <item> use either the actionLayout or actionViewClass attribute to specify either a layout resource or widget class to use.
+
+How to make action view on action bar collapsible?
+Set android:showAsAction attribute of <item> equal 'collapseActionView'
+
+How to place action provider in action bar?
+Set actionViewClass attribute of <item> to fully-qualified class name of ActionProvider subclass.
+
+What action providers are provided in Android API?
+1 ShareActionProvider
+2 MediaRouteActionProvider
+
+How to use ShareActionProvider in menu/action bar?
+1 Set actionProviderClass attribute of chosen <item> value to ShareActionProvider class name
+2 Define Intent used for sharing and pass it to ShareActionProvider.setShareIntent() method
+
+How to implement navigation tabs?
+- (depreciated since API 21)
+- Implement ActionBar.TabListener
+- For each tab instantiate an ActionBar.Tab and call setTabListener() on it
+- Add each tab to the action bar by calling addTab()
+
+What action bar alternative has been introduced in API 21?
+Toolbar class
+
+How to modify appearance of action bar?
+- Define own <style> in style XML resource file, setting action bar attributes.
+- Apply this style in manifest to <application> or <activity> 
+
+What are possible view-switching controls from action bar?
+1 tab controls - for more frequent changes
+2 drop-down menus (spinners)
+
+Name standard action bar elements.
+From left to right:
+1 Up button (if app is not in top-level screen)
+2 Application icon
+3 Action view (ex navigation spinner, search field)
+4 Action buttons
+5 Action overflow menu
+
+What actions are appropriate to be placed on the action bar?
+Documentation suggests following FIT scheme:
+- Frequent
+- Important
+- Typical
+
+What are best practices in placing action buttons on action bar?
+1 They shouldn't occupy more than 50% of top bar width.
+2 They can occupy whole bottom bar width
+3 Buttons number (2 to 5) depend on screen width.
+4 If action buttons number is too big to fit on top, use bottom action bar.
+
+What is CAB?
+Contextual Action Bar

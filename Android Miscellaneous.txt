@@ -1,0 +1,159 @@
+What is the order of logs verbosity?
+ERROR, WARN, INFO, DEBUG, VERBOSE
+
+What is the path to database files on device?
+/data/data/<package_name>/databases/abc.db
+
+What are differences between Java in Android and Java SE?
+1) Android uses Dalvik/ART instead of JVM
+2) Java API implementations based on Apache Harmony
+3) Removed unnecessary libraries (ex Swing/AWT, RMI, CORBA, JMX)
+
+What is zygote?
+A daemon process whose goal is to launch applications. On each app startup it forks and child process continues.
+
+What is Leanback library?
+Provides APIs to support building user interfaces on TV devices.
+
+What is hardware acceleration?
+- It is hardware-accelerated OpenGL renderer available to applications, to improve performance for many common 2D graphics operations.
+- This results in smoother animations, smoother scrolling, and improved responsiveness overall, but makes the app consume more RAM.
+- It was introduced in Android 3.0.
+
+How to specify application's icon and label in the launcher window?
+Specify android:icon and android:label attributes in the manifest for activity marked as MAIN.
+
+What is Parcel? What type of data it can contain?
+Container for a message (data and object references) that can be sent through an IBinder. It flattens objects into byte stream. 
+It can hold:
+1 primitives
+2 primitive arrays
+3 classes implementing Parcelable interface
+4 Bundles
+5 Active Objects: Binder and FileDescriptor
+6 Java containers
+
+What's difference between Serializable and Parcelable?
+- Serializable is much simpler to use (it's marker interface), but slower due to reflection and many temporary objects created.
+- Parcelable requires several methods to be implemented (describeContents(), writeToParcel(), CREATOR static field) but is about 10 times faster.
+
+How implementation of Parcelable interface should look like?
+Class implementing this interface must implement two methods:
+- writeToParcel() - all class fields should be written to the Parcel
+- describeContents() - returns some int (API suggests 0)
+Additionally static field called CREATOR must be added. It must be of Parcelable.Creator<> type, which requires implementing two more methods:
+- createFromParcel() - reads from the Parcel and returns object instance
+- newArray() - returns new array of objects
+
+What are the options to handle configuration changes?
+1. Don't do anything - Android retains automatically for example EditText content
+2. Retain fragment - it will be detached from old activity and attached to the new one
+3. Add to Bundle - pass Bundle with data in onSaveInstanceState() and restore it in onCreate()/onRestoreInstanceState() (activities) or onCreate()/onCreateView()/onViewCreated()/onActivityCreated() (fragments)
+4. Handle chosen configuration changes yourself by specifying them in the manifest and implementing onConfigurationChanged() in Activity
+
+What means '@' in android:id value?
+Indicates that the XML parser should parse the rest of ID string and identify it as an ID resource.
+
+What mean '+' in android:id value? When can it be omitted?
+Indicates this is a new resource which has to be created and added to resources in the R.java file.
+It should be dropped, when it is referenced again in the same resource file.
+
+What means '@android' in android:id value?
+indicates this is resource offered by Android framework (android.R resources class)
+
+How many R classes exist in Android application?
+Two.
+1. android.R - part of core system or Android SDK
+2. com.yourapp.R - generated on project build
+
+What is purpose of R.java files?
+They contain unique identifiers for elements in each category (drawable, string, layout etc) of resources available in the application.
+The main purpose is quick accessibility of resources in the project.
+
+What IME shortcut means?
+Input method editor
+
+When typically system clears a task (removes all activities from the stack above the root activity)?
+If user hasn't visited the task for a certain amount of time, such as 30 minutes and re-selects that task from the home screen.
+
+What is overview screen?
+- A system-level UI that lists recently accessed activities and tasks.
+- Also referred to as the recents screen, recent task list, or recent apps
+
+How to make multiple launchers starting the same Activity?
+Use manifest <activity-alias> targeting this Activity, but specifying different label and icon.
+
+What is restricted profile?
+- Separate profile which can be created on tablet to limit the access that others have to features and content.
+- It's only tablets feature, there are no restricted profiles on phones.
+- Introduced in Android 4.2
+
+How to enable debugging of Android application even when running on a device in user mode?
+Set <application> android:debuggable attribute for true.
+
+How to make two applications access each other's data and run in the same process?
+By specifying the same user ID in <manifest> android:sharedUserId attribute in their manifests.
+
+How to check if device has some feature, ex camera?
+PackageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA);
+
+What happens when user touches app's icon in the application launcher or Home screen?
+- application's task comes to the foreground
+- if no task exists for the application (the application has not been used recently), then a new task is created and the "main" activity for that application opens as the root activity in the stack.
+
+When is DeadObjectException thrown?
+When object you are calling has died, because its hosting process no longer exists.
+
+What are app widgets?
+Miniature application views that can be embedded in other applications (such as the Home screen) and receive periodic updates.
+
+Name some common configuration quantifiers of resources.
+1 language
+2 layout direction: LTR/RTL
+3 screen size: small/normal/large/x-large
+4 orientation: portrait/landscape/square(depreciated)
+5 API version
+
+How to check programmatically some actual configuration parameter (ex orientation or screen size)?
+Get value from Configuration object: getResources().getConfiguration()
+Alternatively:
+1 In each resource directory declare a bool resource value:
+1a. res/values/bools.xml: <bool name="large_layout">false</bool>
+1b. res/values-large/bools.xml: <bool name="large_layout">true</bool>
+2. Initialize variable in onCreate(): largeLayout = gerResources().getBoolean(R.bool.large_layout)
+
+How to retrieve meta-data values in component code?
+- ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+- Bundle metaData = appInfo.metaData;
+
+What is a dream in terms of Android?
+- Interactive screensaver launched when a charging device is idle or docked in a desk dock.
+- Implemented with DreamService (API 17+)
+
+What is a keyguard in terms of Android?
+- It refers to the code that handles the unlocking of the phone.
+- Examples: PIN, pattern, face, password locks, default lock (slide to unlock)
+
+What represents .aar format?
+The binary distribution of an Android Library Project.
+
+What is TalkBack?
+- accessibility service 
+- works by speaking the contents of user interface controls as the user moves focus onto controls
+- can be enabled in Settings
+
+What is the name of accessibility service, which works by speaking the contents of UI controls as the user moves focus onto controls?
+TalkBack
+
+How to enable focus navigation for physical controllers?
+1 Ensure that all views are focusable (android:focusable)
+2 Modify focus order if required (android:nextFocusDown etc)
+
+How to make application accessible?
+1 Set android:contentDescription for every ImageButton, ImageView and CheckBox.
+2 Enable focus navigation for physical controllers
+3 Implement accessibility interfaces for custom views 
+4 Audio feedback must always have a secondary feedback mechanism to support users who are deaf 
+
+
+

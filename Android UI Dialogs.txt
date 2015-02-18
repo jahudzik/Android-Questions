@@ -1,0 +1,71 @@
+What are common Dialog subclasses?
+1 AlertDialog
+2 DatePickerDialog/TimePickerDialog
+3 ProgressDialog
+
+What is an AlertDialog?
+A dialog that can show a title, up to three buttons, a list of selectable items, or a custom layout.
+
+What is a DatePickerDialog?
+A dialog with a pre-defined UI that allows the user to select a date.
+
+What is a ProgressDialog?
+- A dialog showing a progress indicator and an optional text message or view.
+- Documentation suggests it should be avoided. ProgressBar in layout should be used instead.
+
+Why DialogFragment should be used instead of raw Dialog?
+- It correctly handles lifecycle events such as when the user presses the Back button or rotates the screen.
+- It also allows to reuse the dialog's UI as an embeddable component in a larger UI, just like a traditional Fragment.
+
+Where should Dialog be implemented within DialogFragment?
+1 In onCreateView() content of the dialog should be supplied.
+2 OR in onCreateDialog() custom Dialog should be created and returned.
+
+What are the parts of an AlertDialog?
+1 Title (optional)
+2 Content area - message, list or other custom layout
+3 Action buttons - no more than three
+
+How can AlertDialog be created?
+With AlertDialog.Builder class
+1 builder = new AlertDialog.Builder()
+2 builder.setMessage(...).setTitle(...)
+3 builder.setPositiveButton(...)
+4 dialog = builder.create()
+
+What kinds of buttons can AlertDialog contain?
+1 Positive
+2 Negative
+3 Neutral
+(no more than one of each kind)
+
+How to supply AlertDialog's list with items?
+Using AlertDialog.Builder...
+1 Call setItems() with array resource ID
+2 OR Call setAdapter() with some ListAdapter
+
+What kinds of lists are supported by AlertDialog?
+1 traditional single-choice
+2 persistent single-choice radio buttons
+3 persistent multiple-choice checkboxes 
+
+How to create AlertDialog with custom layout?
+Create layout XML and inflate it to AlertDialog.Builder.setView() method:
+builder.setView(inflater.inflate(R.layout.my_layout, null))
+
+How to pass events from dialog to its parent activity?
+As we should use DialogFragment, in the same way as with any other fragments - define dialog's inner interface and force activity to implement it.
+
+How to show a dialog?
+1 Extend DialogFragment with custom dialog defined (ex built with AlertDialog.Builder)
+2 Instantiate it and call myFragment.show(getSupportFragmentManager(), "someTag")
+
+When dialog is dismissed? When is it cancelled?
+Dismissed (onDismiss() called) when user:
+- touches any action button
+- touches item in a dialog list, if it doesn't use radio buttons or checkboxes
+- calls dimsmiss() method somehow
+Cancelled (onCancel() called) when user:
+- presses Back button
+- touches the screen outside dialog area
+- call cancel() method somehow

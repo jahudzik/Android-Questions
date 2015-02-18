@@ -1,0 +1,50 @@
+When was first Android version released?
+- beta release: November 2007
+- version 1.0: September 2008
+
+When is Android birthday?
+5 November 2007 (beta release)
+
+What is percentage of devices running under Lollipop? (Feb '15)
+1.5%
+
+What is percentage of devices running under KitKat? (Feb '15)
+40%
+
+What is percentage of devices running under Jelly Bean? (Feb '15)
+45%
+
+What is percentage of devices running under Ice Cream Sandwich? (Feb '15)
+6%
+
+What is percentage of devices running under Gingerbread and below? (Feb '15)
+8%
+
+What action bar alternative has been introduced in API 21?
+Toolbar class
+
+When was loaders introduced?
+Android 3.0
+
+When was fragments introduced?
+Android 3.0
+
+Which Android version introduced support for Java 1.7 features?
+KitKat
+
+How has Overview Screen changed since API 21?
+- Multiple instances of the same activity containing different documents may appear as tasks in the overview screen. 
+- For example, Google Drive may have a task for each of several Google documents.
+
+Name main features of API 21 release.
+1 Android Runtime (ART) replaced Dalvik
+2 Support for 64-bit CPUs
+3 Material design
+4 Project Volta
+5 WebViews receive updates independently through Google Play
+6 OpenGL ES 3.1 support
+7 Notifications on the lock screen
+8 Document-centric apps
+
+When was expanded notifications introduced?
+Android 4.1

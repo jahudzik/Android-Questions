@@ -1,0 +1,56 @@
+What is Loader?
+- A class that performs asynchronous loading of data.
+- It monitors the source of their data and deliver new results when the content changes.
+- It's available to every Activity and Fragment.
+- It automatically reconnects to the last loader's cursor when being recreated after a configuration change.
+
+How to start a loader?
+In Activity.onCreate() or Fragment.onActivityCreated() call getLoaderManager().initLoader(id, args, listener)
+- id - unique ID that identifies the loader
+- args - optional arguments
+- listener - LoaderManager.LoaderCallbacks implementation
+
+What are the methods of LoaderManager.LoaderCallbacks?
+1 onCreateLoader() — Instantiate and return a new Loader
+2 onLoadFinished() — Called when a previously created loader has finished its load
+3 onLoaderReset() — Called when a previously created loader is being reset
+
+How should loaders be implemented?
+1 Implement LoaderManager.LoaderCallbacks interface
+2 In onCreateLoader() create and return new Loader (ex CursorLoader)
+3 In onLoadFinished() receive and use loaded data (ex fill ListView)
+4 In Activity.onCreate() or Fragment.onActivityCreated() call getLoaderManager().initLoader() passing listener implementation
+
+What is CursorLoader?
+A Loader implementation that queries the ContentResolver and returns a Cursor.
+
+What is content provider?
+- The standard interface that connects data in one process with code running in another process.
+- It encapsulates the data, and provides mechanisms for defining data security.
+
+Which class is used to access data in a content provider?
+ContentResolver
+
+Does content provider require to have a primary key?
+No
+
+How to query for data from content provider?
+Through content resolver: getContentResolver.query()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

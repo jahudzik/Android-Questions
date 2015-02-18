@@ -1,0 +1,3 @@
+How to check IP address of Android device?
+Settings -> Wi-Fi -> Advanced
+

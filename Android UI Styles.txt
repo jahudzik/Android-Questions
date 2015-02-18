@@ -1,0 +1,76 @@
+What is a style?
+- Collection of properties that specify the look and format for a View or window
+- Can specify properties such as height, padding, font color, font size, background color, and much more
+- A similar philosophy to cascading stylesheets in web design
+
+What is a theme?
+- Style applied to an entire Activity or application, rather than an individual View
+- When a style is applied as a theme, every View in the Activity or application will apply each style property that it supports. 
+
+How to define a style?
+1 Create XML file (typically styles.xml) in res/values/
+2 Add <style> element with a name attribute
+3 Add <item> elements for each property
+Example:
+<style name="CodeFont">
+  <item name="android:textColor">#00FF00</item>
+  <item name="android:typeface">monospace</item>
+</style>
+
+How to set a style for a view?
+1 Define it in res/values resources directory
+2 Refer it in view's style attribute: style="@style/myStyle"
+
+How to set a theme for an activity?
+1 Define style XML file in res/values resources directory
+2 Refer it in manifest <activity> android:theme attribute.
+
+When defining a style, how to inherit properties from another style?
+A Specify it in 'parent' attribute:
+- <style name="GreenText" parent="@android:style/TextAppearance">
+B If it is not a build-in Android style, prefix name with parent style name followed by dot:
+- <style name="ParentStyle.MyStyle">
+
+What are two way of setting a style?
+A To an individual view, by adding the style attribute to a View element in the layout XML file
+B To an entire activity or application, by adding the android:theme attribute to the <activity> or <application> element in the Android manifest
+
+Will style applied to a <ViewGroup> element be inherited by all its child <View> elements?
+- No, only the element to which you directly apply the style will apply its properties
+- Another solution is to apply a theme to whole activity in the manifest.
+
+How to specify different styles for different API versions?
+1 Define separate styles.xml in res/values and res/values-vXX directories.
+2 In each file define different style with the same names.
+
+What is default application theme?
+- API [0, 9): Theme
+- API [10, 13]: Holo
+- API [14, 20]: DeviceDefault
+- API >= 21: Material
+
+How 'Theme' theme (default for API 10 and lower) looks like?
+- a dark background with light text on top
+- no other assumptions about its appearance should be made
+
+How *.Wallpaper Android themes look like?
+User's selected wallpaper is used as a background.
+
+What are common Android build-in themes subclasses?
+- Light
+- NoTitleBar (Theme)
+- NoActionBar (Holo)
+- FullScreen
+- Translucent
+- Wallpaper
+
+
+
+
+
+
+
+
+
+
+

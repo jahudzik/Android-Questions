@@ -1,0 +1,12 @@
+On which version of JUnit is Android testing framework based?
+JUnit 3.0
+
+How to run Android tests on an emulator in headless mode?
+adb -no-window
+
+Why is it impossible to test classes using Android API directly on JVM?
+android.jar file does not contain the Android framework code, but only stubs for the type signatures, methods, types, etc. as it is used only for compilation. Once application is deployed on the device, it will use the android.jar JAR file on the Android device.
+
+How to declare Instrumentation class?
+1 Subclass Instrumentation class
+2 Specify it in manifest <instrumentation> element

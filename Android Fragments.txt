@@ -1,0 +1,128 @@
+What is fragment?
+Modular, reusable section of an activity with its own (optional) layout and lifecycle.
+
+In which Android version were fragments introduced? Can they be used in earlier versions?
+- API 11
+- Android Support Package v4 (working back to API 4) contains it as well.
+
+Why fragments shouldn't be initialized from constructor, but with factory pattern instead?
+Fragment's non-empty constructor won't be called when it is re-instantiated. So it's better to create parametrized newInstance(..) factory method, which will instantiate a new fragment and pass it all parameters via bundles, which are persistent.
+
+What is LayoutInflater used for?
+It inflates (instantiates) a new view hierarchy from the specified XML node (layout file).
+
+Is it possible to use LayoutInflater with plain XML file at runtime?
+No, for performance reasons, view inflation relies heavily on pre-processing of XML files that is done at build time. Compiled resource (R.something file) should be passed to inflate() method.
+
+Is fragment required to have its layout?
+No, it can act as an invisible worker for the activity. It should be identified with tag instead of view ID.
+
+How can fragment be identified?
+FragmentManager.findFragmentById()
+- static fragment - by its ID
+- dynamic UI fragment - by its container ID
+FragmentManager.findFragmentByTag()
+- dynamic non-UI fragment - by its tag
+
+What's difference between fragment's onCreate() and onCreateView() methods?
+- onCreate() is called when fragment is created - all initialization should be done here
+- onCreateView() is called to have the fragment instantiate its user interface view - it returns View object or null
+
+What is the lifecycle of the fragment?
+1 onAttach()
+2 onCreate()
+3 onCreateView()
+4 onActivityCreated()
+5 onStart()
+6 onResume()
+<fragment active>
+7 onPause()
+8 onStop()
+9 onDestroyView()
+10 onDestroy()
+11 onDetach()
+
+Which fragment's methods should be implemented at minimum?
+1 onCreate() - to initialize 
+2 onCreateView() - to inflate the View and find required views by id
+3 onPause() - to commit any changes that should be persisted beyond the current user session 
+
+What are fragment subclasses worth mentioning?
+1 DialogFragment - floating on top of its activity's window; contains Dialog object, which may be customized in onCreateDialog() method
+2 ListFragment - hosts a ListView object that can be bound to different data sources; has default layout with single ListView, but can be customized
+3 PreferenceFragment - shows a hierarchy of Preference objects as lists
+4 WebViewFragment - fragment that displays a WebView
+5 couple other classes from Leanback Library
+
+How to put AlertDialog (or any other Dialog subclass) into DialogFragment?
+Override onCreateDialog() method
+
+How to customize ListFragment's layout?
+Inflate it (in onCreateView() method) with own layout resource. It must contain ListView object with the id "@android:id/list". 
+
+How to add fragment to an activity?
+A. Declare it inside activity's layout file with <fragment> tag
+B. Programmatically add the fragment to an existing ViewGroup using FragmentManager and FragmentTransaction classes
+
+How to ensure that fragment transaction will be reversed on BACK button?
+Call FragmentTransaction.addToBackStack() before commit()
+
+How to immediately execute fragment transactions submitted by commit()?
+Call FragmentManager.executePendingTransactions() after commit()
+
+When FragmentTransaction.commit() cannot be executed? How to avoid exception thrown?
+- After its containing activity saved its state. Commit may be lost, if the activity needs later to be restored from its state. 
+- If that's ok, commitAllowingStateLoss() can be called - it won't thrown an exception.
+
+How fragment can access associated activity? How activity can get its fragment?
+- Fragment: Fragment.getActivity()
+- Activity: FragmentManager.findFragmentById() or FragmentManager.findFragmentByTag()
+
+How to send events from fragment back to activity?
+A. Define fragment's inner listener to be implemented by activity.
+B. Use event bus
+
+In what states fragment can exist?
+1 Resumed - visible in the running activity
+2 Paused - another activity is in the foreground, but activity in which fragment lives is still visible
+3 Stopped - not visible, but still alive (activity has been stopped or fragment removed and added to the back stack)
+
+How differs managing of lifecycle between activities and fragments?
+An activity is placed on activities back stack by default, in case of fragments it has to be explicitly requested by calling addToBackStack()
+
+What advantage has factory pattern (newInstance()) over constructor when instantiating the fragment?
+Fragment's constructor must have no arguments, as it will be called on fragment recreation. In case of factory pattern we can pass arguments to newInstance(...) method and use persistent bundles to initialize it there.
+
+What is advantage of passing object to fragment as Parcelable (via bundle) over using setter?
+In case of setter state won't be restored. 
+
+Does setRetainInstance() work with all kinds of fragments?
+- No, only with dynamic fragments. Static fragments are always recreated.
+- It also won't work with fragments added to the back stack.
+
+When should setRetainInstance(true) be used?
+Generally for retaining any non-UI fragments holding data/connection/processing (ex AsyncTask).
+
+How fragment's lifecycle will change after calling setRetainInstance(true)?
+- onDestroy() and onCreate() will not be called
+- onDetach(), onAttach() and onActivityCreated() still will be called
+
+What is a model fragment?
+It is non-UI fragment using setRetainInstance(true). Its purpose is to hold any model data that its host activity needs and preserve them on configuration changes.
+
+How differs saving fragment's state in the bundle to activity's way of doing that?
+- They both use onSaveInstanceState() method to save data do bundle.
+- Activity receives this bundle in onCreate() and onRestoreInstanceState()
+- While Fragment receives it in onCreate(), onCreateView(), onViewCreated() and onActivityCreated() methods
+
+Are there any advantages/disadvantages on using onSaveInstanceState() instead of setRetainInstance(true) for fragments?
+- Advantage: there are scenarios that onSaveInstanceState() handles that retained fragments will not, such as terminating your process due to low memory
+- Disadvantage: onSaveInstanceState() saves data in bundles which allows only simple data (primitives, Parcelables...) to be kept
+
+Can fragment live without activity?
+- No. It must always be embedded in an activity.
+- Fragment's lifecycle is directly affected by the host activity's lifecycle. For example, when the activity is paused, so are all fragments in it, and when the activity is destroyed, so are all fragments.
+
+How to add options menu items from fragment?
+1 Call setHasOptionsMenu(true) from onCreate()
+2 Override onCreateOptionsMenu() to add own items

@@ -1,0 +1,16 @@
+What is Gerrit?
+Web-based team software code review tool developed at Google.
+
+What is SPDY?
+An open networking protocol developed primarily at Google for transporting web content. SPDY manipulates HTTP traffic, with particular goals of reducing web page load latency and improving web security.
+
+What is URI?
+- Uniform Resource Identifier 
+- a string of characters used to identify a name of a resource
+- generic syntax: <scheme name> : <hierarchical part> [? <query>] [# <fragment>]
+- most common is URL (Uniform Resource Locator)
+- more rarely URN (Uniform Resource Name) is used
+
+What is NFC?
+- Near field communication
+- Technology that enables devices to establish radio communication with each other by touching them together or bringing them into proximity, typically a distance of 10 cm or less.

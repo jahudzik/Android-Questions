@@ -1,0 +1,74 @@
+Name three way of persisting data locally.
+- local files
+- shared preferences
+- SQLite database
+
+Is JDBC API used to access SQLite database on Android?
+No, native API is used instead.
+
+What is SQLiteOpenHelper class used for? What important methods it contains?
+It manages database creation and version management. Holds SQLiteDatabase object.
+- onCreate() - called when the database is created for the first time
+- onUpgrade() - called when the database needs to be upgraded
+- getReadableDatabase()/getWritableDatabase() - creates and/or opens a database, returns SQLiteDatabase object
+
+What class is used for SQLite database creation and version management?
+SQLiteOpenHelper
+
+When connecting to local SQLite database, where its name and version should be specified?
+We should subclass SQLiteOpenHelper and pass database name and version when calling parent constructor.
+
+How to close connection to SQLite database?
+Call close() on SQLiteOpenHelper
+
+What is the danger of SQLiteOpenHelper object kept as a singleton and how to avoid it?
+- Memory leak, if it is initialized with Activity as a context. Strong reference is kept then so we wouldn’t be able to GC Activity.
+- To avoid it, we should initialize it with singleton Application object (getActivity().getApplicationContext()) instead.
+
+What are the ways to perform SELECT query on SQLite database?
+- call SQLiteDatabase.rawQuery()
+- call SQLiteDatabase.query()
+- use SQLiteQueryBuilder class
+
+How to join two Cursors holding queries results?
+A. Use CursorJoiner - does a join on two cursors using the specified columns
+B. Use MergeCursor - present an array of Cursors as a single linear Cursor
+
+What is size limit of SQLite Cursor on Android?
+1 Mb
+
+What Adapter can be used with Cursor? What are the requirements for Cursor's result set?
+- CursorAdapter or its subclass SimpleCursorAdapter (provides some boilerplate logic).
+- Result set must contain an integer column named _id that is unique (can use SQLite build-in ROWID column here).
+
+What is SQLite build-in column holding unique values for each row in the table?
+ROWID
+
+What methods can be used to perform insert, update and delete operations on SQLite database?
+SQLiteDatabase.insert()/update()/delete() or SQLiteDatabase.execSQL(...)
+
+How should be SQLite transactions performed?
+SQLiteDatabase db;
+try {
+  db.beginTransaction();
+  ...
+  db.setTransactionSuccessful();
+} finally {
+  db.endTransaction();
+}
+
+Which method causes COMMIT or ROLLBACK result on SQLite transaction?
+SQLiteDatabase.endTransaction();
+
+Are there any ORMs designed for Android?
+- ORMLite
+- greenDAO
+- SurgarORM
+etc.
+
+What is FTS3? How to use it?
+- FTS3 (full-text search) itself is an SQLite extension that is now part of SQLite that provides support for creating virtual tables which in fact maintain an inverted index for full-text searches.
+- CREATE VIRTUAL TABLE my_fts_table USING fts3(ID, COLUMN1, ...)
+
+
+

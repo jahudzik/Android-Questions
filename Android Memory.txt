@@ -1,0 +1,6 @@
+How to increase heap size for the application?
+- Set manifest <application> android:largeHeap attribute for true.
+- Most apps should not need this and should instead focus on reducing their overall memory usage for improved performance.
+
+How to specify activity the system can launch to let users manage the memory occupied by the application on the device?
+- Pass name of Activity subclass to manifest <application> android:manageSpaceActivity

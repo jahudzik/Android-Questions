@@ -1,0 +1,209 @@
+What is a service?
+An application component that can perform long-running operations in the background and does not provide a user interface
+
+What are two forms of a service?
+1 Started
+2 Bound
+
+What means started service?
+- Started by another component by calling startService()
+- Can run in the background indefinitely, even if the component that started it is destroyed.
+- When the operation is done, the service should stop itself.
+
+What means bound service?
+- Bound by another component by calling bindService()
+- Offers a client-server interface that allows components to interact with the service
+- Multiple components can bind to the service at once, but when all of them unbind, the service is destroyed.
+
+Can service be in both started and bound forms?
+- Yes, it can be started (to run indefinitely) and also allow binding. 
+- It's the matter of implementing onStartCommand() and onBind() callback.
+
+In which thread do services run?
+Main thread by default.
+
+When Service.onStartCommand() callback is called?
+When another component, such as an activity, requests that the service be started, by calling startService().
+
+How to stop running service?
+By calling Service.stopSelf() or Context.stopService(Intent) methods.
+
+When Service.onBind() method is called? What should it return?
+- Called when another component wants to bind with the service by calling bindService()
+- Return the IBinder communication channel to the service. 
+- Called only for the first client connecting, all next clients receive the same IBinder object, onBind() is not called again.
+- May return null if clients can not bind to the service
+
+When Service.onCreate() is called?
+The system calls this method when the service is first created, to perform one-time setup procedures (before it calls either onStartCommand() or onBind()).
+
+When Service.onDestroy() is called?
+- The system calls this method when the service is no longer used and is being destroyed. 
+- Service is destroyed when stopSelf()/stopService() has been called (if it's a started service) and all clients called unbind() (if it's a bound service).
+
+When service is stopped?
+- Started service: when Service.stopSelf() or Context.stopService(Intent) is called.
+- Bound service: when all bound components unbind
+- Any service can be also killed by system due to low memory.
+
+What type of intent should be used to start service?
+Only explicit - for security reasons
+
+How to ensure that the service is not available outside the app?
+Set android:exported attribute to false.
+
+What are two main classes which can be extended to create a started service? Which one should be chosen?
+1 IntentService - best option if you don't require that your service handle multiple requests simultaneously
+2 Service - if you require your service to perform multi-threading
+
+What does IntentService work?
+1 Creates a default worker thread that executes all intents delivered to onStartCommand() separate from application's main thread.
+2 Creates a work queue that passes one intent at a time to onHandleIntent() implementation
+3 Stops the service after all start requests have been handled
+4 Provides default implementation of onBind() that returns null
+
+What methods must be implemented in IntentService?
+1 constructor
+2 onHandleIntent() 
+
+How to return result from started (not bound) service back to component which initialized it?
+When calling startService(Intent), pass PendingIntent (instead of regular Intent) to the service and use it from there to send a broadcast.
+
+What are common ways of notifying user that service completed its work?
+1 toast notification
+2 status bar notification
+
+What is a foreground service?
+- A service that's considered to be something the user is actively aware of and thus not a candidate for the system to kill when low on memory. 
+- It must provide a notification for the status bar, which means that the notification cannot be dismissed unless the service is either stopped or removed from the foreground.
+- For example, a music player that plays music from a service should be set to run in the foreground.
+
+How to make a service run in foreground?
+Call startForeground(). 
+This method takes two parameters: 
+- an integer that uniquely identifies the notification 
+- the Notification for the status bar
+
+How to remove service from a foreground?
+Call stopForeground()
+
+Does stopForeground() method stop the service?
+No, it only removes it from the foreground and status bar.
+
+Describe lifecycle of a started service.
+1 Service created -> onCreate()
+2 Call to startService() -> onStartCommand()
+3 Service running
+4 Call to stopService() or stopSelf() -> onDestroy()
+
+Describe lifecycle of a bound service.
+1 Service created -> onCreate()
+2 Call to bindService() -> onBind()
+3 Clients are bound to service
+4 Call to unbindService() -> onUnbind()
+5 Last client calls unbindService() -> onDestroy()
+
+What happens if stopService() or stopSelf() is called on the bound service?
+It does not actually stop the service until all clients unbind.
+
+What are the ways of defining IBinder interface for bound service?
+1 Extending the Binder class
+2 Using a Messenger
+3 Using AIDL
+
+In what cases IBinder interface should be defined by extending the Binder class?
+This is a preferred way if the service is private for the application and runs in the same process as the client (which binds to it).
+
+What's difference between using a Messenger vs AIDL when defining IBinder interface for service?
+- Messenger implementation is simpler, but queues all requests into a single thread
+- Using AIDL results in more complicated implementation, but can handle multiple requests simultaneously 
+
+What is the preferred way of defining a IBinder interface?
+- Extend Binder class, if service is used only by the local application
+- Use a Messenger, for single-thread IPC communication
+- Use AIDL, for multi-thread IPC communication
+
+How to implement service's client-service communication when using Binder class?
+1 Extend Binder class 
+2 Return it from service's onBind() method
+3 Receive it in client's onServiceConnected() method
+
+How to implement service's client -> service communication when using Messenger class?
+1 Service implements Handler to receive callback for each call from client
+2 Service instantiates Messenger, which returns IBinder in onBind() callback
+3 Clients receive IBinder in onServiceConnected() and instantiate Messenger from it
+4 Clients send messages to Messenger, service receive it in handleMessage()
+
+How to implement service's client <-> service communication when using Messenger class?
+The same way as one-way client->service
+Additionally, client must also create Messenger and send it to the service
+
+What component types can bind to the service?
+1 activity
+2 service
+3 content provider
+
+How to receive IBinder from service when calling bindService()?
+- Method bindService() is asynchronous, it doesn't return IBinder.
+- In order to receive IBinder instance, client must pass ServiceConnection to bindService().
+- ServiceConnection.onServiceConnected() method will return IBinder.
+
+When should be bind and unbind to the service from activity? When should we avoid it?
+- onStart()/onStop() - if only need to interact with service while activity is visible
+- onCreate()/onDestroy() - if need to interact with activity even if it's in the background
+- We should avoid doing it in onResume()/onPause(), because these callbacks occur at every lifecycle transition
+
+What AIDL means?
+Android Interface Definition Language
+
+What AIDL is used for? When can it be replaced with alternative?
+- It allows to define the programming interface that both the client and service agree upon in order to communicate with each other using IPC.
+- Necessary only if you allow clients from different applications to access your service for IPC and want to handle multithreading in your service
+- Otherwise Binder (for local communication) or Messenger (for single-threaded IPC) should be used.
+
+How to implement client-service communication using AIDL?
+1 Create xxx.aidl file -> xxx.java file is generated on build
+2 Implement generated Stub (extends Binder) interface
+3 Return it in Service.onBind() callback
+
+Describe structure of AIDL file.
+- Regular Java file with interface definition.
+- Defines methods, using only AIDL-supported types.
+- Only methods are supported, no way to expose static fields.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

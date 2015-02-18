@@ -1,0 +1,51 @@
+What Activity/Fragment subclasses should be used to create app's settings UI?
+- PreferenceActivity (for API 10 and lower)
+- PreferenceFragment (API 11+) 
+
+Name some common Preference subclasses.
+1 CheckBoxPreference
+2 ListPreference
+3 EditTextPreference
+
+Where should be Preferences defined?
+In XML file (traditionally named preferences.xml) in the res/xml directory.
+
+Do we need a separate preferences.xml file for each nested preferences?
+No, branches in the hierarchy (that open their own list of settings) are declared using nested instances of <PreferenceScreen>.
+
+When should we group settings into sections or subscreens?
+According to the documentation, when it's 10 or more settings
+
+How to create a section of preferences with its title?
+Place group of <Preference> objects into <PreferenceCategory>
+
+How to create a subscreen of preferences?
+Place group of <Preference> objects into <PreferenceScreen>
+
+How to start an intent from a preference?
+In preferences.xml add <intent> element (describing an intent) to <Preference>
+
+How to pass preferences defined in preferences.xml to PreferenceActivity/PreferenceFragment?
+Call addPreferencesFromResources(R.xml.preferences) in onCreate().
+
+How to set preferences default values?
+1 Set android:defaultValue attribute for each <Preference> element
+2 From main application's activity call PreferenceManager.setDefaultValues()
+
+How to implement settings with first screen displaying only a list of subscreens?
+1 Define each preferences subscreen in separate XML file
+2 Define XML headers file
+3 Extend PreferenceActivity class and implement onBuildHeaders() callback to specify the headers file
+
+How to read preferences?
+1 Retrieve SharedPreferences object with PreferenceManager.getDefaultSharedPreferences()
+2 Read values from SharedPreferences object
+
+How to react for preference changes?
+Implement SharedPreferences.OnSharedPreferenceChangeListener
+
+How to create a custom Preference?
+1 Specify UI for the preference in XML file
+2 Save the set value with persist*() method
+3 Provide default value if requested by system
+4 Handle configuration changes

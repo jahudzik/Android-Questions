@@ -1,0 +1,53 @@
+(pol) tint
+odcień
+
+(ang) odcień
+tint
+
+(pol) opaque
+nieprzeźroczysty
+
+(ang) nieprzeźroczysty
+opaque
+
+(pol) toggle
+przełączyć
+
+(ang) przełączyć
+toggle
+
+(pol) dispatch
+wysłać
+
+(ang) wysłać
+dispatch
+
+(pol) retain
+zachować
+
+(ang) zachować, utrzymać
+retain
+
+(pol) affinity
+pokrewieństwo
+
+(ang) pokrewieństwo
+affinity 
+
+(pol) relinquish
+zrzec się, porzucić
+
+(pol) zrzec się
+relinquish
+
+(ang) infrared
+podczerwień
+
+(pol) podczerwień
+infrared
+
+(ang) proximity
+bliskość
+
+(pol) bliskość
+proximity

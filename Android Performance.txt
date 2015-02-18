@@ -1,0 +1,36 @@
+Why using question mark parameter markers such as 'phone=?' instead of explicit values in queries, ex passed to ContentResolver.query() is better for performance?
+Queries that differ only by those values will be recognized as the same for caching purposes.
+
+What are the ways of improving layout performance?
+1 Don't block UI thread with heavy operations
+2 Analyse layout with Hierarchy Viewer
+3 Analyse layout with lint
+4 Reuse layout with <include>
+5 Simplify hierarchy with <merge>
+6 Load views on demand with ViewStub
+7 Use ViewHolder pattern for ListViews
+
+Describe ViewHolder pattern.
+Implementation pattern increasing ListView for approx 15%.
+1 Define ListView's inner static view holder class with row's views.
+2 In Adapter.getView() method, for each newly created and inflated row's layout view, set tag with view holder object holding references to row's views.
+3 When reusing row views, instead of calling findViewById() for each rows element, use references from its view holder.
+
+Name some lint suggestions to improve layout performance?
+1 Replace TextView+ImageView with compound drawable
+2 Replace <FrameLayout> with <merge> if it's in layout root and doesn't specify background, padding etc
+3 Remove useless leaf - layout with no children or no background
+4 Remove useless parent - non-ScroolView layout with only one child 
+5 Too much nesting (above 10 levels) in hierarchy
+
+What slows down layout performance?
+1 UI thread overloaded with heavy operations
+2 nested layouts - multiple measure-layout-draw operations
+3 use of layout_weight in LinearLayout
+
+What is default maximum depth for view hierarchy (guarded by lint)?
+10
+
+How to increase performance of database queries?
+- Use SQLite FTS3 extension (full-text search) in case of text queries.
+	

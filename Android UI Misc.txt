@@ -1,0 +1,103 @@
+What's difference between 'match_parent' and 'fill_parent'?
+- No difference, they are the same.
+- 'fill_parent' was depreciated in API 8 to avoid confusion, because it doesn't fill the interior of its parent, but matches outer dimensions of the parent.
+
+What is the difference between width/height and measured width/height of the view?
+- Measured width/height define how big a view wants to be within its parent.
+- Normal (drawing) width/height define the actual size of the view on screen, at drawing time and after layout. 
+
+What are basic classes used for building user interface elements?
+View and ViewGroup
+
+What are two ways of declaring layout?
+A Declare UI elements in XML
+B Instantiate layout elements at runtime
+
+What are advantages of declaring layouts in XML files?
+1 Separation between presentation and logic
+2 Changes in XML don't require code recompilation
+3 It's easier to create different layouts for different screens
+4 It's easier to visualize UI in one XML file
+
+How to load layout from XML file into Activity?
+Call setContentView(R.layout.xxx) from onCreate()
+
+What class is used by all views to tell their parents how they want to be laid out?
+ViewGroup.LayoutParams - base class defines width and length
+
+How to get view's position relative to its parent?
+getLeft() and getTop() methods
+
+What is the base class for all widgets?
+View
+
+What is the base class for all layouts?
+ViewGroup
+
+Do View IDs need to be unique throughout the tree?
+No, but it is good practice to ensure that they are at least unique within the part of the tree you are searching.
+
+What is the unit of view's location and dimensions?
+pixel
+
+What are the layout phases?
+1 measure pass (top-down) - each view specifies how big it wants to be
+2 layout pass (top-down) - every parent positions its children using the sizes computed in the measure pass
+
+Describe View.onMeasure(int, int) method.
+- Sets its measured dimensions based on dimensions received from parent.
+- Contract:  must call setMeasuredDimension(int, int) to store the measured width and height of this view
+- Invoked by measure() and should be overridden by subclasses
+
+Can parent call measure() more than once on its children?
+Yes - first with unspecified dimensions, second with exact values if child's measured dimensions are too big.
+
+What class is used to push layout requirements down the tree from parent to child?
+View.MeasureSpecs 
+
+What is View.MeasureSpecs class responsible for?
+1 It encapsulates the layout requirements passed from parent to child.
+2 It has three possible modes: UNSPECIFIED, EXACTLY and AT_MOST.
+
+What method should be called to initiate View's layout?
+View.requestLayout()
+
+How to force a view to draw?
+Call View.invalidate() (from UI thread) or View.postInvalidate() (non-UI thread)
+
+What are tags used for by Views?
+- The are some extra piece of information associated with a view. 
+- They are not used to identify Views.
+- For example View Holder pattern takes advantage of tags.
+
+What are possible values of View's alpha property?
+Between 0 (completely transparent) and 1 (completely opaque)
+
+How to make ProgressBar show infinite animation?
+Call setIndeterminate(true)
+
+What callback should be implemented to handle user touching and holding the view for longer time?
+onLongClick() method from View.OnLongClickListener
+
+For what types (hardware/software) of keyboard View.OnKeyListener is invoked?
+Only hardware. A software input method has no obligation to trigger this listener.
+
+How to intercept all touch events in the Activity before they are forwarded to the window?
+Override Activity.dispatchTouchEvent(MotionEvent) method
+
+How to make small button?
+Buttons have a minimal height and width (typically of 48dp respectively 64dp by default). It can be changed by setting android:minHeight and android:minWidth attributes.
+
+What is the primary usage of drag/drop framework?
+Data movement from one view to another view in the current layout.
+
+Describe drag/drop process.
+1 Each View can register its View.OnDragListener
+2 User begins to drag -> application calls startDrag()
+3 System sends a ACTION_DRAG_STARTED drag event to the drag event listeners for all the View objects in the current layout.
+4 To continue to receive drag events, a drag event listener must return true.
+5 User continues the drag -> as the drag shadow intersects a View, the system sends drag events to the View object's drag event listener 
+6 User releases the drag -> system sends the View object's listener a ACTION_DROP drag event
+7 System sends out a ACTION_DRAG_ENDED drag event to indicate that the drag operation is over. 
+
+

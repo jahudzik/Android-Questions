@@ -1,0 +1,11 @@
+What is Dalvik?
+- Process virtual machine in Android operating system
+
+
+What is ART?
+- Android Runtime
+- Executes the Dalvik Executable format and Dex bytecode specification
+- Introduced in Android 4.4, replaced Dalvik completely in Android 5.0
+
+What's difference between .dex and .odex files?
+?

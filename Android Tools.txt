@@ -1,0 +1,171 @@
+What does adb stand for?
+Android Debug Bridge
+
+In which Android SDK directory adb can be found?
+platform-tools (tools in older versions)
+
+How to show all connected devices?
+adb devices
+
+How to copy files between computer and device?
+- adb push (computer -> device)
+- adb pull (device -> computer)
+
+How to connect device to computer via Wi-Fi?
+- adb tcpip 5555 (restarts adb daemon in TCP/IP mode and listen on 5555 port)
+- adb connect <device IP>
+
+How to start device's system shell?
+adb shell
+
+To which TCP port adb server binds?
+5037
+
+Which ports are scanned when adb server sets up connections to all running emulator/device instances?
+Odd numbers from range 5555 to 5585
+
+How to get device's logs?
+adb logcat [options] [filter-specs]
+
+How to push Android application (.apk file) to an emulator/device?
+adb install <path-to-apk>
+
+How many ports each emulator/device aquires and what for?
+Pair of sequential ports:
+- an even-numbered port for console connections 
+- an odd-numbered port for adb connections
+
+How to specify emulator/device if there're more than one connected?
+adb -s <serial-number> <command>
+
+What shell tool can be used to start and kill processes on device?
+Activity Monitor (adb shell am <command>)
+
+How to start specific Activity on device with adb?
+adb shell am start [options] <INTENT>
+
+How to kill specific processes on device from adb?
+adb shell am kill [options] <PACKAGE>
+
+What information about device can be obtained with package manager?
+- packages installed
+- permission groups
+- features
+- users
+- path to the APK of the given package
+- and others...
+
+How to list all packages on device?
+adb shell pm list packages [options] <FILTER>
+
+How to manage databases created by Android programs?
+adb shell sqlite3 /data/data/<package_name>/databases/abc.db
+
+How to record display of connected device?
+adb shell screenrecord <path-to-output-file>
+
+What are limitations of screenrecord tool?
+- since KitKat
+- rotation not supported (screen is cut off)
+- audio is not recorded
+
+How to verify intent with ADB?
+adb shell am start -a <ACTION> -t <MIME_TYPE> -d <DATA> -e <EXTRA_NAME> <EXTRA_VALUE> -n <ACTIVITY>
+
+How to start monkey for specified application and number of events?
+adb shell monkey -p <package-name> -v <number-of-events>
+
+What are configuration options in monkey?
+- packages to be run
+- number of events sent
+- random seed
+- delay between events
+- percentage of events of specified type (touch/motion/trackball/basic navigation/...)
+
+What language are monkeyrunner scripts written in?
+Jython (implementation of Python that uses the Java)
+
+What's difference between monkey and monkeyrunner?
+- monkey tool runs in an adb shell directly on the device/emulator and generates pseudo-random streams of user and system events
+- monkeyrunner tool controls devices/emulators from a workstation by sending specific commands and events from an API
+
+What modules are contained in monkeyrunner API?
+1. MonkeyRunner
+2. MonkeyDevice
+3. MonkeyImage
+
+What are the features of monkeyrunner's MonkeyDevice module?
+- install and remove applications, 
+- run applications.
+- send UI events,
+- retrieve information
+
+What are the features of monkeyrunner's MonkeyRunner module?
+- establishes connection to device/emulator
+- provides methods for creating UIs for a monkeyrunner program
+
+What are the features of monkeyrunner's MonkeyImage module?
+- capturing screens, 
+- converting bitmap images to various formats, 
+- comparing two MonkeyImage objects, 
+- writing an image to a file
+
+What can be ProGuard used for?
+It shirnks, optmizes and obfuscates code.
+
+How is ProGuard configured?
+- With configuration file 
+- proguard.cfg by default
+
+Which ProGuard version is supported with Gradle plugin?
+4.10
+
+What is lint?
+Static code analysis tool. It checks Android project source files for potential bugs and optimization improvements for correctness, security, performance, usability, accessibility, and internationalization.
+
+How to disable certain parts of Android project from lint analysis?
+1. Specify it in lint.xml configuration file
+2. Use @SuppressLint annotation for a specific Java class or method
+3. Use tools:ignore attribute for specific sections of XML file
+
+How to run lint analysis from Android Studio?
+Analyze->Inspect Code...
+
+Name some lint checks.
+- Activity class not registered in the manifest
+- 'android' is deprecated; use 'com.android.application' instead
+- Avoid using + in versions numbers
+- Hardcoded string - should use @string resource
+- A newer version of com.android.support:support is available
+- Target SDK attribute not targeting latest version
+- Unused resources
+- Nested layout:weight attributes
+
+What is dx tool?
+It converts Java class files into .dex (Dalvik Executable) file.
+
+What is aapt tool?
+- Android Asset Packaging Tool
+- It performs apk creation.
+
+Which tool can be used to determine how Google Play will filter the application?
+- aapt - it parses application's manifest and apply the same rules as used by Google Play to determine the features that your application requires
+- aapt dump badging <path_to_exported_.apk>
+
+What is Hierarchy Viewer? 
+- Allows layout analysis while application is running.
+- Shows view hierarchy, for each view it shows time for: measure, layout and draw 
+- <sdk>/tools/hierarchyviewer - depreciated, Device Monitor suggested instead
+
+What is layoutopt?
+- A command-line tool that helps to optimize the layouts and layout hierarchies of application.
+- Depreciated since API 16. Use lint instead. 
+
+What is zipalign?
+- Provides optimization to .apk files, which reduces the amount of RAM consumed.
+- Ensures that all uncompressed data (such as images or raw files) starts with a particular alignment relative to the start of the file.
+- It should always be used to align .apk file before distributing it to end-users, after it has been signed with private key.
+
+
+
+
