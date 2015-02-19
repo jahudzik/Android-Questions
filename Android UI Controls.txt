@@ -73,6 +73,13 @@ What is View's android:contentDescription attribute used for?
 - Text in this attribute does not appear on screen, but if the user enables accessibility services that provide audible prompts, then when the user navigates to that control, the text is spoken.
 - Set it for every ImageButton, ImageView and CheckBox.
 
+What are possible values of View's android:visibility attribute?
+1 VISIBLE (default)
+2 INVISIBLE - not displayed, but taken into account during layout (space is left for it)
+3 GONE - completely hidden, as if the view had not been added
 
+How to hide a View?
+- setVisibility(View.INVISIBLE) - space left 
+- setVisibility(View.GONE) - completely hidden, no space left
 
 

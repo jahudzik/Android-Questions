@@ -45,8 +45,16 @@ How are RelativeLayout's children positioned by default?
 One on the other in the top-left corner.
 
 What are the types of attributes used to position children of RelativeLayout?
-1 relative to the parent container (boolean attributes) 
-2 relative to the other views (specified by ID)
+1 Relative to the parent container (boolean attributes) 
+2 Relative to the other views (specified by ID)
+
+How to handle situation in RelativeLayout when some of anchor views (referred in layout_toLeftOf, layout_toRightOf, etc.) cannot be found (is GONE)?
+- Set android:layout_alignWithParentIfMissing attribute for true.
+- Parent will be used as the anchor then.
+
+What is android:layout_alignWithParentIfMissing attribute? When should it be used?
+- Used in RelativeLayout
+- If set to true, the parent will be used as the anchor when the anchor cannot be be found for layout_toLeftOf, layout_toRightOf, etc.
 
 How should be Cursor queried in order to avoid blocking app's main thread?
 CursorLoader should be used.
@@ -114,4 +122,20 @@ What is a compound drawable?
 - Can be specified in <TextView> android:drawableTop/drawableLeft/... attribute
 - More efficient then LinearLayout containing TextView with ImageView
 
+What is a drawback of using android:layout_weight parameter in LinearLayout?
+It requires the child to be measured twice, which makes layout pass more expensive.
 
+What is default orientation of LinearLayout?
+horizontal
+
+What's difference between GridView and GridLayout?
+- GridView - scrollable, items come from ListAdapter
+- GridLayout - a layout placing its children in a rectangular grid
+
+What are the ways of creating spaces between layout children?
+A Specify leftMargin, topMargin etc layout parameters
+B Use dedicated Space view
+
+What is a Space view?
+- A lightweight View subclass that may be used to create gaps between components in general purpose layouts.
+- Example: <Space android:minWidth="10dp" />
