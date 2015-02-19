@@ -1,0 +1,46 @@
+What are the types of location access permissions?
+1 ACCESS_COARSE_LOCATION (approximate, based on cell towers and Wi-Fi)
+2 ACCESS_FINE_LOCATION (precise, based on GPS, cell towers, and Wi-Fi)
+3 ACCESS_MOCK_LOCATION (allows mock location providers for testing)
+
+What are network-related permissions?
+1 ACCESS_NETWORK_STATE
+2 ACCESS_WIFI_STATE
+3 INTERNET
+
+Name example permissions allowing to read data from the phone.
+1 READ_CALENDAR
+2 READ_CALL_LOG
+3 READ_CONTACTS
+4 READ_EXTERNAL_STORAGE
+5 READ_PHONE_STATE
+6 READ_PROFILE
+7 READ_SMS 
+ 
+Name example permissions allowing to write data on the phone.
+1 WRITE_CALENDAR
+2 WRITE_CALL_LOG
+3 WRITE_CONTACTS
+4 WRITE_EXTERNAL_STORAGE
+5 WRITE_PROFILE
+6 WRITE_SETTINGS
+7 WRITE_SMS
+
+What means INTERNET permission?
+Allows applications to open network sockets
+
+What means GET_ACCOUNTS permission?
+Allows access to the list of accounts in the Accounts Service
+
+What means MANAGE_ACCOUNTS permission?
+Allows an application to manage the list of accounts in the AccountManager
+
+What means AUTHENTICATE_ACCOUNTS permission?
+Allows an application to act as an AccountAuthenticator for the AccountManager
+
+What mean READ_SYNC_SETTINGS and WRITE_SYNC_SETTINGS permission?
+Allows applications to read/write the sync settings
+
+What means USE_CREDENTIALS permission?
+Allows an application to request authtokens from the AccountManager
+
