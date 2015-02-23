@@ -21,9 +21,6 @@ adb shell
 To which TCP port adb server binds?
 5037
 
-Which ports are scanned when adb server sets up connections to all running emulator/device instances?
-Odd numbers from range 5555 to 5585
-
 How to get device's logs?
 adb logcat [options] [filter-specs]
 
@@ -41,11 +38,9 @@ adb -s <serial-number> <command>
 What shell tool can be used to start and kill processes on device?
 Activity Monitor (adb shell am <command>)
 
-How to start specific Activity on device with adb?
-adb shell am start [options] <INTENT>
-
-How to kill specific processes on device from adb?
-adb shell am kill [options] <PACKAGE>
+How to start/kill specific Activity on device with adb?
+- adb shell am start [options] <INTENT>
+- adb shell am kill [options] <PACKAGE>
 
 What information about device can be obtained with package manager?
 - packages installed
@@ -89,26 +84,12 @@ What's difference between monkey and monkeyrunner?
 - monkey tool runs in an adb shell directly on the device/emulator and generates pseudo-random streams of user and system events
 - monkeyrunner tool controls devices/emulators from a workstation by sending specific commands and events from an API
 
-What modules are contained in monkeyrunner API?
-1. MonkeyRunner
-2. MonkeyDevice
-3. MonkeyImage
-
-What are the features of monkeyrunner's MonkeyDevice module?
-- install and remove applications, 
-- run applications.
+What are the features of monkeyrunnere?
+- install, run and remove applications, 
 - send UI events,
-- retrieve information
-
-What are the features of monkeyrunner's MonkeyRunner module?
-- establishes connection to device/emulator
-- provides methods for creating UIs for a monkeyrunner program
-
-What are the features of monkeyrunner's MonkeyImage module?
-- capturing screens, 
-- converting bitmap images to various formats, 
-- comparing two MonkeyImage objects, 
-- writing an image to a file
+- establish connection to device/emulator
+- capture screens, 
+- write an image to a file
 
 What can be ProGuard used for?
 It shirnks, optmizes and obfuscates code.
@@ -168,5 +149,4 @@ What is zipalign?
 
 What is draw9patch?
 Utility which can be used to create Nine-patch bitmap from regular PNG file.
-
 
