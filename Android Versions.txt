@@ -5,6 +5,10 @@ When was first Android version released?
 When is Android birthday?
 5 November 2007 (beta release)
 
+What was the first Android-powered device?
+HTC Dream 
+Also known as the T-Mobile G1 in the US and parts of Europe, and as the Era G1 in Poland
+
 What is percentage of devices running under Lollipop? (Feb '15)
 1.5%
 

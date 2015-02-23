@@ -100,4 +100,12 @@ Describe drag/drop process.
 6 User releases the drag -> system sends the View object's listener a ACTION_DROP drag event
 7 System sends out a ACTION_DRAG_ENDED drag event to indicate that the drag operation is over. 
 
-
+What gestures are supported by Android?
+1 Touch
+2 Long press
+3 Swipe/Drag
+4 Long press drag
+5 Double touch
+6 Double touch drag
+7 Pinch open
+8 Pinch close

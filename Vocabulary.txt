@@ -51,3 +51,9 @@ bliskość
 
 (pol) bliskość
 proximity
+
+(ang) pinch
+uszczypnięcie
+
+(pol) uszczypnięcie
+pinch

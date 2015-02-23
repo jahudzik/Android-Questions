@@ -158,7 +158,7 @@ What means <action android:name="${applicationId}.foo"> in manifest?
 How to turn on Manifest Merger?
 Add flag manifestmerger.enabled=true in project.properties
 
-How to reference any value from root project build.gradle in module's script?
+How to get any value defined in root project's Gradle script from module's Gradle script?
 1 Specify some value in root project's build.gradle: 
 ext {
   compileSdkVersion = 19
@@ -183,5 +183,13 @@ This attribute set for true (along with minifyEnabled set for true as well) turn
 
 How to save some resources from removing on resources shrinking phase?
 In any XML resource file (typically res/raw/keep.xml) set tools:keep attribute with list of resources to be saved.
+
+How to exclude some files from APK packaging?
+android {
+  packagingOptions {
+    exclude someFile
+  }
+}
+
 
 
