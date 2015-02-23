@@ -1,0 +1,100 @@
+What types of screen sizes Android defines?
+(depreciated since API 13)
+1 Small (under 3”)
+2 Normal (3” to around 4.5”)
+3 Large (4.5” to around 7”)
+4 Extra-large (over 7”)
+
+What screen sizes are supported by default?
+Small (under 3”) and normal (3” to around 4.5”)
+
+What is screen density?
+- The quantity of pixels within a physical area of the screen
+- Usually referred to as dpi (dots per inch)
+- Android groups all actual screen densities into six generalized densities: low, medium, high, extra-high, extra-extra-high, and extra-extra-extra-high.
+
+What types of screen densities Android defines?
+1 ldpi (low) ~120dpi
+2 mdpi (medium) ~160dpi
+3 hdpi (high) ~240dpi
+4 xhdpi (extra-high) ~320dpi
+5 xxhdpi (extra-extra-high) ~480dpi
+6 xxxhdpi (extra-extra-extra-high) ~640dpi
+
+What's difference between screen density and resolution?
+- Density: number of pixels within a physical area of the screen
+- Resolution: total number of physical pixels on a screen
+
+What means dp/dip unit?
+- Density-independent pixel
+- Equivalent to one physical pixel on a 160 dpi screen
+- px = dp * (dpi / 160)
+
+What means sp unit?
+- Scale-independent pixel
+- Recommended for use when specifying font sizes, as they will be adjusted for both the screen density and user's preference.
+
+What means "density independence"? How Android system helps to achieve it?
+- Application is density independent when it preserves the physical size (from the user's point of view) of user interface elements when displayed on screens with different densities.
+- Android system helps application achieve density independence in two ways:
+1 Scales dp units as appropriate for the current screen density
+2 Scales drawable resources to the appropriate size, based on the current screen density, if necessary
+
+How to ensure density independence in the application?
+1 Use density-independent pixels (dp) instead of regular pixels (px)
+2 Provide alternative bitmap resources for different densities
+
+What are proportions between drawables sizes in different screen densities?
+3:4:6:8:12:16
+
+What are new resource quantifiers for screen sizes introduced in Android 3.2?
+1 Smallest width (sw<N>dp)
+2 Available width (w<N>dp)
+3 Available height (h<N>dp)
+
+What means sw<N>dp (example sw720dp) resource quantifier?
+- sw = Smallest width
+- Specifies a minimum value of shortest dimension of the available screen area at which the resources should be used
+- Useful because width is often the driving factor in designing a layout (i.e. decision to use one/two panels on the screen)
+
+What means w<N>dp (example w720dp) resource quantifier?
+- Available screen width
+- Specifies a minimum available width in dp units at which the resources should be used
+- Useful to determine whether to use a multi-pane layout
+
+What means h<N>dp (example h720dp) resource quantifier?
+- Available screen height
+- Specifies a minimum available height in dp units at which the resources should be used
+- Most apps won't need this qualifier, considering that UIs often scroll vertically 
+
+What are typical screen widths?
+1 320dp: a typical phone screen (240x320 ldpi, 320x480 mdpi, 480x800 hdpi, etc).
+2 480dp: a tweener tablet like the Streak (480x800 mdpi).
+3 600dp: a 7” tablet (600x1024 mdpi).
+4 720dp: a 10” tablet (720x1280 mdpi, 800x1280 mdpi, etc).
+
+What are best practices in supporting multiple screens?
+1 Use wrap_content, fill_parent or the dp unit instead of pixels
+2 Use RelativeLayout instead of depreciated AbsoluteLayout
+3 Use size and density-specific drawables or Nine-patch bitmaps
+
+What is a Nine-patch bitmap?
+- Specially formatted PNG file that indicates which areas can and cannot be stretched.
+- Can be created from any PNG file with SDK/tools/draw9patch utility
+
+How to limit application to be used only with specific screen sizes or densities?
+- Specify screen size/density in manifest <compatible-screens> element
+- Normally, you should not use this manifest element.
+<compatible-screens>
+  <screen android:screenSize="normal" android:screenDensity="mdpi" />
+</compatible-screens>
+
+What is a screen compatibility mode?
+- Mechanism of making applications usable on screens larger than they support.
+- Version 1 (Android 1.6-3.1) - fills the remaining area of the screen with black border
+- Version 2 (Android 3.2+) - zooms or stretches the app to fill the screen
+- Screen compatibility mode is not a mode in which you should want your application to run—it causes pixelation and blurring in your UI, due to zooming. 
+
+How to enable screen compatibility mode for the application?
+(Android 3.2+) Don't declare that the application supports large screens in manifest's <support-screen> element
+

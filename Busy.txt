@@ -56,15 +56,6 @@ It is a ZIP archive containing:
 3 any un-compiled resources (such as what you put in res/raw/) 
 4 the AndroidManifest.xml file
 
-What types of screen sizes Android defines?
-1 Small (under 3”)
-2 Normal (3” to around 4.5”)
-3 Large (4.5” to around 10”)
-4 Extra-large (over 10”)
-
-What screen sizes are supported by default?
-Small (under 3”) and normal (3” to around 4.5”)
-
 What is aapt tool?
 - Android Asset Packaging Tool - it generates an R.java source file within your project’s gen/ directory
 - It allows you to access layouts and widgets within those layouts directly from your Java code

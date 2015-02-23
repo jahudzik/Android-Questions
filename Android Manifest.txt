@@ -302,6 +302,22 @@ What is the purpose of <compatible-screens> element?
 - Specifies each screen configuration with which the application is compatible. 
 - Should be used only as a last resort, when the application absolutely does not work with specific screen configurations. 
 
+What is the purpose of <supports-screens> element?
+- Specifies the screen sizes application supports and enable screen compatibility mode for screens larger than what application supports.
+- Should always be specified.
+
+What means <supports-screens> android:compatibleWidthLimitDp attribute?
+Allows to enable screen compatibility mode as a user-optional feature by specifying the maximum "smallest screen width" for which your application is designed.
+
+What's difference between <supports-screens> and <compatible-screens> manifest elements?
+<supports-screens>
+- Read by Android system to enable screen compatibility mode.
+- Google Play will filter out all devices with smaller screens than specified.
+- Should always be specified.
+<compatible-screens>
+- Used by Google Play to filter out all devices with different screens than specified.
+- Normally, shouldn't be used.
+
 What is the purpose of <instrumentation> element?
 Declares an Instrumentation class that enables to monitor an application's interaction with the system. The Instrumentation object is instantiated before any of the application's components.
 
@@ -370,7 +386,6 @@ How to specify activity's parent?
 What is a placeholder in terms of manifest and what is it used for?
 - It is any manifest's element attribute value in following format: "${applicationId}.foo"
 - Replaced by Manifest Merger with injected value specified in build.gradle ('manifestPlaceholders' attribute).
-
 
 
 

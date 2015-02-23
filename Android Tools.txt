@@ -166,6 +166,7 @@ What is zipalign?
 - Ensures that all uncompressed data (such as images or raw files) starts with a particular alignment relative to the start of the file.
 - It should always be used to align .apk file before distributing it to end-users, after it has been signed with private key.
 
-
+What is draw9patch?
+Utility which can be used to create Nine-patch bitmap from regular PNG file.
 
 
