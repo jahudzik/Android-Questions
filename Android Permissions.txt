@@ -16,7 +16,7 @@ Name example permissions allowing to read data from the phone.
 5 READ_PHONE_STATE
 6 READ_PROFILE
 7 READ_SMS 
- 
+
 Name example permissions allowing to write data on the phone.
 1 WRITE_CALENDAR
 2 WRITE_CALL_LOG

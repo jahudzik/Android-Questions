@@ -18,9 +18,232 @@ View animation:
 - animates only Views
 - exposes just a few aspects to animate, such as the scaling and rotation
 - it only modifies where the View is drawn, not actual View itself
+- holds XML files in res/anim/ directory
 Property animation:
 - animates any property of any object
 - requires more code to write
+- holds XML files in res/animator/ directory
+
+Which class keeps track of property animation's timing and the current value of the property that it is animating?
+ValueAnimator
+
+What main classes are encapsulated by ValueAnimator?
+1 TimeInterpolator
+2 TypeEvaluator
+
+What is TimeInterpolator?
+- It defines the rate of change of an animation. 
+- This allows animations to have non-linear motion, such as acceleration and deceleration.
+
+What are TimeInterpolator subclasses?
+1 AccelerateDecelerateInterpolator (default for ValueAnimator)
+2 AccelerateInterpolator, DecelerateInterpolator
+3 LinearInterpolator
+4 AnticipateInterpolator, OvershootInterpolator, AnticipateOvershootInterpolator 
+5 BounceInterpolator
+6 CycleInterpolator
+7 PathInterpolator
+
+What is default ValueAnimator's interpolator?
+- AccelerateDecelerateInterpolator
+- An interpolator where the rate of change starts and ends slowly but accelerates through the middle.
+
+How to make animation speed constant?
+Use LinearInterpolator
+
+How to make animation accelerate up to the halfway point then decelerate from the halfway point until the end of the animation?
+Use default AccelerateDecelerateInterpolator
+
+How to make animation start backwards then continue forward?
+Use AnticipateInterpolator
+
+Describe AnticipateInterpolator.
+An interpolator where the change starts backward then flings forward.
+
+How to make animation go forward, exceed the last value and then come back?
+Use OvershootInterpolator
+
+Describe OvershootInterpolator.
+An interpolator where the change flings forward and overshoots the last value then comes back.
+
+Describe AnticipateOvershootInterpolator.
+An interpolator where the change starts backward then flings forward and overshoots the target value and finally goes back to the final value.
+
+How to make animation bounce at the end?
+Use BounceInterpolator
+
+Describe CycleInterpolator.
+- Repeats the animation for a specified number of cycles.
+- The rate of change follows a sinusoidal pattern. 
+
+How to make animation repeat for a specified number of times?
+Use CycleInterpolator
+
+Describe PathInterpolator.
+An interpolator that can traverse a Path that extends from Point (0, 0) to (1, 1).
+
+How to define animation's custom interpolation?
+- Implement TimeInterpolator interface.
+- There's just a one method to implement, which defines interpolation function: 
+float getInterpolation(float input)
+
+What is TypeEvaluator?
+It allows to create animations on arbitrary property types, by allowing them to supply custom evaluators for types that are not automatically understood and used by the animation system.
+
+What are TypeEvaluator subclasses?
+1 IntEvaluator, FloatEvaluator
+2 IntArrayEvaluator, FloatArrayEvaluator
+3 ArgbEvaluator
+4 RectEvaluator
+5 PointFEvaluator
+
+Describe ArgbEvaluator.
+This evaluator can be used to perform type interpolation between integer values that represent ARGB colors.
+
+How property animation is calculated by ValueAnimator?
+1 ValueAnimator calculates an elapsed fraction between 0 and 1, based on the duration of the animation and how much time has elapsed.
+2 TimeInterpolator calculates an interpolated fraction, which maps the elapsed fraction to a new fraction that takes into account the time interpolation that is set.
+3 TypeEvaluator calculates the value of the animated property, based on the interpolated fraction, the starting value, and the ending value of the animation.
+
+How to obtain a ValueAnimator?
+- Call one of its factory methods: ofInt(), ofFloat() or ofObject()
+- Example: ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
+
+How to start an animation with ValueAnimator running for 2 seconds with values between 1 and 10?
+ValueAnimator anim = ValueAnimator.ofInt(1,10);
+anim.setDuration(2000);
+anim.start();
+
+What's difference between ValueAnimator and ObjectAnimator?
+- ObjectAnimator is a subclass of ValueAnimator
+- ObjectAnimator provides additional support for animating properties on target objects. Its constructors take parameters to define the target object and the name of the property that will be animated.
+
+How to create animator changing 'alpha' property of 'foo' object from 0.0 to 1.0 in 1 second?
+ObjectAnimator anim = ObjectAnimator.ofFloat(foo, "alpha", 0f, 1f);
+anim.setDuration(1000);
+
+What is required for ObjectAnimator to update properties correctly?
+A The object animated property must have a setter function (in camel case) in the form of set<propertyName>(). 
+B If there's just one animation value provided, it's assumed to be end value, so getter function must be implemented to provide start value.
+
+How to run animation backward?
+Call reverse() method on ValueAnimator class.
+
+How to define dependencies between animations?
+Bundle them together in AnimatorSet
+
+Describe AnimatorSet class.
+- It plays a set of Animator objects in the specified order.
+- Animations can be set up to play together, in sequence, or after a specified delay.
+- Circular dependencies of animations should be avoided, and the dependency flow of animations should only be in one direction.
+
+Can AnimatorSet classes be nested one in another?
+Yes, AnimatorSet extends Animator class.
+
+How progress of the animation can be observed?
+There are two listener classes:
+1 Animator.AnimatorListener
+2 ValueAnimator.AnimatorUpdateListener
+
+What events can be observed with Animator.AnimatorListener?
+1 onAnimationStart()
+2 onAnimationRepeat()
+3 onAnimationEnd()
+4 onAnimationCanceled()
+
+Does animation of drawable's color property require redrawing it on each animation step?
+Yes, invalidate() should be called on a View in each ValueAnimator.AnimatorUpdateListener.onAnimationUpdate() call.
+
+Does animation of View properties require redrawing it on each animation step?
+All of the property setters on View, such as setAlpha() and setTranslationX() invalidate the View properly, so there's no need to invalidate the view.
+
+What is LayoutTransition used for?
+It enables automatic animations on layout changes (view appearing/disappearing) in ViewGroup objects.
+
+How to trigger any animation defined in LayoutTransition?
+Change visibility of any view contained by a layout with android:animateLayoutChanges set for true.
+
+What animations can be handled by LayoutTransition?
+1 APPEARING - how new views appear
+2 CHANGE_APPEARING - how views change when a new item appear
+3 DISAPPEARING - how views disappear
+4 CHANGE_DISAPPEARING - how views change when some item disappear
+
+How to enable animations of appearing/disappearing views within layout?
+- Set android:animateLayoutChanges="true" for a layout
+- To define animations, create a LayoutTransition object and set it to ViewGroup by calling setLayoutTransition()
+
+What is Keyframe used for?
+- It consists of a time/value pair that defines a specific state at a specific time of an animation.
+- Keyframes should be passed to PropertyValuesHolder.ofKeyFrame("someProperty", Keyframe..) method to obtain PropertyValuesHolder object.
+- Example:
+Keyframe kf0 = Keyframe.ofFloat(0f, 0f);
+Keyframe kf1 = Keyframe.ofFloat(.5f, 360f);
+Keyframe kf2 = Keyframe.ofFloat(1f, 0f);
+PropertyValuesHolder pvhRotation = PropertyValuesHolder.ofKeyframe("rotation", kf0, kf1, kf2);
+ObjectAnimator rotationAnim = ObjectAnimator.ofPropertyValuesHolder(target, pvhRotation)
+
+What is a pivot point? Where is it located by default?
+- Point around which the rotation and scaling transforms occur. 
+- By default, the pivot point is located at the center of the object.
+
+What are common view properties to be animated?
+1 translationX/..
+2 rotation/rotationX/..
+3 scaleX/..
+4 pivotX/..
+5 x/y
+6 alpha
+
+How to animate several properties of a view at once?
+A (1-2 properties) Create ObjectAnimator for each property
+B (2+ properties) Use ViewPropertyAnimator
+
+What is ViewPropertyAnimator?
+- Class which enables automatic and optimized animation of select properties on View objects.
+- It may provide better performance for several simultaneous animations, because it will optimize invalidate calls to take place only once for several properties.
+
+Where ViewPropertyAnimator should be implemented?
+In View class which will be animated. It should be returned from animate() method.
+
+What are advantages of ViewPropertyAnimator?
+1 It refers to properties directly (alpha(), translationX() etc methods instead of strings), which removes reflection overhead
+2 Less number of calculations and invalidations, as they are per animation frame instead of per property.
+3 Less code than couple ObjectAnimators or PropertyValuesHolder
+
+How to declare and use an animation in XML?
+1 Create XML file in res/animator/ directory
+2 Define AnimatorSets with <set> and ObjectAnimators with <objectAnimator> elements
+3 Inflate AnimatorSet object: set = (AnimatorSet)AnimatorInflater.loadAnimator(context,R.animator.myAnimator);
+
+What is drawable animation? 
+Drawable animation allows to load a series of Drawable resources one after another to create an animation.
+
+How to define a drawable animation?
+A In code using AnimationDrawable class
+B In res/drawable/ XML file defining list of <item> elements within root <animation-list>
+<animation-list android:oneshot="true">
+  <item android:drawable="@drawable/draw1" android:duration="200" />
+  <item android:drawable="@drawable/draw2" android:duration="200" />
+  <item android:drawable="@drawable/draw3" android:duration="200" />
+</animation-list>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
