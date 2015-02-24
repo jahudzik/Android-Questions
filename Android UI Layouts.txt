@@ -35,6 +35,31 @@ What's difference between android:gravity and android:layout_gravity?
 - android:gravity defines how ViewGroup positions all its content
 - android:layout_gravity defines how the child view should be positioned within its enclosing layout
 
+How to modify the way ViewGroup positions its content?
+Specify android:gravity parameter
+
+What are possible values of android:gravity parameter?
+1 top/bottom
+2 left/right
+3 center/center_vertical/center_horizontal
+4 fill/fill_vertical/fill_horizontal
+5 clip_vertical/clip_horizontal
+6 start/end
+
+What's difference between android:gravity 'start' and 'left' values?
+- In LTR they mean the same thing
+- In RTL they are opposite ('start' positions on the right side)
+
+How to specify how the child view should be positioned within its layout?
+Set android:layout_gravity parameter
+
+What are possible values of android:layout_gravity parameter?
+1 top
+2 bottom
+3 left
+4 right
+5 center
+
 How to create space between LinearLayout elements?
 Set margin for each element. Can be done manually on each element or by defining custom style for LinearLayout.
 
