@@ -121,6 +121,10 @@ How to implement Up button on the action bar to return to 'parent' screen (for e
 2b by overriding getSupportParentActivityIntent() method (if it changes)
 3 In case of fragments onSupportNavigateUp() should be overridden instead
 
+How to define activity's parent activity in manifest?
+1 Specify it in <activity> android:parentActivity parameter
+2 Below API 16 use PARENT_ACTIVITY <meta-data> element
+
 How to place action view instead of action button on action bar?
 In menu XML resource file for chosen <item> use either the actionLayout or actionViewClass attribute to specify either a layout resource or widget class to use.
 
@@ -177,3 +181,60 @@ What are best practices in placing action buttons on action bar?
 
 What is CAB?
 Contextual Action Bar
+
+Which class can be used to implement Swipe Views?
+View Pager (from Support Library)
+
+What is a ViewPager?
+- A layout widget in which each child view is a separate page (a separate tab) in the layout.
+- It allows the user to flip left and right through pages of data. 
+- Pages to be shown are supplied by implementation of a PagerAdapter.
+
+What are PageerAdapter implementations?
+1 FragmentPagerAdapter
+2 FragmentStatePagerAdapter
+
+What's difference between FragmentPagerAdapter and FragmentStatePagerAdapter?
+- FragmentPagerAdapter - best when navigating between sibling screens representing a fixed, small number of pages (they are kept in memory)
+- FragmentStatePagerAdapter - best for paging across a collection of objects for which the number of pages is undetermined
+
+How to add tabs to the ActionBar?
+getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+getActionBar().addTab(actionBar.newTab()
+  .setText("tab 1").setTabListener(this));
+(...)
+ 
+What is required when adding a new tab to the ActionBar?
+ActionBar.TabListener implementation
+
+How to implement navigation between fragments using swipe gestures?
+1 Include ViewPager in the activity (requires support library v4)
+2 Implement FragmentPagerAdapter or FragmentStatePagerAdapter returning fragments
+3 In Activity find ViewPager by ID and supply it with adapter
+
+How to implement ActionBar's tabs changing along with ViewPager's swipe views? 
+- To switch between pages in a ViewPager when the user selects a tab, implement ActionBar.TabListener to select the appropriate page by calling setCurrentItem() on ViewPager.
+- To select the corresponding tab when the user swipes between pages with a touch gesture implement the ViewPager.OnPageChangeListener interface to change the current tab each time the page changes.
+
+What is PagerTitleStrip?
+- A non-interactive indicator of the current, next and previous pages of a ViewPager.
+- It is intended to be used as a child view of a ViewPager widget in XML layout
+
+How to add an indicator of the current, next and previous pages of a ViewPager?
+1 Add PagerTitleStrip as ViewPager child
+2 Implement getPageTitle() method of PagerAdapter to return title of each page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
