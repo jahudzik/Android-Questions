@@ -1,0 +1,117 @@
+What is a Servlet? 
+- A Java class used to process client requests and generate dynamic web content.
+- Servlets are mostly used to process or store data submitted by an HTML form, provide dynamic content and manage state information that does not exist in the stateless HTTP protocol.
+
+Explain the architechure of a Servlet. 
+- The core abstraction that must be implemented by all servlets is the javax.servlet.Servlet interface. Each servlet must implement it either directly or indirectly, either by extending javax.servlet.GenericServlet or javax.servlet.http.HTTPServlet. 
+- Finally, each servlet is able to serve multiple requests in parallel using multithreading.
+
+What is the difference between an Applet and a Servlet? 
+- An Applet is a client side Java program that runs within a Web browser on the client machine.
+- A servlet is a server side component that runs on the web server.
+- An applet can use the user interface classes, while a servlet does not have a user interface. Instead, a servlet waits for client’s HTTP requests and generates a response in every request.
+
+Explain the life cycle of a Servlet. 
+- On every client’s request, the Servlet Engine loads the servlets and invokes its init() methods. 
+- Then, the Servlet object handles all subsequent requests coming from that client, by invoking the service method for each request separately.
+- Finally, the servlet is removed by calling the server’s destroy() method.
+
+Describe the GET method.
+- It appends the name-value pairs on the request’s URL.
+- Thus, there is a limit on the number of characters and subsequently on the number of values that can be used in a client’s request.
+- Furthermore, the values of the request are made visible and thus, sensitive information must not be passed in that way.
+
+Describe the POST method.
+- It overcomes the limit imposed by the GET request, by sending the values of the request inside its body.
+- Also, there is no limitations on the number of values to be sent across.
+- Finally, the sensitive information passed through a POST request is not visible to an external client.
+
+What are the types of web applications?
+- presentation-oriented
+- service-oriented
+
+What is presentation-oriented web application?
+It generates interactive web pages containing various types of markup language (HTML, XHTML, XML, and so on) and dynamic content in response to requests. 
+
+What is service-oriented web application?
+- It implements the endpoint of a web service.
+- Presentation-oriented applications are often clients of service-oriented web applications. 
+
+What is Servlet Chaining? 
+- Method where the output of one servlet is sent to a second servlet. The output of the second servlet can be sent to a third servlet, and so on.
+- The last servlet in the chain is responsible for sending the response to the client.
+
+How do you find out what client machine is making a request to your servlet?
+The ServletRequest class has methods:
+- getRemoteAddr() gets the IP address of the client machine 
+- getRemoteHost() gets the host name of the client machine
+
+What is the structure of the HTTP response? 
+The HTTP response consists of three parts:
+1 Status Code
+2 HTTP Headers
+3 Body
+
+What is HTTP response status code?
+- It describes the status of the response.
+- In case the request failed, the status code can be used to find out the reason behind the failure.
+- If servlet does not return a status code, the success status code, HttpServletResponse.SC_OK, is returned by default.
+
+What are HTTP response headers?
+- They contain more information about the response.
+- For example, the headers may specify the date/time after which the response is considered stale, or the form of encoding used to safely transfer the entity to the user.
+
+What is HTTP response body?
+- It contains the content of the response.
+- The body may contain HTML code, an image, etc.
+- The body consists of the data bytes transmitted in an HTTP transaction message immediately following the headers.
+
+What is a cookie? 
+- A bit of information that the Web server sends to the browser.
+- The browser stores the cookies for each Web server in a local file.
+- In a future request, the browser, along with the request, sends all stored cookies for that specific Web server.
+ 
+What is the difference between session and cookie ?
+- The session should work, regardless of the settings on the client browser. The client may have chosen to disable cookies.
+- The HTTP session is capable of storing any Java object, while a cookie can only store String objects.
+
+Which protocol will be used by browser and servlet to communicate? 
+HTTP protocol
+
+What is HTTP Tunneling? 
+- Technique by which, communications performed using various network protocols are encapsulated using the HTTP or HTTPS protocols.
+- The HTTP protocol therefore acts as a wrapper for a channel that the network protocol being tunneled uses to communicate. 
+
+What is URL Encoding and URL Decoding? 
+- The URL encoding procedure is responsible for replacing all the spaces and every other extra special character of a URL, into their corresponding Hex representation.
+- URL decoding is the exact opposite procedure.
+
+What is a JSP?
+- JavaServer Pages
+- Technology that mixes static content with dynamically-generated content.
+- JSP is a text document that contains two types of text: static data and JSP elements. 
+- Static data can be expressed in any text-based format, such as HTML or XML. 
+
+How are the JSP requests handled?
+1 On the arrival of a JSP request, the browser first requests a page with a .jsp extension. 
+2 The Web server reads the request and using the JSP compiler, the Web server converts the JSP page into a servlet class. 
+3 The generated servlet class is invoked, in order to handle the browser’s request.
+4 Once the execution of the request is over, the servlet sends a response back to the client.
+
+What are the advantages of JSP?
+1 can be pre-compiled.
+2 can be easily combined to static templates, including HTML or XML fragments, with code that generates dynamic content.
+3 are dynamically compiled into servlets and thus, the developers can easily make updates to presentation code.
+
+
+
+
+
+
+
+
+
+
+
+
+

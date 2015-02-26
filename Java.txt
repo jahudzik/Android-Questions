@@ -1,0 +1,379 @@
+What is JVM?
+- Java Virtual Machine
+- Process virtual machine that can execute Java bytecode. 
+- Each Java source file is compiled into a bytecode file, which is executed by the JVM
+
+What is JRE?
+- Java Runtime Environment
+- Provides runtime environment.
+- It contains set of libraries + other files that JVM uses at runtime.
+
+What is JDK?
+- Java Development Kit.
+- It contains JRE + development tools.
+
+What does the “static” keyword mean?
+Static member variable or method can be accessed, without requiring an instantiation of the class to which it belongs.
+
+Can you override private or static method in Java?
+No, because method overriding is based upon dynamic binding at runtime and static methods are statically binded at compile time. A static method is not associated with any instance of a class so the concept is not applicable.
+
+What are primitive data types supported by Java? 
+1 byte
+2 short
+3 int
+4 long
+5 float
+6 double
+7 boolean
+8 char
+
+What is autoboxing and unboxing?
+- Autoboxing is the automatic conversion made by the Java compiler between the primitive types and their corresponding object wrapper classes.
+- For example, the compiler converts an int to an Integer, a double to a Double, and so on.
+- If the conversion goes the other way, this operation is called unboxing.
+
+What is method overloading in Java?
+- Occurs when two or more methods in the same class have the exact same name, but different parameters. 
+- It's not related with return type.
+
+Is it possible to overload Java method just by changing return type?
+No. The return value alone is not sufficient for the compiler to figure out which function to call.
+
+What is method overriding in Java?
+- Subclass redefines the same method as a parent class. 
+- Overridden methods must have the same name, argument list, and return type. 
+
+What is constructor in Java?
+- Method invoked when a new object is created.
+- Every class has a constructor.
+- In case the programmer does not provide a constructor for a class, the Java compiler (Javac) creates a default constructor for that class.
+
+Does Java support multiple inheritance? 
+No, each class is able to extend only on one class, but is able to implement more than one interfaces.
+
+What is the difference between an interface and an abstract class ? 
+1 All methods in interface are abstract. Abstract class can have both abstract and non-abstract methods.
+2 A class may implement a number of interfaces, but can extend only one abstract class.
+3 In order for a class to implement an interface, it must implement all its declared methods.
+4 Abstract classes can implement interfaces without even providing the implementation of interface methods.
+5 Variables declared in a Java interface is by default final. An abstract class may contain non-final variables.
+6 Members of a Java interface are public by default. A member of an abstract class can either be private, protected or public.
+
+What are pass by reference and pass by value?
+- By value: a copy of the object is passed. Thus, even if changes are made to that object, it doesn’t affect the original value. 
+- By reference: the actual object is not passed, rather a reference of the object is passed. Thus, any changes made by the external method, are also reflected in all places.
+
+What is the difference between processes and threads? 
+- A process is an execution of a program, while a thread is a single execution sequence within a process. 
+- A process can contain multiple threads. 
+- A thread is sometimes called a lightweight process.
+
+What are the different ways of creating a thread?
+1 A class may extend the Thread class.
+2 A class may implement the Runnable interface.
+3 An application can use the Executor framework, in order to create a thread pool.
+
+What is preferred way of creating a thread?
+- The Runnable interface is preferred, as it does not require an object to inherit the Thread class. In case application design requires multiple inheritance, only interfaces can help. 
+- Also, the thread pool is very efficient and can be implemented and used very easily.
+
+What are possible Thread states?
+1 NEW
+2 RUNNABLE
+3 BLOCKED
+4 WAITING
+5 TIMED_WAITING
+6 TERMINATED
+
+What means NEW Thread state?
+The thread becomes ready to run, but does not necessarily start running immediately.
+
+What means RUNNABLE Thread state?
+The Java Virtual Machine (JVM) is actively executing the thread’s code.
+
+What means BLOCKED Thread state?
+The thread is in a blocked state while waiting for a monitor lock.
+
+What means WAITING Thread state?
+The thread waits for another thread to perform a particular action.
+
+What means TIMED_WAITING Thread state?
+The thread waits for another thread to perform a particular action up to a specified waiting time.
+
+What means TERMINATED Thread state?
+The thread has finished its execution.
+
+What is the difference between a synchronized method and synchronized block?
+- A synchronized method uses the method receiver as a lock (i.e. this for non static methods, and the enclosing class for static methods).
+- Synchronized blocks uses the expression as a lock.
+
+What is a monitor in terms of concurrency?
+- A monitor is basically a guardian that watches over a sequence of synchronized code and ensuring that only one thread at a time executes a synchronized piece of code.
+- Each monitor is associated with an object reference. 
+
+What’s a deadlock ? 
+A condition that occurs when two processes are waiting for each other to complete, before proceeding. The result is that both processes wait endlessly.
+
+How to ensure that N threads can access N resources without deadlock?
+Impose an ordering on the locks and force each thread to follow that ordering. Thus, if all threads lock and unlock the mutexes in the same order, no deadlocks can arise.
+
+What are the basic interfaces of Java Collections Framework ? 
+1 Collection
+2 Set
+3 List
+4 Map
+
+What is an Iterator? 
+- The Iterator interface provides a number of methods that are able to iterate over any Collection.
+- Each Java Collection contains the iterator method that returns an Iterator instance.
+
+What differences exist between Iterator and ListIterator?
+- The ListIterator implements the Iterator interface and contains extra functionality, such as adding an element, replacing an element, getting the index position for previous and next elements, etc.
+- ListIterator can only be used on List, Iterator on both List and Set.
+
+What is difference between fail-fast and fail-safe?
+- The Iterator's fail-safe property works with the clone of the underlying collection and thus, it is not affected by any modification in the collection. 
+- Fail-fast iterators throw a ConcurrentModificationException, while fail-safe iterator never throws such an exception.
+- All the collection classes in java.util package are fail-fast, while the collection classes in java.util.concurrent are fail-safe. 
+
+How HashMap works in Java? 
+- Stores key-value pairs. 
+- Requires a hash function and uses hashCode() and equals() methods, in order to put and retrieve elements to and from the collection respectively.
+- When the put() method is invoked, the HashMap calculates the hash value of the key and stores the pair in the appropriate index inside the collection.
+- Some important characteristics of a HashMap are its capacity, its load factor and the threshold resizing.
+
+What is the importance of hashCode() and equals() methods?
+- A HashMap uses the hashCode() and equals() methods to determine the index of the key-value pair and to detect duplicates.
+- More specifically, the hashCode() method is used in order to determine where the specified key will be stored.
+- Since different keys may produce the same hash value, the equals() method is used, in order to determine whether the specified key actually exists in the collection or not.
+- Therefore, the implementation of both methods is crucial to the accuracy and efficiency of the HashMap.
+
+What differences exist between HashMap and Hashtable? 
+Both the HashMap and Hashtable classes implement the Map interface, but:
+1 A Hashtable is synchronized, while a HashMap is not. 
+2 A HashMap allows the existence of null keys and values, while a Hashtable doesn’t
+3 A HashMap provides its set of keys and a Java application can iterate over them. A Hashtable provides an Enumeration of its keys.
+4 The Hashtable class is considered to be a legacy class.
+
+What is difference between Array and ArrayList?
+1 Arrays can contain primitive or objects, while an ArrayList can contain only objects.
+2 Arrays have fixed size, while an ArrayList is dynamic.
+3 An ArrayListprovides more methods and features, such as addAll, removeAll, iterator, etc.
+
+Describe ArrayList.
+- Implements List interface.
+- An index based data structure backed by an Array. It provides random access to its elements with a performance equal to O(1). 
+- Insert/delete operations are slow as they require resizing an array
+
+Describe LinkedList.
+- Implements List interface.
+- Stores its data as list of elements and every element is linked to its previous and next element. Search operation for an element has execution time equal to O(n).
+- Insert/delete operations are fast.
+- LinkedList consumes more memory than an ArrayList, because every node in a LinkedList stores two references, one for its previous element and one for its next element.
+
+What is difference between ArrayList and LinkedList?
+1 ArrayList accesses data faster.
+2 Insert/remove operations faster for LinkedList.
+3 LinkedList consumes more memory than an ArrayList, because every node in a LinkedList stores two references, one for its previous element and one for its next element.
+
+What's difference between Comparable and Comparator interfaces?
+- Comparable interface contains only one method, called compareTo(T obj)
+- Comparator interface contains two methods, called compare(T obj1, T obj2) and equals(T obj)
+
+What is Java PriorityQueue?
+- An unbounded priority queue based on a priority heap. 
+- The elements of the priority queue are ordered according to their natural ordering, or by a Comparator provided at queue construction time.
+- A priority queue does not permit null elements.
+- Not thread-safe
+
+What is Big-O notation?
+- Describes how the algorithm scales and performs, in terms of either the execution time required or the space used.
+- Is relative representation of complexity. This allows you to reduce an algorithm to a variable which in turn allows you to easily compare it to another.
+- Describes an upper limit on the growth of a function, in the other words the “worst case scenario”.
+
+What is the tradeoff between using an unordered array versus an ordered array?
+- ordered: search complexity of O(log n), insertion complexity of O(n)
+- unordered: search complexity of O(n), insertion complexity of O(1)
+
+What are some of the best practices relating to the Java Collection framework?
+1 Choosing the right type of the collection to use, based on the application’s needs, is very crucial for its performance.
+2 Some collection classes allow us to specify their initial capacity. Thus, if we have an estimation on the number of elements that will be stored, we can use it to avoid rehashing or resizing.
+3 Always use Generics for type-safety, readability, and robustness.
+4 Use immutable classes provided by the JDK as a key in a Map, in order to avoid the implementation of the hashCode() and equals() methods for our custom class.
+5 Return zero-length collections or arrays as opposed to returning a null in case the underlying collection is actually empty.
+
+What’s the difference between Enumeration and Iterator interfaces?
+- Enumeration is twice as fast as compared to an Iterator and uses very less memory.
+- However, the Iterator is much safer compared to Enumeration, because other threads are not able to modify the collection object that is currently traversed by the iterator. 
+- Also, Iterators allow the caller to remove elements from the underlying collection, something which is not possible with Enumerations.
+
+What is the difference between HashSet and TreeSet?
+- HashSet is Implemented using a hash table and thus, its elements are not ordered. The add, remove, and contains methods of a HashSet have constant time complexity O(1).
+- TreeSet is implemented using a tree structure. The elements in a TreeSet are sorted, and thus, the add, remove, and contains methods have time complexity of O(logn).
+
+What is the purpose of garbage collection in Java?
+The purpose of garbage collection is to identify and discard those objects that are no longer needed by the application, in order for the resources to be reclaimed and reused.
+
+What does System.gc() and Runtime.gc() methods do? 
+These methods can be used as a hint to the JVM, in order to start a garbage collection. However, this it is up to the JVM to start the garbage collection immediately or later in time.
+
+When is the finalize() called ? What is the purpose of finalization ? 
+- The finalize() method is called by the garbage collector, just before releasing the object’s memory.
+- It is normally advised to release resources held by the object inside the finalize() method.
+
+What are the methods of Object class?
+1 clone()
+2 equals()
+3 finalize()
+4 getClass()
+5 hashCode()
+6 notify()/notifyAll()
+7 toString()
+8 wait()
+
+If an object reference is set to null, will the Garbage Collector immediately free the memory held by that object?
+No, the object will be available for garbage collection in the next cycle of the garbage collector.
+
+What is the difference between Serial and Throughput Garbage collector?
+- The throughput garbage collector uses a parallel version of the young generation collector and is meant to be used with applications that have medium to large data sets. 
+- The serial collector is usually adequate for most small applications (those requiring heaps of up to approximately 100MB on modern processors).
+
+When does an Object becomes eligible for Garbage collection in Java?
+When it becomes unreachable to the program in which it is currently used.
+
+Does Garbage collection occur in permanent generation space in JVM?
+- Garbage Collection does occur in PermGen space and if PermGen space is full or cross a threshold, it can trigger a full garbage collection.
+- This is the reason why correct sizing of PermGen space is important to avoid frequent full garbage collections.
+
+What are the two types of Exceptions in Java? Which are the differences between them? 
+- Unchecked exceptions do not need to be declared in a method or a constructor’s throws clause.
+- Checked exceptions must be declared in a method or a constructor’s throws clause
+
+Name some unchecked exceptions.
+1 ArrayIndexOutOfBoundsException	
+2 ClassCastException 
+3 IllegalArgumentException 
+4 NullPointerException 
+5 RuntimeException 
+6 AssertionError 
+7 StackOverflowError 
+
+Name some checked exceptions.
+1 Exception 
+2 IOException 
+3 FileNotFoundException 
+4 ParseException 
+5 ClassNotFoundException 
+6 InterruptedException	
+7 NoSuchMethodException	
+
+What is the difference between Exception and Error in Java?
+- Exception and Error classes are both subclasses of the Throwable class.
+- The Exception class is used for exceptional conditions that a user’s program should catch.
+- The Error class defines exceptions that are not excepted to be caught by the user program.
+
+What is the difference between throw and throws?
+- The throw keyword is used to explicitly raise a exception within the program.
+- The throws clause is used to indicate those exceptions that are not handled by a method. 
+
+What is the importance of finally block in exception handling?
+- A finally block will always be executed, whether or not an exception is actually thrown.
+- Even in the case where the catch statement is missing and an exception is thrown, the finally block will still be executed.
+- The finally block is used to release resources like I/O buffers, database connections, etc.
+
+What will happen to the Exception object after exception handling? 
+The Exception object will be garbage collected in the next garbage collection.
+
+How does finally block differ from finalize() method?
+- A finally block will be executed whether or not an exception is thrown and is used to release those resources held by the application.
+- Finalize is a protected method of the Object class, which is called by the JVM just before an object is garbage collected.
+
+What is an applet? 
+A Java applet is program that can be included in a HTML page and be executed in a java enabled client browser. 
+
+What are the restrictions imposed on Java applets?
+An applet cannot 
+- load libraries or define native methods.
+- ordinarily read or write files on the execution host.
+- read certain system properties.
+- make network connections except to the host that it came from.
+- start any program on the host that’s executing it.
+
+What is JDBC? 
+- Java DataBase Connectivity
+- JDBC is an abstraction layer that allows users to choose between databases.
+- JDBC enables developers to write database applications in Java, without having to concern themselves with the underlying details of a particular database.
+
+Explain the role of Driver in JDBC. 
+- The JDBC Driver provides vendor-specific implementations of the abstract classes provided by the JDBC API. 
+- Each driver must provide implementations for the following classes of the java.sql package: Connection, Statement, PreparedStatement, CallableStatement, ResultSet and Driver
+
+What does Class.forName() method do?
+- It causes the class named X to be dynamically loaded (at runtime).
+- Class.forName("X") returns the Class object associated with the "X" class. The returned Class object is not an instance of the "x" class itself.
+
+What is the advantage of PreparedStatement over Statement? 
+- PreparedStatements are precompiled and thus, their performance is much better.
+- Also, PreparedStatement objects can be reused with different input values to their queries.
+
+What is the use of CallableStatement? 
+- A CallableStatement is used to execute stored procedures.
+- Stored procedures are stored and offered by a database. They may take input values from the user and may return a result.
+- The usage of stored procedures is highly encouraged, because it offers security and modularity.
+
+What does Connection pooling mean?
+- The interaction with a database can be costly, regarding the opening and closing of database connections.
+- A pool of database connections is obtained at start up by the application server and is maintained in a pool. A request for a connection is served by a connection residing in the pool.
+
+What is RMI? 
+- The Java Remote Method Invocation (Java RMI) 
+- Java API that performs the object-oriented equivalent of remote procedure calls (RPC), with support for direct transfer of serialized Java classes and distributed garbage collection. 
+- Remote Method Invocation (RMI) can also be seen as the process of activating a method on a remotely running object.
+- RMI offers location transparency because a user feels that a method is executed on a locally running object. 
+
+What are the layers of RMI Architecture?
+1 Stub and Skeleton layer
+2 Remote Reference Layer
+3 Transport layer
+
+Explain serialization and deserialization. 
+- Serialization - an object can be represented as a sequence of bytes and includes the object’s data, as well as information about the object’s type, and the types of data stored in the object.
+- Thus, serialization can be seen as a way of flattening objects, in order to be stored on disk, and later, read back and reconstituted.
+- Deserialisation is the reverse process of converting an object from its flattened state to a live object.
+
+How to get reference to the class (ex OuterClass) from its inner class?
+OuterClass.this
+
+How is polymorphism expressed in Java?
+1 Method overloading
+2 Method overriding
+
+What is a generic type? How to define it?
+- A generic type is a generic class or interface that is parameterized over types.
+- The type parameter section, delimited by angle brackets (<>), follows the class name. It specifies the type parameters:
+class name<T1, T2, ..., Tn> {...}
+
+What is a generic method? How to define it?
+- Generic methods are methods that introduce their own type parameters. 
+- This is similar to declaring a generic type, but the type parameter's scope is limited to the method where it is declared.
+- The syntax for a generic method includes a type parameter, inside angle brackets, and appears before the method's return type:
+public static <K, V> boolean compare(Pair<K, V> p1, Pair<K, V> p2) {...}
+
+What are bounded type parameters in Java?
+- They restrict the types that can be used as type arguments in a parameterized type to some class's subclasses.
+- Example: 
+public <U extends Number> void inspect(U u) {...}
+
+What is reflection in Java?
+- It is language's ability to inspect and dynamically call classes, methods, attributes, etc. at runtime. 
+- Example:
+Object foo = Class.forName("com.api.Foo").newInstance();
+// Alternatively: Object foo = Foo.class.newInstance();
+Method m = foo.getClass().getDeclaredMethod("hello", new Class<?>[0]);
+m.invoke(foo);
+
+What are drawbacks of reflection?
+1 Performance overhead - as types are dynamically resolved at runtime, certain JVM optimizations are not performed
+2 Exposure of internals - gives access to private fields and methods
+3 Security restrictions - code run in a restricted security context (such as Applet) may not grant permission for reflection
