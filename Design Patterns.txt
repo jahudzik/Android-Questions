@@ -1,0 +1,343 @@
+What is a design pattern?
+- A general reusable solution to a commonly occurring problem within a given context.
+- It is a description or template for how to solve a problem that can be used in many different situations
+
+What are design patterns types?
+1 creational
+2 structural
+3 behavioral
+
+What are creational design patterns?
+- Deal with object creation - try to create objects in a manner suitable to the situation.
+- Examples: Builder, Factory, Prototype, Singleton 
+
+Which type of design patterns deal with object creation?
+Creational patterns
+
+What are structural design patterns?
+- These design patterns concern class and object composition.
+- Inheritance is used to compose interfaces and define ways to compose objects to obtain new functionalities.
+- Examples: Adapter, Bridge, Decorator, Facade
+
+Which type of design patterns concern class and object composition?
+Structural patterns
+
+What are behavioral design patterns?
+- They identify common communication patterns between objects and patterns increase flexibility in carrying out this communication.
+- Examples: Command, Iterator, Mediator, Observer, Visitor
+
+Which type of design patterns deal with communication between objects?
+Behavioral pattern
+
+Name some creational design patterns.
+1 Abstract factory
+2 Builder
+3 Factory method
+4 Prototype
+5 Singleton
+
+Name some structural design patterns.
+1 Adapter
+2 Bridge
+3 Composite
+4 Decorator
+5 Facade
+
+Name some behavioral design patterns.
+1 Command
+2 Iterator
+3 Mediator
+4 Observer
+5 Strategy
+6 Visitor
+
+Describe Factory method pattern.
+- It uses factory methods to create and return object rather than using constructor.
+- Example: newInstance(), valueOf()
+- Creational pattern 
+- Recommended in Effective Java
+
+Which design pattern uses factory methods to create and return object rather than using constructor?
+Factory method
+
+Describe Builder method pattern.
+- When creating new instance, it uses builder object, that receives each initialization parameter step by step and then returns the resulting constructed object at once.
+- It finds a solution to the telescoping constructor anti-pattern.
+- Creational pattern 
+
+Which design pattern uses special object, that receives each initialization parameter step by step and then returns the resulting constructed object?
+Builder
+
+Describe telescoping constructor anti-pattern.
+It occurs when the increase of object constructor parameter combination leads to an exponential list of constructors.
+
+Describe Abstract factory pattern.
+- It provides a way to encapsulate a group of individual factories that have a common theme without specifying their concrete classes.
+- The client software creates a concrete implementation of the abstract factory and then uses the generic interface of the factory to create the concrete objects that are part of the theme.
+- Creational pattern
+
+Which design pattern provides a way to encapsulate a group of individual factories that have a common theme without specifying their concrete classes?
+Abstract factory
+
+Describe Lazy initialization pattern.
+- Tactic of delaying the creation of an object, the calculation of a value, or some other expensive process until the first time it is needed.
+- Creational pattern
+
+Which design pattern delays creation of an object until it is needed?
+Lazy initialization
+
+Describe Multition pattern.
+- It allows only one instance of a class per key in the map to be created.
+- Creational pattern
+
+Which design pattern allows only one instance of a class per key in the map to be created?
+Multition
+
+What's difference between Singleton and Multition design patterns?
+Singleton is about having a single class instance per application, while the multiton pattern instead ensures a single instance per key.
+
+Describe Object pool pattern.
+- It uses a set of initialized objects kept ready to use rather than allocating and destroying them on demand.
+- A client of the pool will request an object from the pool and perform operations on the returned object. When the client has finished, it returns the object to the pool rather than destroying it.
+- Crational pattern.
+
+Which design pattern uses a set of initialized objects kept ready to use?
+Object pool
+
+Describe Prototype pattern.
+- It involves implementing a prototype interface which tells to create a clone of the current object.
+- This pattern is used when creation of object directly is costly.
+- For example, an object is to be created after a costly database operation. We can cache the object, returns its clone on next request and update the database as and when needed thus reducing database calls.
+- Creational pattern
+
+Which design pattern can be used when creation of object directly is costly?
+Prototype
+
+Which design pattern involves implementing an interface which tells to create a clone of the current object?
+Prototype
+
+Describe Singleton pattern.
+- It restricts the instantiation of a class to one object. 
+- Creational pattern
+- Common uses: Abstract Factory, Builder, Prototype, Facade
+- Drawbacks: it is overused, introduces unnecessary restrictions in situations where a sole instance of a class is not actually required, and introduces global state into an application.
+
+Which design pattern restricts the instantiation of a class to one object?
+Singleton and Multition
+
+Describe Adapter pattern.
+- Called also Wrapper or Translator
+- It allows incompatible classes to work together by converting the interface of one class into an interface expected by the clients.
+- It is often used to make existing classes work with others without modifying their source code. 
+- Structural pattern.
+
+Which design pattern allows incompatible classes to work together by converting the interface of one class into an interface expected by the clients?
+Adapter
+
+What is a glue code?
+- Sometimes used to describe implementations of the Adapter pattern.
+- It serves as a proxy between otherwise incompatible parts of software, to make them compatible.
+- The standard practice is to keep logic out of the glue code and leave that to the code blocks it connects to.
+
+Describe Bridge pattern.
+- It decouples an abstraction from its implementation so that the two can vary independently.
+- Publishes interface in an inheritance hierarchy, and bury implementation in its own inheritance hierarchy.
+- Structural pattern
+
+Which pattern decouples an abstraction from its implementation so that the two can vary independently?
+Bridge
+
+Describe Composite pattern.
+- It describes that a group of objects is to be treated in the same way as a single instance of an object.
+- The intent of a composite is to "compose" objects into tree structures to represent part-whole hierarchies.
+- Implementing the composite pattern lets clients treat individual objects and compositions uniformly.
+- Structural pattern
+
+Which pattern assumes that a group of objects is to be treated in the same way as a single instance of an object?
+Composite
+
+Describe Decorator pattern.
+- Also known as Wrapper
+- It allows a user to add new functionality to an existing object without altering its structure. 
+- It creates a decorator class which wraps the original class and provides additional functionality keeping class methods signature intact.
+- Structural pattern
+
+Which design pattern allows a user to add new functionality to an existing object without altering its structure?
+Decorator
+
+What is Wrapper pattern?
+Both Adapter and Decorator patterns are referred by Wrapper name as well.
+
+Describe Facade pattern.
+- A facade is an object (typically wrapper) that provides a simplified interface to a larger body of code.
+- It can make library easier to use and more readable
+- Structural pattern
+
+Which design pattern provides a simplified interface to a larger body of code?
+Facade
+
+Describe Flyweight pattern.
+- A flyweight is an object that minimizes memory use by sharing as much data as possible with other similar objects.
+- It is a way to use objects in large numbers when a simple repeated representation would use an unacceptable amount of memory.
+- To enable safe sharing, between clients and threads, Flyweight objects must be immutable.
+- Structural pattern
+
+Which pattern provides an object that minimizes memory use by sharing as much data as possible with other similar objects?
+Flyweight
+
+Describe Front Controller pattern.
+- It provides a centralized entry point for handling requests.
+- The pattern relates to the design of web applications. 
+- Structural pattern
+
+Which pattern provides a centralized entry point for handling requests?
+Front Controller
+
+Describe Proxy pattern.
+- In proxy pattern, we create object having original object to interface its functionality to outer world.
+- Usage: adding security access, thread-safe features, interface to remote objects
+- Structural pattern
+
+Which pattern provides object having original object to interface its functionality to outer world?
+Proxy
+
+What's difference between Proxy and Decorator patterns?
+- Proxy usually used by frameworks to add security or caching/lazing, while Decorator usually used to add new behaviour to old or legacy classes
+- Proxy may not instantiate wrapping object at all while Decorator always hold link to actual wrapped instance
+
+Describe Chain-of-responsibility pattern.
+- It creates a chain of receiver objects for a request. 
+- Normally each receiver contains reference to another receiver. If one object cannot handle the request then it passes the same to the next receiver and so on.
+- Bahavioral pattern.
+
+Which pattern creates a chain of receiver objects for a request?
+Chain-of-responsibility
+
+Describe Command pattern.
+- Command object is used to represent and encapsulate all the information (method name and parameters) needed to call a method at a later time.
+- It is passed to invoker object, which looks for the appropriate object which can handle this command and passes the command to the corresponding object which executes the command.
+- Bahavioral pattern
+
+Which pattern provides an object which represents and encapsulates all the information needed to call a method at a later time?
+Command
+
+Describe Interpreter pattern.
+- It provides a way to evaluate language grammar or expression. 
+- The basic idea is to have a class for each symbol in a specialized computer language. The syntax tree of a sentence in the language is an instance of the composite pattern and is used to evaluate (interpret) the sentence for a client
+- This pattern is used in SQL parsing, symbol processing engine etc.
+- Behavioral pattern
+
+Which pattern provides a way to evaluate language grammar or expression?
+Interpreter
+
+Describe Iterator pattern.
+- It is used to get a way to access the elements of a collection object in sequential manner without any need to know its underlying representation.
+- Behavioral pattern.
+
+Which pattern is used to get a way to access the elements of a collection object in sequential manner?
+Iterator
+
+Describe Mediator pattern.
+- It provides a mediator class which normally handles all the communications between different classes and supports easy maintenance of the code by loose coupling. 
+- Behavioral pattern
+
+Which pattern  provides a class which handles all the communications between different classes?
+Mediator
+
+Describe Memento pattern.
+- It provides the ability to restore an object to its previous state.
+- Memento object keeps previous state and can be used to restore it.
+- When using this pattern, care should be taken if the originator may change other objects or resources - the memento pattern operates on a single object.
+- Behavioral pattern
+
+Which pattern provides the ability to restore an object to its previous state?
+Memento
+
+
+Describe Null Object pattern.
+- Instead of using a null reference to convey absence of an object, one uses a Null Object which implements the expected interface, but whose method body is empty.
+- The advantage of this approach over a working default implementation is that a Null Object is very predictable and has no side effects: it does nothing.
+- Behavioral pattern
+
+Which pattern introduces an object with defined neutral behaviour?
+Null Object
+
+Describe Observer pattern.
+- Called also Publish-subscribe pattern
+- Subject object maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods.
+- It is mainly used to implement distributed event handling systems.
+- Can cause memory leaks, known as the lapsed listener problem, because in basic implementation it requires both explicit registration and explicit deregistration.
+- Behavioral pattern.
+
+Which pattern provides an object notifying its dependent objects on any state change?
+Observer/Publish-subscribe
+
+Describe State pattern.
+- Also known as the Objects for states pattern
+- In State pattern, we create objects which represent various states and a context object whose behaviour varies as its state object changes.
+- This can be a cleaner way for an object to change its behaviour at runtime without resorting to large monolithic conditional statements.
+- Behavioral pattern
+
+Which pattern provides objects which represent various states and a context object whose behaviour varies as its state object changes?
+State
+
+Describe Strategy pattern.
+- Known also as Policy pattern
+- In Strategy pattern, a class behaviour or its algorithm can be changed at runtime. 
+- It defines family of algorithms, encapsulates each and makes them interchangeable within that family.
+- Behavioral pattern
+
+Which pattern enables a class behaviour or its algorithm to be changed at runtime?
+Strategy
+
+Describe Template method pattern.
+- It defines the program skeleton of an algorithm in a method, called template method, which defers some steps to subclasses.
+- It lets one redefine certain steps of an algorithm without changing the algorithm's structure.
+- Behavioral pattern
+
+Which pattern defines the program skeleton of an algorithm in a method, which defers some steps to subclasses?
+Template method
+
+Describe Visitor pattern.
+- It is a way of separating an algorithm from an object structure on which it operates. 
+- A practical result of this separation is the ability to add new operations to existing object structures without modifying those structures. 
+- It is one way to follow the open/closed principle.
+- Behavioral pattern.
+
+Which patterns separates an algorithm from an object structure on which it operates?
+Visitor
+
+What is MVC pattern?
+- Model-View-Controller Pattern. This pattern is used to separate application's concerns.
+- Model represents an object or JAVA POJO carrying data. It can also have logic to update controller if its data changes.
+- View represents the visualization of the data that model contains.
+- Controller acts on both model and view. It controls the data flow into model object and updates the view whenever data changes. It keeps view and model separate.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
