@@ -40,7 +40,12 @@ What Gradle 'deviceCheck' task does?
 How to parametrize application version code in Android build?
 1 Define Gradle's getVersionCode() method
 2 Check if property exists: project.hasProperty('xyz') and return it
-3 In build.gradle override manifest's versionCode value: android { defaultConfig { versionCode getVersionCode() }}
+3 In build.gradle override manifest's versionCode value: 
+android { 
+  defaultConfig { 
+    versionCode getVersionCode() 
+  }
+}
 
 What manifest entries can be modified through the DSL?
 1 minSdkVersion
@@ -189,6 +194,12 @@ android {
   packagingOptions {
     exclude someFile
   }
+}
+
+How to include support library to the project?
+Add in build.gradle:
+dependencies {
+  compile 'com.android.support:support-v4:21.0.3'
 }
 
 

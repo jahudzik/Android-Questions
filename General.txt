@@ -14,3 +14,7 @@ What is URI?
 What is NFC?
 - Near field communication
 - Technology that enables devices to establish radio communication with each other by touching them together or bringing them into proximity, typically a distance of 10 cm or less.
+
+What is ERD diagram?
+- entity-relationship diagram
+- It describes an application's information model.

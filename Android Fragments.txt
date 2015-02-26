@@ -126,3 +126,9 @@ Can fragment live without activity?
 How to add options menu items from fragment?
 1 Call setHasOptionsMenu(true) from onCreate()
 2 Override onCreateOptionsMenu() to add own items
+
+What's difference between using framework Fragment and support Fragment classes?
+When using support Fragment:
+1 Activity must extend FragmentActivity 
+2 In order to get the FragmentManager must call getSupportFragmentManager()
+

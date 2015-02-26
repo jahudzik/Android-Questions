@@ -27,9 +27,6 @@ What is percentage of devices running under Gingerbread and below? (Feb '15)
 What action bar alternative has been introduced in API 21?
 Toolbar class
 
-When was loaders introduced?
-Android 3.0
-
 When was fragments introduced?
 Android 3.0
 
@@ -49,6 +46,3 @@ Name main features of API 21 release.
 6 OpenGL ES 3.1 support
 7 Notifications on the lock screen
 8 Document-centric apps
-
-When was expanded notifications introduced?
-Android 4.1
