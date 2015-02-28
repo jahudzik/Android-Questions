@@ -224,17 +224,54 @@ How to add an indicator of the current, next and previous pages of a ViewPager?
 1 Add PagerTitleStrip as ViewPager child
 2 Implement getPageTitle() method of PagerAdapter to return title of each page
 
+What are top-level navigation controls?
+1 Fixed tabs
+2 Spinners
+3 Navigation drawer
 
+What is a navigation drawer?
+- A panel that transitions in from the left edge of the screen and displays the app’s main navigation options.
+- The user can bring the navigation drawer onto the screen by swiping from the left edge of the screen or by touching the application icon on the action bar.
+- As the navigation drawer expands, it overlays the content but not the action bar.
 
+What are good cases for using navigation drawer?
+1 More than 3 top-level views
+2 Cross-navigation from lower levels (drawer is accessible from anywhere in the app)
+3 Deep navigation branches
 
+Using navigation drawer, which activities should present Up button and which hamburger icon?
+- Hamburger icon - screens that correspond to an entry in navigation drawer
+- Up button - others, which have parent activity
 
+What are elements of navigation drawer?
+1 Item group title
+2 Item icon
+3 Item name
+4 Item counter
 
+What shouldn't be placed in the navigation drawer?
+- Actions, as they belong to action bar
+- Common targets, such as Help or Setting, as they belong to overflow menu
 
+How should action bar content change on navigation drawer show?
+1 Title should change to the application name
+2 Actions should disappear, except for actions with global state, such as Search
+3 If contextual action bar (CAB) was presented, it should switch to regular action bar
 
+What is recommended width of a navigation drawer?
+Between 240 dp and 320 dp.
 
+How to should navigation drawer layout be implemented?
+In XML layout file root <DrawerLayout> element should contain two children views:
+1 main content for the screen (when drawer is hidden)
+2 the contents of the navigation drawer (ex ListView)
 
+How to handle opening and closing navigation drawer?
+A Implement DrawerLayout.DrawerListener interface, which provides callbacks for drawer events such as onDrawerOpened() and onDrawerClosed().
+B Use ActionBarDrawerToggle class, which can be used directly as a DrawerLayout.DrawerListener.
 
+What is ActionBarDrawerToggle?
+Class providing a handy way to tie together the functionality of DrawerLayout and the framework ActionBar to implement the recommended design for navigation drawers.
 
-
-
-
+Which class ties together functionality of DrawerLayout and ActionBar?
+ActionBarDrawerToggle
