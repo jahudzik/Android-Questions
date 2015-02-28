@@ -9,9 +9,6 @@ What are differences between Java in Android and Java SE?
 2) Java API implementations based on Apache Harmony
 3) Removed unnecessary libraries (ex Swing/AWT, RMI, CORBA, JMX)
 
-What is zygote?
-A daemon process whose goal is to launch applications. On each app startup it forks and child process continues.
-
 What is Leanback library?
 Provides APIs to support building user interfaces on TV devices.
 

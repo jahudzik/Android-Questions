@@ -4,6 +4,10 @@ What is Loader?
 - It's available to every Activity and Fragment.
 - It automatically reconnects to the last loader's cursor when being recreated after a configuration change.
 
+What is LoaderManager?
+- Interface associated with an Activity or Fragment for managing one or more Loader instances associated with it. 
+- It is also responsible for retaining data on configuration changes like a change of orientation and it calls the relevant callback methods when the data changes.
+
 How to start a loader?
 In Activity.onCreate() or Fragment.onActivityCreated() call getLoaderManager().initLoader(id, args, listener)
 - id - unique ID that identifies the loader
