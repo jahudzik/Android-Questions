@@ -209,8 +209,8 @@ What’s the difference between Enumeration and Iterator interfaces?
 - Also, Iterators allow the caller to remove elements from the underlying collection, something which is not possible with Enumerations.
 
 What is the difference between HashSet and TreeSet?
-- HashSet is Implemented using a hash table and thus, its elements are not ordered. The add, remove, and contains methods of a HashSet have constant time complexity O(1).
-- TreeSet is implemented using a tree structure. The elements in a TreeSet are sorted, and thus, the add, remove, and contains methods have time complexity of O(logn).
+- HashSet is Implemented using a hash table and thus, its elements are not ordered. The add(), remove() and contains() methods of a HashSet have constant time complexity O(1).
+- TreeSet is implemented using a tree structure. The elements in a TreeSet are sorted, and thus, the add(), remove() and contains() methods have time complexity of O(logn).
 
 What is the purpose of garbage collection in Java?
 The purpose of garbage collection is to identify and discard those objects that are no longer needed by the application, in order for the resources to be reclaimed and reused.

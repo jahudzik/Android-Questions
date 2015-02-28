@@ -59,9 +59,10 @@ What means '@android' in android:id value?
 indicates this is resource offered by Android framework (android.R resources class)
 
 How many R classes exist in Android application?
-Two.
+At least two:
 1. android.R - part of core system or Android SDK
 2. com.yourapp.R - generated on project build
+3-n. Each Android library has its own R.java file
 
 What is purpose of R.java files?
 They contain unique identifiers for elements in each category (drawable, string, layout etc) of resources available in the application.

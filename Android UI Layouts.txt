@@ -6,10 +6,10 @@ What are common subclasses of AdapterView?
 What's difference between ListView and ExpandableListView?
 ExpandableListView allows two levels: groups which can individually be expanded to show its children.
 
-What are common Adapters?
+What are common Adapter subclasses?
 1 ArrayAdapter
 2 SimpleCursorAdapter
-3 SpinnerAdapter
+3 CursorAdapter
 
 How ArrayAdapter works by default? How to change it?
 - For each array item it calls toString() and places the content into TextView.

@@ -57,7 +57,7 @@ Describe Factory method pattern.
 - Creational pattern 
 - Recommended in Effective Java
 
-Which design pattern uses factory methods to create and return object rather than using constructor?
+Which design pattern uses special methods to create and return object rather than using constructor?
 Factory method
 
 Describe Builder method pattern.

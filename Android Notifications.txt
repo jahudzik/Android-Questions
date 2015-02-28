@@ -26,7 +26,7 @@ How to create an expanded view of notification?
 1 Create NotificationCompat.Builder object with normal view options
 2 Call Builder.setStyle() with an expanded layout object as its argument
 
-What are the ways of extending notification view?
+What are possible styles which can be applied to the notifications?
 There are three NotificationCompat.Style subclasses:
 1 BigPictureStyle - include a large image attachment
 2 BigTextStyle - include a lot of text

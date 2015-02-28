@@ -1,4 +1,4 @@
-What are 3 main areas of Android build file?
+What are three main sections of Android Gradle build script?
 1 'buildscript' - repositories and dependiences
 2 'apply plugin'
 3 'android' - all configurations
@@ -82,9 +82,9 @@ What is generated for each new BuildType?
 2 assemble<BuildTypeName> task
 
 What is the purpose of signing the application?
-1 identifying the author of an application (only he can publish application updates)
-2 app can expose functionality to another app that is signed with a specified certificate
-3 apps signed by the same certificate can run in the same process
+1 Identifying the author of an application (only he can publish application updates)
+2 Application can expose functionality to another app that is signed with a specified certificate
+3 Applications signed by the same certificate can run in the same process
 
 Where is debug keystore located?
 $HOME/.android/debug.keystore (automatically created)
@@ -178,7 +178,7 @@ What merging mechanisms are part of Android build process?
 2 resources 
 3 assets
 
-How to enable resource shrinking?
+How to enable automatic removal of unused resources?
 In build.gradle specify:
 - minifyEnabled true
 - shrinkResources true
@@ -201,6 +201,4 @@ Add in build.gradle:
 dependencies {
   compile 'com.android.support:support-v4:21.0.3'
 }
-
-
 

@@ -116,7 +116,7 @@ Why Google doesn't recommend using android:configChanges in manifest to handle c
 2 We might forget some resource that needs to be changed
 
 How to block orientation change?
-- .android:screenOrientation="sensorLandscape" in manifest (since API 18 “userLandscape” value)
+- Specify <application> or <activity> android:screenOrientation value in manifest
 - Android still treats this as a configuration change, despite the fact that there is no visible change to the user
 
 What happens in the main application thread?
@@ -179,7 +179,7 @@ How to open HTTP connection and read from there?
 - HttpURLConnection c=(HttpURLConnection)url.openConnection();
 - reader=new BufferedReader(new InputStreamReader(c.getInputStream()))
 
-What class should be use to proceed with long-running HTTP downloads (working in the background, reconnecting etc)?
+What class should be used to proceed with long-running HTTP downloads (working in the background, reconnecting etc)?
 DownloadManager
 
 What is OkHttp?
@@ -188,8 +188,8 @@ What is OkHttp?
 3 wraps up common HTTP performance-improvement patterns, such as GZIP compression, response caching, and connection pooling
 
 What is Retrofit?
-Type-safe REST client for Android and Java by Square
-It handles the data parsing and marshaling, along with the HTTP operations and (optionally) background threading.
+- Type-safe REST client for Android and Java by Square
+- It handles the data parsing and marshaling, along with the HTTP operations and (optionally) background threading.
 
 What is Picasso?
 Library designed by Square to help with asynchronously loading images.

@@ -37,7 +37,7 @@ What type of intents should be used to start services?
 - Beginning API 21, the system throws an exception if you call bindService() with an implicit intent.
 
 How to make Intent explicit?
-- By defining the name of component (class) to start. 
+- By defining the name of component (class) to be started. 
 - Otherwise it will be implicit.
 
 What information can be contained in intent?

@@ -39,7 +39,7 @@ In the manifest specify a new <intent-filter> for <activity> with:
 
 How to start an another specific activity?
 Call startActivity(Intent) with an intent describing the activity to be started:
-- startActivity(new Intent(this, SomeAnother.class));
+startActivity(new Intent(this, SomeAnother.class));
 
 How to start an another specific activity and receive result it returns?
 - Call startActivityForResult(Intent,int) with intent and request code.
@@ -76,7 +76,7 @@ What callbacks are called when an activity is stopped and user navigates to it a
 
 What methods are called in order to preserve and restore activity's state?
 - onSaveInstanceState() is called from an activity before being killed - data can be stored in the bundle here
-- onCreate() and onResotreInstanceState() are called then activity is (re)created - bundle with stored data is received by them
+- onCreate() and onRestoreInstanceState() are called then activity is (re)created - bundle with stored data is received by them
 
 What's difference between restoring Activity's state in onCreate() and onRestoreInstanceState()?
 Any of these may be used.
@@ -137,8 +137,10 @@ What condition must be met for widgets to system save their state on configurati
 
 What is the order of lifecycle callbacks invoked when activity A starts activity B?
 1 A.onPause() - A is still visible
-2 B.onCreate(), B.onStart(), B.onResume() - now B has foreground
-3 A.onStop() - A no longer visible
+2 B.onCreate()
+3 B.onStart()
+4 B.onResume() - now B has foreground
+5 A.onStop() - A no longer visible
 
 What is a task?
 - A collection of activities (even from different applications) that users interact with when performing a certain job. 
@@ -150,7 +152,10 @@ LIFO - last in, first out
 Is it possible for one activity to be instantiated more than once?
 Yes. Activities in the back stack are never rearranged, so creating new activity always puts it on top, instead of bringing it back from back stack.
 
-What are the two ways of defining a launch mode - how a new instance of an activity is associated with the current task? Which one has a priority?
+What is a launch mode in terms of activities?
+It defines how a new instance of an activity is associated with the current task.
+
+What are the two ways of defining a launch mode? Which one has a priority?
 1 intent flags (priority)
 2 attributes in manifest file
 
@@ -174,7 +179,7 @@ What 'singleTop' launch mode means?
 - Otherwise it creates a new instance of an activity on the top of this task.
 - Equivalent of FLAG_ACTIVITY_SINGLE_TOP flag.
 
-What launch mode is it: 'If an instance of the activity already exists at the top of the current task, the system routes the intent to that instance, rather than creating a new instance of the activity'?
+Which launch mode is it: 'If an instance of the activity already exists at the top of the current task, the system routes the intent to that instance, rather than creating a new instance of the activity'?
 singleTop
 
 Give example of 'singleTop' launch mode.
@@ -192,13 +197,13 @@ Give example of 'singleTask' launch mode.
 1 Application issues an intent to open some activity, ex the Android Browser, 
 2 Either a new task starts for the Browser or, if the Browser already has a task running in the background, that task is brought forward to handle the new intent
 
-What launch mode is it: 'If an instance of the activity already exists in a separate task, the system routes the intent to the existing instance, otherwise, system creates a new task and instantiates the activity in its root'?
+Which launch mode is it: 'If an instance of the activity already exists in a separate task, the system routes the intent to the existing instance, otherwise, system creates a new task and instantiates the activity in its root'?
 singleTask
 
 What 'singleInstance' launch mode means?
 The activity is always the single and only member of its task; any activities started by this one open in a separate task.
 
-What launch mode is it: 'The activity is always the single and only member of its task; any activities started by this one open in a separate task'?
+Which launch mode is it: 'The activity is always the single and only member of its task; any activities started by this one open in a separate task'?
 singleInstance
 
 What are intent flags used to specify (override) launch mode?
@@ -207,13 +212,13 @@ What are intent flags used to specify (override) launch mode?
 3 FLAG_ACTIVITY_CLEAR_TOP
 
 What FLAG_ACTIVITY_NEW_TASK means?
-- The same behaviour as the "singleTask" launch mode
 - If a task is already running for the activity you are now starting, that task is brought to the foreground with its last state restored and the activity receives the new intent in onNewIntent().
 - Otherwise, start the activity in a new task. 
+- The same behaviour as the "singleTask" launch mode
 
 What FLAG_ACTIVITY_SINGLE_TOP means?
-- The same behaviour as the "singleTop" launch mode
 - If the activity being started is the current activity (at the top of the back stack), then the existing instance receives a call to onNewIntent(), instead of creating a new instance of the activity.
+- The same behaviour as the "singleTop" launch mode
 
 What FLAG_ACTIVITY_CLEAR_TOP means?
 - If the activity being started is already running in the current task, then instead of launching a new instance of that activity, all of the other activities on top of it are destroyed and this intent is delivered to the resumed instance of the activity (now on top), through onNewIntent()).
@@ -232,7 +237,7 @@ How to display activity as a dialog?
 - It will appear as a dialog instead of fullscreen
 
 How to display activity as a dialog only when on large screens?
-- Set <activity> android:theme attribute to Theme.Holo.DialogWhenLarge 
+Set <activity> android:theme attribute to Theme.Holo.DialogWhenLarge 
 
 What are other ways of presenting an activity than a fullscreen?
 1 dialog - set <activity> android:theme attribute to Theme.Holo.Dialog

@@ -319,7 +319,8 @@ What's difference between <supports-screens> and <compatible-screens> manifest e
 - Normally, shouldn't be used.
 
 What is the purpose of <instrumentation> element?
-Declares an Instrumentation class that enables to monitor an application's interaction with the system. The Instrumentation object is instantiated before any of the application's components.
+- Declares an Instrumentation class that enables to monitor an application's interaction with the system.
+- The Instrumentation object is instantiated before any of the application's components.
 
 What is the purpose of <meta-data> element?
 - A name-value pair for an item of additional, arbitrary data that can be supplied to the parent component. 

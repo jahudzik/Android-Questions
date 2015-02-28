@@ -15,7 +15,7 @@ What manifest elements are used by Google Play filters?
 
 What are other Google Play filters except for these specified in application manifest?
 1 Publishing status - only apps with Published status are visible
-2 Priced status - to see paid apps, a device must have a SIM card and be running Android 1.1+ and it must be in a country (as determined by SIM carrier) in which paid apps are available
+2 Priced status - to see paid apps, a device must be in a country (as determined by SIM carrier) in which paid apps are available
 3 Target countries - when publishing the app, developer can select the countries in which to distribute
 4 CPU Architecture - app that includes native libraries that target a specific CPU architecture (i.e. ARM EABI v7 or x86) are visible only on devices that support that architecture
 

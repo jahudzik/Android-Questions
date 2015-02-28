@@ -3,7 +3,7 @@ What's difference between Animation and Animator classes?
 - Animator - introduced in API 11, change actual properties of the View object, such as alpha and translationX
 
 What animation systems are on Android?
-1 property animation (introduced in Android 3.0)
+1 property animation
 2 view animation
 3 drawable animation
 
@@ -45,14 +45,13 @@ What are TimeInterpolator subclasses?
 7 PathInterpolator
 
 What is default ValueAnimator's interpolator?
-- AccelerateDecelerateInterpolator
-- An interpolator where the rate of change starts and ends slowly but accelerates through the middle.
+AccelerateDecelerateInterpolator
 
 How to make animation speed constant?
 Use LinearInterpolator
 
 How to make animation accelerate up to the halfway point then decelerate from the halfway point until the end of the animation?
-Use default AccelerateDecelerateInterpolator
+Use (default) AccelerateDecelerateInterpolator
 
 How to make animation start backwards then continue forward?
 Use AnticipateInterpolator
@@ -76,15 +75,15 @@ Describe CycleInterpolator.
 - Repeats the animation for a specified number of cycles.
 - The rate of change follows a sinusoidal pattern. 
 
-How to make animation repeat for a specified number of times?
+How to make animation repeat for a specified number of cycles?
 Use CycleInterpolator
 
 Describe PathInterpolator.
 An interpolator that can traverse a Path that extends from Point (0, 0) to (1, 1).
 
 How to define animation's custom interpolation?
-- Implement TimeInterpolator interface.
-- There's just a one method to implement, which defines interpolation function: 
+- Implement TimeInterpolator interface
+- There's just one method to implement, which defines interpolation function: 
 float getInterpolation(float input)
 
 What is TypeEvaluator?
@@ -149,19 +148,20 @@ What events can be observed with Animator.AnimatorListener?
 1 onAnimationStart()
 2 onAnimationRepeat()
 3 onAnimationEnd()
-4 onAnimationCanceled()
+4 onAnimationCancel()
 
 Does animation of drawable's color property require redrawing it on each animation step?
 Yes, invalidate() should be called on a View in each ValueAnimator.AnimatorUpdateListener.onAnimationUpdate() call.
 
 Does animation of View properties require redrawing it on each animation step?
-All of the property setters on View, such as setAlpha() and setTranslationX() invalidate the View properly, so there's no need to invalidate the view.
+No. All of the property setters on View, such as setAlpha() and setTranslationX() invalidate the View properly, so there's no need to invalidate the view.
 
 What is LayoutTransition used for?
 It enables automatic animations on layout changes (view appearing/disappearing) in ViewGroup objects.
 
 How to trigger any animation defined in LayoutTransition?
-Change visibility of any view contained by a layout with android:animateLayoutChanges set for true.
+- Change visibility of any view contained by a layout.
+- Layout must have android:animateLayoutChanges property set for true.
 
 What animations can be handled by LayoutTransition?
 1 APPEARING - how new views appear
@@ -170,7 +170,7 @@ What animations can be handled by LayoutTransition?
 4 CHANGE_DISAPPEARING - how views change when some item disappear
 
 How to enable animations of appearing/disappearing views within layout?
-- Set android:animateLayoutChanges="true" for a layout
+- Set <ViewGroup> android:animateLayoutChanges attribute for true
 - To define animations, create a LayoutTransition object and set it to ViewGroup by calling setLayoutTransition()
 
 What is Keyframe used for?
@@ -200,11 +200,12 @@ A (1-2 properties) Create ObjectAnimator for each property
 B (2+ properties) Use ViewPropertyAnimator
 
 What is ViewPropertyAnimator?
-- Class which enables automatic and optimized animation of select properties on View objects.
+- Class which enables automatic and optimized animation of selected properties on View objects.
 - It may provide better performance for several simultaneous animations, because it will optimize invalidate calls to take place only once for several properties.
 
 Where ViewPropertyAnimator should be implemented?
-In View class which will be animated. It should be returned from animate() method.
+- In View class which will be animated.
+- It should be returned from View.animate() method.
 
 What are advantages of ViewPropertyAnimator?
 1 It refers to properties directly (alpha(), translationX() etc methods instead of strings), which removes reflection overhead
