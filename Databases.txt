@@ -1,0 +1,159 @@
+What is two-phase commit?
+- Strategy designed to ensure that either all the databases are updated or none of them
+- Database changes required by a transaction are initially stored temporarily by each database.
+- The transaction monitor then issues a "pre-commit" command to each database which requires an acknowledgement. 
+- If the monitor receives the appropriate response from each database, the monitor issues the "commit" command, which causes all databases to simultaneously make the transaction changes permanent.
+
+What is a database view?
+- The result set of a stored query on the data, which the database users can query.
+- It is a virtual table computed or collated dynamically from data in the database when access to that view is requested.
+- Changes applied to the data in a relevant underlying table are reflected in the data shown in subsequent invocations of the view.
+
+What are advantages of database views over tables?
+1 Views can represent a subset of the data contained in a table.
+2 Views can join and simplify multiple tables into a single virtual table.
+3 Views can act as aggregated tables presenting the calculated results (sum, average etc) as part of the data.
+4 Views take very little space to store; the database contains only the definition of a view, not a copy of all the data that it presents.
+5 Depending on the SQL engine used, views can provide extra security.
+
+What is the syntax of SQL INSERT operation?
+INSERT INTO table_name (column1,column2,...) 
+VALUES (value1,value2,..);
+
+What is the syntax of SQL UPDATE operation?
+UPDATE table_name
+SET column1=value1,column2=value2,...
+WHERE some_column=some_value;
+
+What is the syntax of SQL DELETE operation?
+DELETE FROM table_name
+WHERE some_column=some_value;
+
+How to specify number of x first rows to be returned from SELECT statement?
+SELECT TOP x FROM table_name
+Not all DBMS support the SELECT TOP clause:
+- MySQL: LIMIT x
+- Oracle: WHERE ROWNUM <= x
+
+Name SQL wildcard characters.
+% - zero or more characters
+_ - single character 
+[xyz] - sets and ranges of characters to match
+[^xyz] - matches only a character NOT specified within the brackets
+
+Give example of IN SQL operator.
+SELECT column_name(s)
+FROM table_name
+WHERE column_name IN (value1,value2,...);
+
+Give example of BETWEEN SQL operator.
+SELECT column_name(s)
+FROM table_name
+WHERE column_name BETWEEN value1 AND value2;
+
+What are the types of SQL Joins?
+1 Inner Join
+2 Left Join 
+3 Right Join
+4 Full Join
+
+What is SQL Inner Join?
+Returns all rows when there is at least one match in BOTH tables
+
+What is SQL Left (Right) Join?
+Return all rows from the left (right) table, and the matched rows from the right (left) table
+
+What is SQL Full Join?
+Return all rows when there is a match in ONE of the tables
+
+What is SQL Union?
+- Operator used to combine the result-set of two or more SELECT statements.
+- Each SELECT statement within the UNION must have the same number of columns of similar data types in the same order.
+
+What are SQL constraints?
+1 NOT NULL
+2 UNIQUE
+3 PRIMARY KEY
+4 FOREIGN KEY
+5 CHECK
+6 DEFAULT
+
+Name some SQL aggregate functions.
+- avg()
+- count()
+- first()/last()
+- min()/max()
+
+How to use SQL aggregate function in SQL statement?
+Use HAVING clause:
+SELECT column_name, function(column_name)
+FROM table_name
+WHERE column_name operator value
+GROUP BY column_name
+HAVING function(column_name) operator value;
+
+What is SQL GROUP BY statement?
+It is used in conjunction with the aggregate functions to group the result-set by one or more columns.
+SELECT column_name, funciton(column_name)
+FROM table_name
+WHERE column_name operator value
+GROUP BY column_name;
+
+What is ACID?
+- Atomicity, Consistency, Isolation, Durability
+- Set of properties that guarantee that database transactions are processed reliably. 
+
+What means Atomicity database characteristic?
+It requires that each transaction be "all or nothing": if one part of the transaction fails, the entire transaction fails, and the database state is left unchanged. 
+
+What means Consistency database characteristic?
+- It ensures that any transaction will bring the database from one valid state to another.
+- Any data written to the database must be valid according to all defined rules, including constraints, cascades, triggers, and any combination thereof.
+
+What means Isolation database characteristic?
+- It ensures that the concurrent execution of transactions results in a system state that would be obtained if transactions were executed serially
+- 4 isolation levels:
+1 Read uncommitted
+2 Read committed
+3 Repeatable read
+4 Serializable
+
+What means Durability database characteristic?
+It means that once a transaction has been committed, it will remain so, even in the event of power loss, crashes, or errors
+
+What means dirty read?
+- It permits to read uncommitted data.
+- Can be achieved by just opening an OS file that someone else is writing and reading whatever data happens to be there.
+- Data integrity is compromised, foreign keys are violated, and unique constraints are ignored.
+
+What means nonrepeatable read?
+Result rows returned from the same query executed twice may have changed (disappeared, updated etc)
+
+What means phantom read?
+- There may be additional result rows returned when the same query is executed for the second time.
+- This differs from a nonrepeatable read in that with a phantom read, already read data hasn't been changed, but instead, more data satisfies query criteria than before. 
+
+What are four isolation levels?
+1 Read uncommitted
+2 Read committed
+3 Repeatable read
+4 Serializable
+
+What means read uncommitted isolation level?
+- Dirty reads are allowed, so one transaction may see not-yet-committed changes made by other transactions.
+- Allows dirty reads, not repeatable reads and phantom reads.
+- The lowest isolation level.
+
+What means read committed isolation level?
+- It keeps write locks until the end of the transaction, but read locks are released as soon as the SELECT operation is performed 
+- It guarantees that any data read is committed at the moment it is read.
+- Allows not repeatable reads and phantom reads. Doesn't allow dirty reads.
+
+What means repeatable reads isolation level?
+- It keeps read and write locks until the end of the transaction. 
+- However, range-locks are not managed, so phantom reads can occur.
+- Allows phantom reads. Doesn't allow dirty reads and not repeatable reads.
+
+What means serializable isolation level?
+- Doesn't allow dirty reads, not repeatable reads nor phantom reads.
+- The highest isolation level.
