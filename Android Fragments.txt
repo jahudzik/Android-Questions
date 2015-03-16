@@ -58,7 +58,8 @@ How to put AlertDialog (or any other Dialog subclass) into DialogFragment?
 Override onCreateDialog() method
 
 How to customize ListFragment's layout?
-Inflate it (in onCreateView() method) with own layout resource. It must contain ListView object with the id "@android:id/list". 
+- Inflate it (in onCreateView() method) with own layout resource.
+- It must contain ListView object with the id "@android:id/list". 
 
 How to add fragment to an activity?
 A. Declare it inside activity's layout file with <fragment> tag
@@ -132,3 +133,7 @@ When using support Fragment:
 1 Activity must extend FragmentActivity 
 2 In order to get the FragmentManager must call getSupportFragmentManager()
 
+Is it possible to embed fragments inside fragments?
+- Yes, since Android 4.2 (Android 1.6 with support library)
+- In order to nest a fragment, call getChildFragmentManager() on the Fragment in which you want to add a fragment.
+- From within a nested fragment, you can get a reference to the parent fragment by calling getParentFragment().

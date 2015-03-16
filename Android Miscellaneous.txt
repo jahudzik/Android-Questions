@@ -153,5 +153,11 @@ How to make application accessible?
 3 Implement accessibility interfaces for custom views 
 4 Audio feedback must always have a secondary feedback mechanism to support users who are deaf 
 
+What happens when an application attempts to perform a networking operation on its main thread?
+android.os.NetworkOnMainThreadException is thrown
+
+What is AlarmManger?
+- Class providing the access to the system alarm services, which allow you to schedule an application to be run at some point in the future.
+- When an alarm goes off, the Intent that had been registered for it is broadcast by the system.
 
 

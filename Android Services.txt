@@ -56,6 +56,11 @@ What are two main classes which can be extended to create a started service? Whi
 1 IntentService - best option if you don't require that your service handle multiple requests simultaneously
 2 Service - if you require your service to perform multi-threading
 
+What's difference between Service and IntentService?
+1 Service uses main thread, IntentService creates and uses a worker thread
+2 Multi-threading can be accomplished only with Service direct implementation. IntentService creates a queue that passes one intent at a time to onHandleIntent(). 
+3 Service class needs a manual stop using stopSelf(), IntentService automatically stops itself when there is no intent in queue.
+
 What does IntentService work?
 1 Creates a default worker thread that executes all intents delivered to onStartCommand() separate from application's main thread.
 2 Creates a work queue that passes one intent at a time to onHandleIntent() implementation

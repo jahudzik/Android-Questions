@@ -110,6 +110,10 @@ How to avoid calling findViewById() for each new ListView's row views?
 - Use View Holder pattern.
 - For each ListView's row layout view we set a tag containing view holder object with references to all element views in this row.
 
+How to create ListView with different layouts (defined in XML) for different rows?
+- In Adapter.getView() method retrieve LayoutInflater and call its inflate() method with layout resource depending on position.
+- inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
 How to make GridView's number of columns depend on screen size?
 Set number of column as AUTO_FIT, which creates as many columns as it can fit on the screen.
 
