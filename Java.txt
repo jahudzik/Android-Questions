@@ -64,65 +64,14 @@ What are pass by reference and pass by value?
 - By value: a copy of the object is passed. Thus, even if changes are made to that object, it doesn’t affect the original value. 
 - By reference: the actual object is not passed, rather a reference of the object is passed. Thus, any changes made by the external method, are also reflected in all places.
 
-What is the difference between processes and threads? 
-- A process is an execution of a program, while a thread is a single execution sequence within a process. 
-- A process can contain multiple threads. 
-- A thread is sometimes called a lightweight process.
-
-What are the different ways of creating a thread?
-1 A class may extend the Thread class.
-2 A class may implement the Runnable interface.
-3 An application can use the Executor framework, in order to create a thread pool.
-
-What is preferred way of creating a thread?
-- The Runnable interface is preferred, as it does not require an object to inherit the Thread class. In case application design requires multiple inheritance, only interfaces can help. 
-- Also, the thread pool is very efficient and can be implemented and used very easily.
-
-What are possible Thread states?
-1 NEW
-2 RUNNABLE
-3 BLOCKED
-4 WAITING
-5 TIMED_WAITING
-6 TERMINATED
-
-What means NEW Thread state?
-The thread becomes ready to run, but does not necessarily start running immediately.
-
-What means RUNNABLE Thread state?
-The Java Virtual Machine (JVM) is actively executing the thread’s code.
-
-What means BLOCKED Thread state?
-The thread is in a blocked state while waiting for a monitor lock.
-
-What means WAITING Thread state?
-The thread waits for another thread to perform a particular action.
-
-What means TIMED_WAITING Thread state?
-The thread waits for another thread to perform a particular action up to a specified waiting time.
-
-What means TERMINATED Thread state?
-The thread has finished its execution.
-
-What is the difference between a synchronized method and synchronized block?
-- A synchronized method uses the method receiver as a lock (i.e. this for non static methods, and the enclosing class for static methods).
-- Synchronized blocks uses the expression as a lock.
-
-What is a monitor in terms of concurrency?
-- A monitor is basically a guardian that watches over a sequence of synchronized code and ensuring that only one thread at a time executes a synchronized piece of code.
-- Each monitor is associated with an object reference. 
-
-What’s a deadlock ? 
-A condition that occurs when two processes are waiting for each other to complete, before proceeding. The result is that both processes wait endlessly.
-
-How to ensure that N threads can access N resources without deadlock?
-Impose an ordering on the locks and force each thread to follow that ordering. Thus, if all threads lock and unlock the mutexes in the same order, no deadlocks can arise.
+Does Java pass by reference or pass by value?
+Java manipulates objects 'by reference,' but it passes object references to methods 'by value'.
 
 What are the basic interfaces of Java Collections Framework ? 
 1 Collection
 2 Set
 3 List
-4 Map
+4 Queue/Deque
 
 What is an Iterator? 
 - The Iterator interface provides a number of methods that are able to iterate over any Collection.
@@ -332,11 +281,6 @@ What is RMI?
 - Remote Method Invocation (RMI) can also be seen as the process of activating a method on a remotely running object.
 - RMI offers location transparency because a user feels that a method is executed on a locally running object. 
 
-What are the layers of RMI Architecture?
-1 Stub and Skeleton layer
-2 Remote Reference Layer
-3 Transport layer
-
 Explain serialization and deserialization. 
 - Serialization - an object can be represented as a sequence of bytes and includes the object’s data, as well as information about the object’s type, and the types of data stored in the object.
 - Thus, serialization can be seen as a way of flattening objects, in order to be stored on disk, and later, read back and reconstituted.
@@ -377,3 +321,59 @@ What are drawbacks of reflection?
 1 Performance overhead - as types are dynamically resolved at runtime, certain JVM optimizations are not performed
 2 Exposure of internals - gives access to private fields and methods
 3 Security restrictions - code run in a restricted security context (such as Applet) may not grant permission for reflection
+
+What's danger in using mutable objects as keys in hash-based collections?
+- All hash-based collections assume that an object’s hash value does not change while it is in use as a key in the collection.
+- If a key’s hash code were to change while it was in a collection, some unpredictable and confusing consequences could follow. 
+
+Where can be final keyword used?
+1 variable - it cannot be modified
+2 method - it cannot be overriden
+3 class - it cannot be subclassed
+
+Where can be static keyword used?
+1 variable - class variable
+2 method - class method
+3 static block of code
+4 nested class
+
+What's use of static block of code in Java? When is it executed?
+- Used to initialize the static data member.
+- Executed before main method at the time of classloading.
+
+What are the ways of synchronizing a variable?
+1 Mark it as volatile
+2 Use AtomicReference class
+
+Is protected variable accessible to another class (not a subclass) in the same package?
+Yes. Protected is accessible for class, package and subclass.
+
+What is the order of access level modifiers in Java?
+1 public
+2 protected (accessible in class, package and subclass)
+3 default (accessible in class and package)
+4 private
+
+Why exceptions are slow in Java?
+Creation of Exception object is slow due to time spent on building a stacktrace.
+
+What means virtual function? How to implement it in Java?
+- A function or method whose behaviour can be overridden within an inheriting class by a function with the same signature.
+- All Java methods are virtual except for these marked as final.
+
+What's difference between stack and heap memory in Java?
+- Stack memory is used to store local variables and function calls, while heap memory is used to store objects in Java.
+- Each thread in Java has its own stack, but they all share a heap, which is common within an application.
+- If there is no memory left in stack for storing function call or local variable, JVM will throw java.lang.StackOverFlowError, while if there is no more heap space for creating object, JVM will throw java.lang.OutOfMemoryError: Java Heap Space
+
+Where are stored Java local variables of primitive type?
+Thread stack
+
+Where are stored Java local variables, which are a reference to the object?
+The reference (the local variable) is stored on the thread stack, but the object itself if stored on the heap.
+
+Where are stored Java object member variables in Java?
+- On the heap along with the object itself.
+- That is true both when the member variable is of a primitive type, and if it is a reference to an object.
+
+

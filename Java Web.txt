@@ -1,3 +1,42 @@
+What is HTTP?
+- HyperText Transfer Protocol
+- An application protocol for distributed, collaborative, hypermedia information systems.
+- Functions as a request-response protocol in the client-server computing model
+- HTTP is an application layer protocol, but its definition presumes an underlying transport layer protocol, which are commonly reliable TCP or unreliable UDP protocols.
+- It is stateless protocol because each command is executed independently
+
+What is HTTP session?
+- A sequence of network request-response transactions.
+- An HTTP client initiates a request by establishing a TCP connection to a particular port on a server (typically port 80, occasionally port 8080).
+- An HTTP server listening on that port waits for a client's request message.
+- Upon receiving the request, the server sends back a status line, such as "HTTP/1.1 200 OK", and a message of its own.
+
+What are HTTP request methods?
+1 GET
+2 POST
+3 HEAD
+4 PUT
+5 DELETE
+6 TRACE
+7 OPTIONS
+8 CONNECT
+9 PATCH
+
+Which request methods HTTP servers are required to implement at least?
+- GET and HEAD
+- Whenever possible, also OPTIONS
+
+What is HTTPS?
+- A communications protocol for secure communication over a computer network, with especially wide deployment on the Internet.
+- Technically, it is not a protocol; rather, it is the result of simply layering the Hypertext Transfer Protocol (HTTP) on top of the SSL or TLS protocol, thus adding the security capabilities of SSL/TLS to standard HTTP communications.
+- It provides authentication and bidirectional encryption of communications between a client and server
+
+What are differences between HTTP and HTTPS?
+1 URL beginning: http:// vs https://
+2 HTTP uses port 80 to communicate, while HTTPS uses 433
+3 HTTP operates at application layer, HTTPS at transport layer
+4 HTTPS is encrypted and requires certificate, HTTP not
+
 What is a Servlet? 
 - A Java class used to process client requests and generate dynamic web content.
 - Servlets are mostly used to process or store data submitted by an HTML form, provide dynamic content and manage state information that does not exist in the stateless HTTP protocol.
@@ -70,7 +109,7 @@ What is a cookie?
 - A bit of information that the Web server sends to the browser.
 - The browser stores the cookies for each Web server in a local file.
 - In a future request, the browser, along with the request, sends all stored cookies for that specific Web server.
- 
+
 What is the difference between session and cookie ?
 - The session should work, regardless of the settings on the client browser. The client may have chosen to disable cookies.
 - The HTTP session is capable of storing any Java object, while a cookie can only store String objects.

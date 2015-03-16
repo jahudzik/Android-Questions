@@ -1,0 +1,211 @@
+What's difference between process and thread?
+1 Threads share the address space of the process that created it; processes have their own address space.
+2 Threads have direct access to the data segment of its process; processes have their own copy of the data segment of the parent process.
+3 Threads can directly communicate with other threads of its process; processes must use IPC to communicate with sibling processes.
+4 Threads have almost no overhead; processes have considerable overhead.
+
+What are the different ways of creating a thread?
+1 A class may extend the Thread class.
+2 A class may implement the Runnable interface.
+3 An application can use the Executor framework, in order to create a thread pool.
+
+What is preferred way of creating a thread?
+- The Runnable interface is preferred, as it does not require an object to inherit the Thread class. In case application design requires multiple inheritance, only interfaces can help. 
+- Also, the thread pool is very efficient and can be implemented and used very easily.
+
+What are possible Thread states?
+1 NEW
+2 RUNNABLE
+3 BLOCKED
+4 WAITING
+5 TIMED_WAITING
+6 TERMINATED
+
+What means NEW Thread state?
+The thread becomes ready to run, but does not necessarily start running immediately.
+
+What means RUNNABLE Thread state?
+The Java Virtual Machine (JVM) is actively executing the thread’s code.
+
+What means BLOCKED Thread state?
+The thread is in a blocked state while waiting for a monitor lock.
+
+What means WAITING Thread state?
+The thread waits for another thread to perform a particular action.
+
+What means TIMED_WAITING Thread state?
+The thread waits for another thread to perform a particular action up to a specified waiting time.
+
+What means TERMINATED Thread state?
+The thread has finished its execution.
+
+What is the difference between a synchronized method and synchronized block?
+- A synchronized method uses the method receiver as a lock (i.e. this for non static methods, and the enclosing class for static methods).
+- Synchronized blocks uses the expression as a lock.
+
+What is a monitor in terms of concurrency?
+- A monitor is basically a guardian that watches over a sequence of synchronized code and ensuring that only one thread at a time executes a synchronized piece of code.
+- Each monitor is associated with an object reference. 
+
+What’s a deadlock ? 
+A condition that occurs when two processes are waiting for each other to complete, before proceeding. The result is that both processes wait endlessly.
+
+How to ensure that N threads can access N resources without deadlock?
+Impose an ordering on the locks and force each thread to follow that ordering. Thus, if all threads lock and unlock the mutexes in the same order, no deadlocks can arise.
+
+What means volatile in Java?
+- It is used to indicate that a variable's value will be modified by different threads.
+- The value of this variable will never be cached thread-locally: all reads and writes will go straight to "main memory";
+- Access to the variable acts as though it is enclosed in a synchronized block, synchronized on itself.
+
+What's difference between synchronized and volatile?
+1 A primitive can be volatile, but can't be synchronized
+2 An access to a volatile variable never has the potential to block
+3 A volatile variable that is an object reference may be null
+4 Synchronization of volatile variable happens on each access, in case of synchronized it happens when entering/exiting synchronized block
+
+Where can be synchronized keyword used?
+1 Instance/static method
+2 Block of code inside instance/static method
+
+What's difference between Runnable and Callable?
+- Both are designed for classes whose instances are potentially executed by another thread.
+- Callable defines a task that returns a result and may throw an exception.
+- A Runnable, however, does not return a result and cannot throw a checked exception.
+
+What are the ways of starting a new thread in Java?
+1 Implement Runnable and pass it to Thread constructor
+2 Extend Thread
+
+What means interrupt operation in term of Java threads?
+- An interrupt is an indication to a thread that it should stop what it is doing and do something else.
+- A thread sends an interrupt by invoking interrupt() on the Thread object for the thread to be interrupted.
+
+What means join operation in term of Java threads?
+The Thread.join() methods allow one thread to wait for the completion of another.
+
+Which class provides a managed collection of threads?
+ThreadPoolExecutor
+
+What is Executor?
+- An object that executes submitted Runnable tasks.
+- Depending on which concrete Executor class is being used, tasks may execute in a newly created thread, an existing task-execution thread, or the thread calling execute, and may execute sequentially or concurrently.
+- An Executor is normally used instead of explicitly creating threads - rather than invoking new Thread(new(RunnableTask())).start():
+Executor executor = anExecutor;
+executor.execute(new RunnableTask1());
+executor.execute(new RunnableTask2());
+...
+
+What is Future?
+- Class representing the result of an asynchronous computation.
+- Provides methods to check if the computation is complete/cancelled, to wait for its completion, and to retrieve the result of the computation.
+- Returned from ExecutorService.submit()
+- FutureTask is it's Runnable extension
+
+What is FutureTask?
+- A cancellable asynchronous computation.
+- Implements both Future and Runnable interfaces, so may be executed by an Executor.
+
+What is ExecutorService?
+An Executor that provides shutdown() and shutdownNow() methods to manage termination and submit(..) methods that can produce a Future for tracking progress of one or more asynchronous tasks.
+
+What are the methods to terminate ExecutorService?
+1 shutdown() - will allow previously submitted tasks to complete
+2 shutdownNow() - prevents waiting tasks from starting and attempts to stop currently executing tasks
+
+What is ScheduledExecutorService()
+ExecutorService extension, with additional schedule(..) methods scheduling commands to run after a given delay, or to execute periodically.
+
+What are Executor factory methods to create a different thread pools?
+1 newCachedThreadPool()
+2 newFixedThreadPool()
+3 newScheduledThreadPool()
+4 newSingleThreadExecutor()
+
+What is a cached thread pool (returned from Executor.newCachedThreadPool())?
+- A thread pool that creates new threads as needed, but will reuse previously constructed threads when they are available.
+- Threads that have not been used for sixty seconds are terminated and removed from the cache.
+
+What is a fixed thread pool (returned from Executor.newFixedThreadPool())?
+- A thread pool that reuses a fixed number of threads operating off a shared unbounded queue.
+- If additional tasks are submitted when all threads are active, they will wait in the queue until a thread is available.
+- The threads in the pool will exist until it is explicitly shutdown.
+
+What is a scheduled thread pool (returned from Executor.newScheduledThreadPool())?
+A thread pool that can schedule commands to run after a given delay, or to execute periodically.
+
+What's difference between thread pools returned from Executor.newSingleThreadExecutor() and Executor.newFixedThreadPool(1)?
+Executor returned from Executor.newSingleThreadExecutor() is guaranteed not to be reconfigurable to use additional threads.
+
+What is ThreadPoolExecutor?
+- An ExecutorService that executes each submitted task using one of possibly several pooled threads, normally configured using Executors factory methods.
+- Additionally it provides methods to create a tunable, flexible thread pools.
+
+What is BlockingQueue?
+- A Queue that additionally supports operations that wait for the queue to become non-empty when retrieving an element, and wait for space to become available in the queue when storing an element.
+- BlockingQueue methods come in four forms, with different ways of handling operations that cannot be satisfied immediately, but may be satisfied at some point in the future:
+1 one throws an exception,
+2 the second returns a special value (either null or false, depending on the operation),
+3 the third blocks the current thread indefinitely until the operation can succeed,
+4 the fourth blocks for only a given maximum time limit before giving up.
+
+What are BlockingQueue extensions?
+1 LinkedBlockingQueue
+2 ArrayBlockingQueue
+3 SynchronousQueue
+4 PriorityBlockingQueue
+5 DelayQueue
+
+What is BlockingDeque?
+- A linear collection that supports element insertion and removal at both ends and additionally supports blocking operations.
+- The name deque is short for "double ended queue.
+
+What is ConcurrentLinkedQueue?
+- An unbounded thread-safe queue based on linked nodes.
+- It is an appropriate choice when many threads will share access to a common collection
+
+What synchronizer classes Java provides?
+1 Semaphore
+2 CountDownLatch
+3 CyclicBarrier
+4 Exchanger
+
+What is ThreadLocal?
+- The ThreadLocal class in Java enables to create variables that can only be read and written by the same thread.
+- Thus, even if two threads are executing the same code, and the code has a reference to a ThreadLocal variable, then the two threads cannot see each other's ThreadLocal variables.
+
+How to create variables that can only be read and written by the same thread?
+- Use ThreadLocal class
+- private ThreadLocal myThreadLocal = new ThreadLocal();
+
+How to use ThreadLocal?
+private ThreadLocal myThreadLocal = new ThreadLocal();
+myThreadLocal.set("A thread local value");
+String threadLocalValue = (String) myThreadLocal.get();
+
+What means Object.wait() method?
+- It causes the current thread to wait until another thread invokes the notify() method or the notifyAll() method for this object. 
+- This method should always be used in a loop:
+synchronized (obj) {
+  while (<condition does not hold>)
+    obj.wait();
+    ... // Perform action appropriate to condition
+}
+
+What means Object.notify() method?
+- It wakes up a single thread that is waiting on this object's monitor. 
+- If any threads are waiting on this object, one of them is chosen to be awakened. 
+- This method should only be called by a thread that is the owner of this object's monitor.
+
+How can a thread becomes the owner of the object's monitor?
+In one of three ways:
+1 By executing a synchronized instance method of that object.
+2 By executing the body of a synchronized statement that synchronizes on the object.
+3 For objects of type Class, by executing a synchronized static method of that class.
+
+What means Object.notifyAll() method?
+It wakes up all threads that are waiting on this object's monitor.
+
+
+
+
