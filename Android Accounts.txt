@@ -1,0 +1,60 @@
+What is authentication token?
+- Temporary access token (or security-token) given by the server.
+- The user needs to identify to get such token and attach it to every request he sends to the server.
+- Can be time limited and expire after a period of time
+- Most popular authentication standard: OAuth2
+
+What is AccountManager?
+- Class providing access to a centralized registry of the user's online accounts
+- Can be used to: get list of available accounts, add an account, manage auth token etc
+
+What class represents the result of an asynchronous AccountManager call?
+AccountManagerFuture
+
+What is AccountAuthenticator?
+- A module to handle a specific account type.
+- The AccountManager find the appropriate AccountAuthenticator talks with it to perform all the actions on the account type.
+- The AccountAuthenticator knows which activity to show the user for entering his credentials and where to find any stored auth-token that the server has returned previously
+
+How to implement account authenticator?
+1 Extend AbstractAccountAuthenticator class
+2 Create bound service returning authenticator's binder - Service.onBind() should return authenticator.getIBinder()
+3 Create res/xml/authenticator.xml file with authenticator description
+4 Add <service> entry to manifest, containing <intent-filter> with <action> equal "android.accounts.AccountAuthenticator" and <meta-data> element pointing to res/xml/authenticator.xml file
+
+Which class should be extended to implement authenticator component?
+AbstractAccountAuthenticator
+
+How to configure authenticator?
+- In res/xml/authenticator.xml resource file
+- It contains only one <account-authenticator> element with attributes
+- Only required attribute is android:accountType, which should specify domain name 
+- Attributes android:icon/android:smallIcon/android:label are shown in Settings->Accounts section
+
+How to supply account authenticator with res/xml/authenticator.xml file?
+Add <service> entry in manifest with:
+- android:name attribute pointing to AbstractAccountAuthenticator implementation
+- <meta-data> entry pointing to res/xml/authenticator.xml
+
+Describe typical first time login scenario with AccountManager.
+1 App asks AccountManager for an auth token
+2 AccountManager asks relevant AccountAuthenticator if it has auth token
+3 Since it has none (there’s no logged-in user), it shows AccountAuthenticatorActivity that will allow the user to log-in.
+4 The user logs-in and auth-token is returned from the server.
+5 The auth-token is stored for future use in the AccountManager.
+6 The app gets the auth-token it requested
+
+What is SyncAdapter?
+- Application's component which encapsulates code for the tasks that transfer data between the device and a server. 
+- It requires bound service to work
+
+How to implement SyncAdapter?
+1 Create authenticator component or stub it, if no authentication is required
+2 Create content provider for local data or stub it, if data is stored in another form
+3 Extend AbstractThreadedSyncAdapter
+4 Create bound service 
+5 Add syncadapter.xml metadata file
+6 Declare Sync Adapter in the manifest
+
+What is the name of the class to be extended in order to implement SyncAdapter?
+AbstractThreadedSyncAdapter

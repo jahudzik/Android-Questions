@@ -1,0 +1,110 @@
+What are thread priorities on Android?
+1 THREAD_PRIORITY_URGENT_AUDIO = -19
+2 THREAD_PRIORITY_AUDIO = -16
+3 THREAD_PRIORITY_URGENT_DISPLAY = -8
+4 THREAD_PRIORITY_DISPLAY = -4
+5 THREAD_PRIORITY_FOREGROUND = -2
+6 THREAD_PRIORITY_MORE_FAVORABLE = -1
+7 THREAD_PRIORITY_DEFAULT = 0
+8 THREAD_PRIORITY_LESS_FAVORABLE = 1
+9 THREAD_PRIORITY_BACKGROUND = 10
+10 THREAD_PRIORITY_LOWEST = 19
+
+What is default thread priority?
+THREAD_PRIORITY_DEFAULT = 0
+
+How to change thread priority?
+Process.setThreadPriority()
+
+What is MessageQueue?
+- Low-level class holding the list of messages to be dispatched by a Looper.
+- Messages are not added directly to a MessageQueue, but rather through Handler objects associated with the Looper.
+- You can retrieve the MessageQueue for the current thread with Looper.myQueue().
+
+What is the name of a class  holding the list of messages to be dispatched by a Looper?
+MessageQueue
+
+What is Looper?
+- Wrapper class which attaches a MessageQueue to a Thread and manages this queue. 
+- MessageQueue is a structure to sequentialize simultaneous processing requests of a Thread.  
+- In Android, message/request processing classes like Handler uses Looper to manage their respective MessageQueue.
+- Looper = Thread + MessageQueue
+
+Does every Android Thread have its MessageQueue?
+No. It executes once and after method execution finishes, the thread will not run another Message(Runnable).
+
+When should Looper class be used?
+- In order to execute multiple messages (Runnables) on a single thread.
+- Example: writing an application that downloads files from the internet, we can use Looper class to put files to be downloaded in the queue.
+
+What is a lifecycle of a Looper?
+1 prepare()
+2 loop()
+3 MessageQueue.IdleHandler.queueIdle() 
+4 quit()
+
+What is Handler?
+- It allows to send and process Message and Runnable objects associated with a thread's MessageQueue
+- Each Handler instance is associated with a thread which created it and that thread's message queue.
+
+What are main uses for Handler?
+1 To schedule messages and runnables to be executed as some point in the future
+2 To enqueue an action to be performed on a different thread than your own
+
+What classes allow to perform background operations?
+A AsyncTask - for short operations (few seconds at most)
+B java.util.concurrent classes - for longer operations
+
+What is AsyncTask?
+- It allows to perform background operations and publish results on the UI thread without having to manipulate threads and/or handlers.
+- It is defined by 3 generic types, called Params, Progress and Result, and 4 steps, called onPreExecute, doInBackground, onProgressUpdate and onPostExecute.
+
+What are generic types of AsyncTask?
+1 Params - type of the parameters sent to the task upon execution
+2 Progress - type of the progress units published during the background computation 
+3 Result - type of the result of the background computation
+
+How to set unused generic type (ex in AsyncTask)?
+Use Void
+
+What are the steps of an asynchronous task being executed?
+1 onPreExecute() - setups the task
+2 doInBackground(Params...) - performs background computation that can take a long time
+3 onProgressUpdate(Progress...) - used to display any form of progress in the UI while the background computation is still executing
+4a onPostExecute(Result) - run on UI thread after background computations finishes
+4b onCancelled() - if cancel() was invoked
+
+When AsyncTask.onProgressUpdate() callback is called?
+After a call to publishProgress(Progress...)
+
+Which AsyncTask callback is called on which thread?
+1 onPreExecute() - UI thread
+2 doInBackground() - background thread
+3 onProgressUpdate() - UI thread
+4 onPostExecute() - UI thread
+
+Can AsyncTask be called more than once?
+No, exception will be thrown
+
+How are multiple AsyncTasks executed - sequentially or in parallel?
+- API < 1.6 - sequentially
+- 1.6 <= API < 4.0 - in parallel
+- API >= 4.0 - sequentially, but AsyncTask.executeOnExecutor() can be used to enable parallel execution
+
+How to enable parallel execution of multiple AsyncTasks?
+Call AsyncTask.executeOnExecutor(Executor) with THREAD_POOL_EXECUTOR or custom Executor.
+
+What are drawbacks of AsyncTask?
+1 AsyncTask keeps reference to the activity, which may have been destroyed, which may cause memory leaks and losing computation results (solution: Fragment.setRetainedInstance())
+2 Pausing an activity doesn’t pause the AsyncTask
+
+What are the ways to access the UI thread from other threads?
+1 Activity.runOnUiThread(Runnable)
+2 View.post(Runnable)
+3 View.postDelayed(Runnable,long)
+
+What is the purpose of View.post() method?
+- It causes the Runnable to be added to the message queue.
+- The runnable will be run on the user interface thread.
+
+
