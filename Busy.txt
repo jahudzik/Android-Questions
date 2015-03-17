@@ -157,10 +157,6 @@ What filesystems are used on Android?
 - YAFFS [Android 1.x & 2.x] - problem: only one process can write to the filesystem at a time
 - ext4 [Android 3.0+]
 
-What is StrictMode?
-- StrictMode is a developer tool which detects things might be done by accident and logs them to LogCat.
-- Shouldn't be used in production code.
-
 What is Otto?
 Event bus by Square designed for Android.
 

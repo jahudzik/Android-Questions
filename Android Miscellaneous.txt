@@ -156,8 +156,29 @@ How to make application accessible?
 What happens when an application attempts to perform a networking operation on its main thread?
 android.os.NetworkOnMainThreadException is thrown
 
+What is StrictMode?
+- A developer tool which detects things you might be doing by accident and brings them to your attention so you can fix them.
+- Most commonly used to catch accidental disk or network access on the application's main thread
+- Uses StrictMode.ThreadPolicy class to define problems to be detected and actions to be taken.
+
+What problems/actions can be detected with StrictMode?
+1 Slow calls
+2 Disk reads/writes
+3 Network operations
+4 Process on violation
+
+What action can be taken by StrictMode if some policy is violated?
+1 Crash the whole process
+2 Show dialog
+3 Log stacktrace and time data to DropBoxManager
+4 Flash the screen
+5 Log to the system log
+
+What is DropBoxManager?
+- It enqueues chunks of data from various sources - application crashes, kernel log records, etc.
+- You can think of this as a persistent, system-wide, blob-oriented "logcat".
+- Entries are not sent anywhere directly, but other system services and debugging tools may scan and upload entries for processing.
+
 What is AlarmManger?
 - Class providing the access to the system alarm services, which allow you to schedule an application to be run at some point in the future.
 - When an alarm goes off, the Intent that had been registered for it is broadcast by the system.
-
-
