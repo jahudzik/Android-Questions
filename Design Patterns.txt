@@ -3,9 +3,9 @@ What is a design pattern?
 - It is a description or template for how to solve a problem that can be used in many different situations
 
 What are design patterns types?
-1 creational
-2 structural
-3 behavioral
+1 Creational
+2 Structural
+3 Behavioral
 
 What are creational design patterns?
 - Deal with object creation - try to create objects in a manner suitable to the situation.
@@ -27,7 +27,7 @@ What are behavioral design patterns?
 - Examples: Command, Iterator, Mediator, Observer, Visitor
 
 Which type of design patterns deal with communication between objects?
-Behavioral pattern
+Behavioral patterns
 
 Name some creational design patterns.
 1 Abstract factory

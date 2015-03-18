@@ -46,7 +46,7 @@ When service is stopped?
 - Bound service: when all bound components unbind
 - Any service can be also killed by system due to low memory.
 
-What type of intent should be used to start service?
+What type (explicit/implicit) of intent should be used to start service?
 Only explicit - for security reasons
 
 How to ensure that the service is not available outside the app?
@@ -75,8 +75,8 @@ How to return result from started (not bound) service back to component which in
 When calling startService(Intent), pass PendingIntent (instead of regular Intent) to the service and use it from there to send a broadcast.
 
 What are common ways of notifying user that service completed its work?
-1 toast notification
-2 status bar notification
+1 Toast notification
+2 Status bar notification
 
 What is a foreground service?
 - A service that's considered to be something the user is actively aware of and thus not a candidate for the system to kill when low on memory. 

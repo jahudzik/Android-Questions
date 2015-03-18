@@ -17,9 +17,9 @@ Why DialogFragment should be used instead of raw Dialog?
 - It correctly handles lifecycle events such as when the user presses the Back button or rotates the screen.
 - It also allows to reuse the dialog's UI as an embeddable component in a larger UI, just like a traditional Fragment.
 
-Where should Dialog be implemented within DialogFragment?
-1 In onCreateView() content of the dialog should be supplied.
-2 OR in onCreateDialog() custom Dialog should be created and returned.
+In which DialogFragment callback should Dialog be implemented?
+A In onCreateView() content of the dialog should be supplied.
+B In onCreateDialog() custom Dialog should be created and returned.
 
 What are the parts of an AlertDialog?
 1 Title (optional)

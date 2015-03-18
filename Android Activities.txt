@@ -86,7 +86,7 @@ Is onSaveInstanceState() always called along with onPause() or onStop() methods?
 No.
 When user navigates back, onPause() and onStop() are called, but no need to call onSaveInstanceState().
 
-What callbacks are called on configuration change?
+What Activity lifecycle callbacks are called on configuration change?
 1 onPause()
 2 onStop()
 3 onDestroy()
@@ -150,7 +150,7 @@ What is the type (FIFO, LIFO etc) of activities back stack?
 LIFO - last in, first out
 
 Is it possible for one activity to be instantiated more than once?
-Yes. Activities in the back stack are never rearranged, so creating new activity always puts it on top, instead of bringing it back from back stack.
+Yes. In standard launch mode, activities in the back stack are never rearranged, so creating new activity always puts it on top, instead of bringing it back from back stack.
 
 What is a launch mode in terms of activities?
 It defines how a new instance of an activity is associated with the current task.
@@ -184,8 +184,8 @@ singleTop
 
 Give example of 'singleTop' launch mode.
 1 Stack is A-B-C-D; D is on top
-2 An intent arrives for an activity of type D - the stack remains A-B-C-D, D receives intent through onNewIntent()
-3 An intent arrives for an activity of type B - the stack becomes A-B-C-D-B
+2 If an intent arrives for an activity of type D - the stack remains A-B-C-D, D receives intent through onNewIntent()
+3 If an intent arrives for an activity of type B - the stack becomes A-B-C-D-B
 
 What 'singleTask' launch mode means?
 - If an instance of the activity already exists in a separate task, the system routes the intent to the existing instance through a call to its onNewIntent() method, rather than creating a new instance. 

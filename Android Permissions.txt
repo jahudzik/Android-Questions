@@ -39,7 +39,8 @@ What means AUTHENTICATE_ACCOUNTS permission?
 Allows an application to act as an AccountAuthenticator for the AccountManager
 
 What mean READ_SYNC_SETTINGS and WRITE_SYNC_SETTINGS permission?
-Allows applications to read/write the sync settings
+- Allows applications to read/write the sync settings
+- Required by Sync Adapter
 
 What means USE_CREDENTIALS permission?
 Allows an application to request authtokens from the AccountManager

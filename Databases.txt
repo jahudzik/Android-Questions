@@ -64,7 +64,8 @@ What is SQL Left (Right) Join?
 Return all rows from the left (right) table, and the matched rows from the right (left) table
 
 What is SQL Full Join?
-Return all rows when there is a match in ONE of the tables
+- It combines the results of both left and right outer joins.
+- The joined table will contain all records from both tables, and fill in NULLs for missing matches on either side.
 
 What is SQL Union?
 - Operator used to combine the result-set of two or more SELECT statements.
@@ -127,11 +128,10 @@ What means dirty read?
 - Data integrity is compromised, foreign keys are violated, and unique constraints are ignored.
 
 What means nonrepeatable read?
-Result rows returned from the same query executed twice may have changed (disappeared, updated etc)
+It occurs, when during the course of a transaction, a row is retrieved twice and the values within the row differ between reads.
 
 What means phantom read?
-- There may be additional result rows returned when the same query is executed for the second time.
-- This differs from a nonrepeatable read in that with a phantom read, already read data hasn't been changed, but instead, more data satisfies query criteria than before. 
+It occurs when, in the course of a transaction, two identical queries are executed, and the collection of rows returned by the second query is different from the first.
 
 What are four isolation levels?
 1 Read uncommitted

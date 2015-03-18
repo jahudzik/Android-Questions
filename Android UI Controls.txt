@@ -71,7 +71,7 @@ Use TimePickerDialog within DialogFragment.
 What is View's android:contentDescription attribute used for?
 - Defines text that briefly describes content of the view. 
 - Text in this attribute does not appear on screen, but if the user enables accessibility services that provide audible prompts, then when the user navigates to that control, the text is spoken.
-- Set it for every ImageButton, ImageView and CheckBox.
+- Should be set for every ImageButton, ImageView and CheckBox.
 
 What are possible values of View's android:visibility attribute?
 1 VISIBLE (default)

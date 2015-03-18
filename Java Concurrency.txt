@@ -40,7 +40,7 @@ What means TERMINATED Thread state?
 The thread has finished its execution.
 
 What is the difference between a synchronized method and synchronized block?
-- A synchronized method uses the method receiver as a lock (i.e. this for non static methods, and the enclosing class for static methods).
+- A synchronized method uses the method receiver as a lock - 'this' for non static methods, and the enclosing class for static methods.
 - Synchronized blocks uses the expression as a lock.
 
 What is a monitor in terms of concurrency?
@@ -72,10 +72,6 @@ What's difference between Runnable and Callable?
 - Both are designed for classes whose instances are potentially executed by another thread.
 - Callable defines a task that returns a result and may throw an exception.
 - A Runnable, however, does not return a result and cannot throw a checked exception.
-
-What are the ways of starting a new thread in Java?
-1 Implement Runnable and pass it to Thread constructor
-2 Extend Thread
 
 What means interrupt operation in term of Java threads?
 - An interrupt is an indication to a thread that it should stop what it is doing and do something else.
@@ -197,11 +193,11 @@ What means Object.notify() method?
 - If any threads are waiting on this object, one of them is chosen to be awakened. 
 - This method should only be called by a thread that is the owner of this object's monitor.
 
-How can a thread becomes the owner of the object's monitor?
+How can a thread become the owner of the object's monitor?
 In one of three ways:
-1 By executing a synchronized instance method of that object.
-2 By executing the body of a synchronized statement that synchronizes on the object.
-3 For objects of type Class, by executing a synchronized static method of that class.
+A By executing a synchronized instance method of that object.
+B By executing the body of a synchronized statement that synchronizes on the object.
+C For objects of type Class, by executing a synchronized static method of that class.
 
 What means Object.notifyAll() method?
 It wakes up all threads that are waiting on this object's monitor.

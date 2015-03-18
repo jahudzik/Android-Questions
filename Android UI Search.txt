@@ -1,6 +1,6 @@
 What are two modes of search input?
-1 a search dialog at the top of the screen
-2 a search widget (SearchView) embedded in layout
+1 A search dialog at the top of the screen
+2 A search widget (SearchView) embedded in layout
 
 What is a Searchable Configuration?
 XML resource file (traditionally res/xml/searchable.xml), which configures certain UI aspects and behaviour of search dialog/widget.

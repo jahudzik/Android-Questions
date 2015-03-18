@@ -105,7 +105,7 @@ Both the HashMap and Hashtable classes implement the Map interface, but:
 3 A HashMap provides its set of keys and a Java application can iterate over them. A Hashtable provides an Enumeration of its keys.
 4 The Hashtable class is considered to be a legacy class.
 
-What is difference between Array and ArrayList?
+What is difference between an array and ArrayList?
 1 Arrays can contain primitive or objects, while an ArrayList can contain only objects.
 2 Arrays have fixed size, while an ArrayList is dynamic.
 3 An ArrayListprovides more methods and features, such as addAll, removeAll, iterator, etc.
@@ -220,7 +220,7 @@ Name some checked exceptions.
 What is the difference between Exception and Error in Java?
 - Exception and Error classes are both subclasses of the Throwable class.
 - The Exception class is used for exceptional conditions that a user’s program should catch.
-- The Error class defines exceptions that are not excepted to be caught by the user program.
+- The Error class defines exceptions that are not expected to be caught by the user program.
 
 What is the difference between throw and throws?
 - The throw keyword is used to explicitly raise a exception within the program.
@@ -322,9 +322,9 @@ What are drawbacks of reflection?
 2 Exposure of internals - gives access to private fields and methods
 3 Security restrictions - code run in a restricted security context (such as Applet) may not grant permission for reflection
 
-What's danger in using mutable objects as keys in hash-based collections?
+What is the danger in using mutable objects as keys in hash-based collections?
 - All hash-based collections assume that an object’s hash value does not change while it is in use as a key in the collection.
-- If a key’s hash code were to change while it was in a collection, some unpredictable and confusing consequences could follow. 
+- If a key object’s hash value were to change while it was in a collection, some unpredictable and confusing consequences could follow. 
 
 Where can be final keyword used?
 1 variable - it cannot be modified
