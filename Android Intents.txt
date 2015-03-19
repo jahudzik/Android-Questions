@@ -2,9 +2,9 @@ What is intent?
 A messaging object which can be used to request an action from another app component.
 
 What are three fundamental use cases of intents?
-1 start an activity
-2 start a service
-3 deliver a broadcast
+1 Start an activity
+2 Start a service
+3 Deliver a broadcast
 
 How to start an activity with intent?
 A. Context.startActivity(Intent)

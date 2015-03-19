@@ -3,9 +3,9 @@ What's difference between Animation and Animator classes?
 - Animator - introduced in API 11, change actual properties of the View object, such as alpha and translationX
 
 What animation systems are on Android?
-1 property animation
-2 view animation
-3 drawable animation
+1 Property animation
+2 View animation
+3 Drawable animation
 
 What is default animation length?
 300 ms

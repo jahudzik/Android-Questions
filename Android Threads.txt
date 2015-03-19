@@ -57,7 +57,7 @@ B java.util.concurrent classes - for longer operations
 
 What is AsyncTask?
 - It allows to perform background operations and publish results on the UI thread without having to manipulate threads and/or handlers.
-- It is defined by 3 generic types, called Params, Progress and Result, and 4 steps, called onPreExecute, doInBackground, onProgressUpdate and onPostExecute.
+- It is defined by 3 generic types, called Params, Progress and Result, and 4 methods: onPreExecute(), doInBackground(), onProgressUpdate() and onPostExecute().
 
 What are generic types of AsyncTask?
 1 Params - type of the parameters sent to the task upon execution
@@ -90,10 +90,6 @@ How are multiple AsyncTasks executed - sequentially or in parallel?
 - API < 1.6 - sequentially
 - 1.6 <= API < 4.0 - in parallel
 - API >= 4.0 - sequentially, but AsyncTask.executeOnExecutor() can be used to enable parallel execution
-
-How to run multiple AsyncTasks in parallel?
-1 Create ThreadPoolExecutor
-2 Call AsyncTask.executeOnExecutor() instead of execute()
 
 How to enable parallel execution of multiple AsyncTasks?
 Call AsyncTask.executeOnExecutor(Executor) with THREAD_POOL_EXECUTOR or custom Executor.

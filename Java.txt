@@ -12,11 +12,11 @@ What is JDK?
 - Java Development Kit.
 - It contains JRE + development tools.
 
-What does the “static” keyword mean?
+What does the 'static' keyword mean?
 Static member variable or method can be accessed, without requiring an instantiation of the class to which it belongs.
 
-Can you override private or static method in Java?
-No, because method overriding is based upon dynamic binding at runtime and static methods are statically binded at compile time. A static method is not associated with any instance of a class so the concept is not applicable.
+Can static method be overridden in Java?
+No, because method overriding is based upon dynamic binding at runtime and static methods are statically bound at compile time. A static method is not associated with any instance of a class so the concept is not applicable.
 
 What are primitive data types supported by Java? 
 1 byte
@@ -105,7 +105,12 @@ Both the HashMap and Hashtable classes implement the Map interface, but:
 3 A HashMap provides its set of keys and a Java application can iterate over them. A Hashtable provides an Enumeration of its keys.
 4 The Hashtable class is considered to be a legacy class.
 
-What is difference between an array and ArrayList?
+Name hashable collections in Java.
+1 HashMap, LinkedHashMap, WeakHashMap, ConcurrentHashMap
+2 HashSet, LinkedHashSet
+3 Hashtable
+
+What is difference between Array and ArrayList?
 1 Arrays can contain primitive or objects, while an ArrayList can contain only objects.
 2 Arrays have fixed size, while an ArrayList is dynamic.
 3 An ArrayListprovides more methods and features, such as addAll, removeAll, iterator, etc.
@@ -220,7 +225,7 @@ Name some checked exceptions.
 What is the difference between Exception and Error in Java?
 - Exception and Error classes are both subclasses of the Throwable class.
 - The Exception class is used for exceptional conditions that a user’s program should catch.
-- The Error class defines exceptions that are not expected to be caught by the user program.
+- The Error class defines exceptions that are not excepted to be caught by the user program.
 
 What is the difference between throw and throws?
 - The throw keyword is used to explicitly raise a exception within the program.
@@ -322,20 +327,20 @@ What are drawbacks of reflection?
 2 Exposure of internals - gives access to private fields and methods
 3 Security restrictions - code run in a restricted security context (such as Applet) may not grant permission for reflection
 
-What is the danger in using mutable objects as keys in hash-based collections?
+What's danger in using mutable objects as keys in hash-based collections?
 - All hash-based collections assume that an object’s hash value does not change while it is in use as a key in the collection.
-- If a key object’s hash value were to change while it was in a collection, some unpredictable and confusing consequences could follow. 
+- If a key’s hash code were to change while it was in a collection, some unpredictable and confusing consequences could follow. 
 
 Where can be final keyword used?
-1 variable - it cannot be modified
-2 method - it cannot be overriden
-3 class - it cannot be subclassed
+1 Variable - it cannot be modified
+2 Method - it cannot be overriden
+3 Class - it cannot be subclassed
 
 Where can be static keyword used?
-1 variable - class variable
-2 method - class method
-3 static block of code
-4 nested class
+1 Variable - class variable
+2 Method - class method
+3 Static block of code
+4 Nested class
 
 What's use of static block of code in Java? When is it executed?
 - Used to initialize the static data member.
@@ -372,8 +377,16 @@ Thread stack
 Where are stored Java local variables, which are a reference to the object?
 The reference (the local variable) is stored on the thread stack, but the object itself if stored on the heap.
 
-Where are stored Java object member variables in Java?
+Where are stored Java class members?
 - On the heap along with the object itself.
 - That is true both when the member variable is of a primitive type, and if it is a reference to an object.
 
+What are the types of inner classes in Java?
+1 Static nested class
+2 Member inner class
+3 Method-local inner class
+4 Anonymous inner class
+
+Is anonymous inner class static?
+No, as it has access to class non-static members.
 

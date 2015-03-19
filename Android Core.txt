@@ -9,7 +9,7 @@ What is ART?
 What's difference between .dex and .odex files?
 - An .odex file is an Optimized .dex file, meaning that it has basically been pre-compiled for a specific platform.
 - The advantage to this is that startup time is much faster since the VM doesn't have to perform any optimizing at startup/runtime. 
-- The disadvantages are 1) That it takes up some extra space and 2) An odexed app won't run properly if it's put onto another device.
+- The disadvantages are that it takes up some extra space and an odexed app won't run properly if it's put onto another device.
 
 What is zygote?
 A daemon process whose goal is to launch applications. On each app startup it forks and child process continues.

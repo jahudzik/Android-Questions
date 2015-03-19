@@ -41,10 +41,10 @@ What means stacking a notification?
 - Accomplished with calling NotificationManager.notify() with the same notification ID.
 
 When notification can be dismissed?
-1 User dismissed it either individually or using "Clear All"
-2 User clicks notification, which was created with setAutoCancel() method called
-3 cancel() was called for a specific notification ID
-4 cancelAll() was called
+A User dismissed it either individually or using "Clear All"
+B User clicks notification, which was created with setAutoCancel() method called
+C cancel() was called for a specific notification ID
+D cancelAll() was called
 
 How should be navigation handled when starting an activity from notification?
 Regular activity (part of the application's normal workflow):

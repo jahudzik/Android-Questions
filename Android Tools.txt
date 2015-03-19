@@ -84,7 +84,7 @@ What's difference between monkey and monkeyrunner?
 - monkey tool runs in an adb shell directly on the device/emulator and generates pseudo-random streams of user and system events
 - monkeyrunner tool controls devices/emulators from a workstation by sending specific commands and events from an API
 
-What are the features of monkeyrunnere?
+What are the features of monkeyrunner?
 - install, run and remove applications, 
 - send UI events,
 - establish connection to device/emulator

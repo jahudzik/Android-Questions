@@ -80,7 +80,7 @@ What is Servlet Chaining?
 - Method where the output of one servlet is sent to a second servlet. The output of the second servlet can be sent to a third servlet, and so on.
 - The last servlet in the chain is responsible for sending the response to the client.
 
-How do you find out what client machine is making a request to your servlet?
+How do you find out which client machine is making a request to your servlet?
 The ServletRequest class has methods:
 - getRemoteAddr() gets the IP address of the client machine 
 - getRemoteHost() gets the host name of the client machine

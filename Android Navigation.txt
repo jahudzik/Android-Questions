@@ -190,7 +190,7 @@ What is a ViewPager?
 - It allows the user to flip left and right through pages of data. 
 - Pages to be shown are supplied by implementation of a PagerAdapter.
 
-What are PageerAdapter implementations?
+What are PagerAdapter implementations?
 1 FragmentPagerAdapter
 2 FragmentStatePagerAdapter
 
@@ -203,7 +203,7 @@ getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 getActionBar().addTab(actionBar.newTab()
   .setText("tab 1").setTabListener(this));
 (...)
- 
+
 What is required when adding a new tab to the ActionBar?
 ActionBar.TabListener implementation
 
@@ -261,7 +261,7 @@ How should action bar content change on navigation drawer show?
 What is recommended width of a navigation drawer?
 Between 240 dp and 320 dp.
 
-How to should navigation drawer layout be implemented?
+How should navigation drawer layout be specified?
 In XML layout file root <DrawerLayout> element should contain two children views:
 1 main content for the screen (when drawer is hidden)
 2 the contents of the navigation drawer (ex ListView)

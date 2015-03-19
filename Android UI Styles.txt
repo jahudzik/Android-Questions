@@ -31,7 +31,7 @@ A Specify it in 'parent' attribute:
 B If it is not a build-in Android style, prefix name with parent style name followed by dot:
 - <style name="ParentStyle.MyStyle">
 
-What are two way of setting a style?
+What are two ways of setting a style?
 A To an individual view, by adding the style attribute to a View element in the layout XML file
 B To an entire activity or application, by adding the android:theme attribute to the <activity> or <application> element in the Android manifest
 
@@ -50,8 +50,8 @@ What is default application theme?
 - API >= 21: Material
 
 How 'Theme' theme (default for API 10 and lower) looks like?
-- a dark background with light text on top
-- no other assumptions about its appearance should be made
+- A dark background with light text on top
+- No other assumptions about its appearance should be made
 
 How *.Wallpaper Android themes look like?
 User's selected wallpaper is used as a background.
@@ -63,14 +63,5 @@ What are common Android build-in themes subclasses?
 - FullScreen
 - Translucent
 - Wallpaper
-
-
-
-
-
-
-
-
-
 
 

@@ -170,10 +170,11 @@ It permits the user to have multiple documents from the same application appear 
 What means <activity> android:enabled attribute?
 Whether or not the activity can be instantiated by the system. The default value is "true".
 
-What are the manifest ways of (dis)allowing other application to launch <activity>?
-1 <intent-filter> element
-2 android:exported attribute
-3 android:permission attribute
+What are the manifest ways of (dis)allowing other applications to launch an activity?
+In <activity> element:
+A Set <intent-filter> element
+B Set android:exported attribute
+C Set android:permission attribute
 
 What means <activity> android:exported attribute?
 - Whether or not the activity can be launched by components of other applications.
@@ -186,8 +187,8 @@ What means <activity> android:launchMode attribute? What are possible values?
 An instruction on how the activity should be launched. There are four modes:
 1 standard (default) 
 2 singleTop 
-3 singleTask (not appropriate for most applications)
-4 singleInstance (not appropriate for most applications)
+3 singleTask
+4 singleInstance
 
 What means <activity> android:maxRecents attribute?
 - The maximum number of tasks rooted at this activity in the overview screen. 

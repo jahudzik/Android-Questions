@@ -41,7 +41,7 @@ How to read preferences?
 1 Retrieve SharedPreferences object with PreferenceManager.getDefaultSharedPreferences()
 2 Read values from SharedPreferences object
 
-How to react for preference changes?
+How to react to preference changes?
 Implement SharedPreferences.OnSharedPreferenceChangeListener
 
 How to create a custom Preference?

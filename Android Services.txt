@@ -30,9 +30,9 @@ By calling Service.stopSelf() or Context.stopService(Intent) methods.
 
 When Service.onBind() method is called? What should it return?
 - Called when another component wants to bind with the service by calling bindService()
-- Return the IBinder communication channel to the service. 
+- Returns IBinder communication channel to the service. 
 - Called only for the first client connecting, all next clients receive the same IBinder object, onBind() is not called again.
-- May return null if clients can not bind to the service
+- May return null if clients cannot bind to the service
 
 When Service.onCreate() is called?
 The system calls this method when the service is first created, to perform one-time setup procedures (before it calls either onStartCommand() or onBind()).
@@ -46,9 +46,6 @@ When service is stopped?
 - Bound service: when all bound components unbind
 - Any service can be also killed by system due to low memory.
 
-What type (explicit/implicit) of intent should be used to start service?
-Only explicit - for security reasons
-
 How to ensure that the service is not available outside the app?
 Set android:exported attribute to false.
 
@@ -61,8 +58,8 @@ What's difference between Service and IntentService?
 2 Multi-threading can be accomplished only with Service direct implementation. IntentService creates a queue that passes one intent at a time to onHandleIntent(). 
 3 Service class needs a manual stop using stopSelf(), IntentService automatically stops itself when there is no intent in queue.
 
-What does IntentService work?
-1 Creates a default worker thread that executes all intents delivered to onStartCommand() separate from application's main thread.
+How does IntentService work?
+1 Creates a default worker thread that executes all intents delivered to onStartCommand() separately from application's main thread.
 2 Creates a work queue that passes one intent at a time to onHandleIntent() implementation
 3 Stops the service after all start requests have been handled
 4 Provides default implementation of onBind() that returns null
@@ -75,8 +72,8 @@ How to return result from started (not bound) service back to component which in
 When calling startService(Intent), pass PendingIntent (instead of regular Intent) to the service and use it from there to send a broadcast.
 
 What are common ways of notifying user that service completed its work?
-1 Toast notification
-2 Status bar notification
+1 toast notification
+2 status bar notification
 
 What is a foreground service?
 - A service that's considered to be something the user is actively aware of and thus not a candidate for the system to kill when low on memory. 

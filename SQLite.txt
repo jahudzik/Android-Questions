@@ -1,8 +1,3 @@
-Name three way of persisting data locally.
-- local files
-- shared preferences
-- SQLite database
-
 Is JDBC API used to access SQLite database on Android?
 No, native API is used instead.
 

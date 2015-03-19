@@ -81,10 +81,6 @@ What actions must be made to add a new Activity?
 2 implement class extending Activity
 3 add <Activity> entry to AndroidManifest.xml
 
-How to start an another Activity?
-A. startActivity(new Intent(this, OtherActivity.class))
-B. startActivityForResult(new Intent(this, OtherActivity.class))
-
 How to pass extra attributes to starting Activity?
 Intent.putExtra() method
 

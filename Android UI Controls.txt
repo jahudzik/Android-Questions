@@ -72,6 +72,7 @@ What is View's android:contentDescription attribute used for?
 - Defines text that briefly describes content of the view. 
 - Text in this attribute does not appear on screen, but if the user enables accessibility services that provide audible prompts, then when the user navigates to that control, the text is spoken.
 - Should be set for every ImageButton, ImageView and CheckBox.
+- It is roughly equivalent to the alt attribute on an HTML <img> tag
 
 What are possible values of View's android:visibility attribute?
 1 VISIBLE (default)

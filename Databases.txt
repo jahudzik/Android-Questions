@@ -71,7 +71,7 @@ What is SQL Union?
 - Operator used to combine the result-set of two or more SELECT statements.
 - Each SELECT statement within the UNION must have the same number of columns of similar data types in the same order.
 
-What are SQL constraints?
+Name some SQL constraints.
 1 NOT NULL
 2 UNIQUE
 3 PRIMARY KEY

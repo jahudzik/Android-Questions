@@ -95,9 +95,9 @@ By specifying the same user ID in <manifest> android:sharedUserId attribute in t
 How to check if device has some feature, ex camera?
 PackageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA);
 
-What happens when user touches app's icon in the application launcher or Home screen?
-- application's task comes to the foreground
-- if no task exists for the application (the application has not been used recently), then a new task is created and the "main" activity for that application opens as the root activity in the stack.
+What happens when user touches application icon in the application launcher or Home screen?
+- Application's task comes to the foreground
+- If no task exists for the application (the application has not been used recently), then a new task is created and the "main" activity for that application opens as the root activity in the stack.
 
 When is DeadObjectException thrown?
 When object you are calling has died, because its hosting process no longer exists.
@@ -136,9 +136,9 @@ What represents .aar format?
 The binary distribution of an Android Library Project.
 
 What is TalkBack?
-- accessibility service 
-- works by speaking the contents of user interface controls as the user moves focus onto controls
-- can be enabled in Settings
+- Accessibility service 
+- Works by speaking the contents of user interface controls as the user moves focus onto controls
+- Can be enabled in Settings
 
 What is the name of accessibility service, which works by speaking the contents of UI controls as the user moves focus onto controls?
 TalkBack
@@ -182,3 +182,8 @@ What is DropBoxManager?
 What is AlarmManger?
 - Class providing the access to the system alarm services, which allow you to schedule an application to be run at some point in the future.
 - When an alarm goes off, the Intent that had been registered for it is broadcast by the system.
+
+Name three ways of persisting data locally.
+- local files
+- shared preferences
+- SQLite database
